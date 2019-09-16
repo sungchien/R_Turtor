@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Tidyverse簡介 | R語言課程</title>
+  <title>Chapter 3 Tidyverse簡介 | R語言課程講義</title>
   <meta name="description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Tidyverse簡介 | R語言課程" />
+  <meta property="og:title" content="Chapter 3 Tidyverse簡介 | R語言課程講義" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Tidyverse簡介 | R語言課程" />
+  <meta name="twitter:title" content="Chapter 3 Tidyverse簡介 | R語言課程講義" />
   
   <meta name="twitter:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="林頌堅" />
 
 
-<meta name="date" content="2019-07-17" />
+<meta name="date" content="2019-09-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="data-manipulation.html">
-<link rel="next" href="applications.html">
+<link rel="next" href="data-visualization.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -126,14 +126,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">R語言課程講義</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R語言的基本概念與語法</a><ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-1"><i class="fa fa-check"></i>課程簡介</a><ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-2"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="1.0.1" data-path="intro.html"><a href="intro.html#section-3"><i class="fa fa-check"></i><b>1.0.1</b> 學習目標</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-3"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.1</b> R語言的基本概念</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r-1"><i class="fa fa-check"></i><b>1.2</b> R語言的運算</a></li>
@@ -192,23 +192,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-format"><i class="fa fa-check"></i><b>3.3</b> tidy data format的資料分析方法</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="tidyverse.html"><a href="tidyverse.html#section-29"><i class="fa fa-check"></i><b>3.3.1</b> 預備工作</a></li>
 <li class="chapter" data-level="3.3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-2"><i class="fa fa-check"></i><b>3.3.2</b> 使用tidyverse套件的函數</a></li>
-<li class="chapter" data-level="3.3.3" data-path="tidyverse.html"><a href="tidyverse.html#section-30"><i class="fa fa-check"></i><b>3.3.3</b> 資料整理</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#section-31"><i class="fa fa-check"></i><b>3.4</b> 資料分析</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="tidyverse.html"><a href="tidyverse.html#section-32"><i class="fa fa-check"></i><b>3.4.1</b> 找出某一縣市的偵測站</a></li>
-<li class="chapter" data-level="3.4.2" data-path="tidyverse.html"><a href="tidyverse.html#section-33"><i class="fa fa-check"></i><b>3.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
-<li class="chapter" data-level="3.4.3" data-path="tidyverse.html"><a href="tidyverse.html#section-34"><i class="fa fa-check"></i><b>3.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
-<li class="chapter" data-level="3.4.4" data-path="tidyverse.html"><a href="tidyverse.html#section-35"><i class="fa fa-check"></i><b>3.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#section-30"><i class="fa fa-check"></i><b>3.4</b> 資料整理</a></li>
+<li class="chapter" data-level="3.5" data-path="tidyverse.html"><a href="tidyverse.html#section-31"><i class="fa fa-check"></i><b>3.5</b> 資料分析</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="tidyverse.html"><a href="tidyverse.html#section-32"><i class="fa fa-check"></i><b>3.5.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="3.5.2" data-path="tidyverse.html"><a href="tidyverse.html#section-33"><i class="fa fa-check"></i><b>3.5.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="3.5.3" data-path="tidyverse.html"><a href="tidyverse.html#section-34"><i class="fa fa-check"></i><b>3.5.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="3.5.4" data-path="tidyverse.html"><a href="tidyverse.html#section-35"><i class="fa fa-check"></i><b>3.5.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-36"><i class="fa fa-check"></i>小結</a></li>
 <li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-37"><i class="fa fa-check"></i>延伸思考</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
-<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
-<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+<li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> 資料視覺化</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-38"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-39"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-40"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#section-41"><i class="fa fa-check"></i><b>4.1</b> 資訊視覺化簡介</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="data-visualization.html"><a href="data-visualization.html#section-42"><i class="fa fa-check"></i><b>4.1.1</b> 視覺化的應用</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-visualization.html"><a href="data-visualization.html#section-43"><i class="fa fa-check"></i><b>4.1.2</b> 應用圖形呈現各種問題</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#r-4"><i class="fa fa-check"></i><b>4.2</b> R語言的資料視覺化工具</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.2.1</b> ggplot2的運作概念</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization.html"><a href="data-visualization.html#aesthetics"><i class="fa fa-check"></i><b>4.2.2</b> Aesthetics上幾種常用的資料編碼方式</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-geometrics"><i class="fa fa-check"></i><b>4.2.3</b> ggplot2上幾種常用的圖表類型 (Geometrics)</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-1"><i class="fa fa-check"></i><b>4.2.4</b> 使用ggplot2套件</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#section-44"><i class="fa fa-check"></i><b>4.3</b> 以資料視覺化的方式進行資料探索</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualization.html"><a href="data-visualization.html#section-45"><i class="fa fa-check"></i><b>4.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization.html"><a href="data-visualization.html#section-46"><i class="fa fa-check"></i><b>4.3.2</b> 問題</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#section-47"><i class="fa fa-check"></i><b>4.4</b> 利用直方圖呈現資料的分布情形</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#section-48"><i class="fa fa-check"></i><b>4.5</b> 利用長條圖進行資料之間的比較</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#section-49"><i class="fa fa-check"></i><b>4.6</b> 利用散佈圖呈現兩個數值之間的關係</a></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#section-50"><i class="fa fa-check"></i><b>4.7</b> 使用盒狀圖比較多個群體的分布情形</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#section-51"><i class="fa fa-check"></i><b>4.8</b> 利用並列的多個圖表進行比較</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-52"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-53"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>5</b> 利用R語言進行探索性資料分析</a><ul>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-54"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-55"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-56"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-57"><i class="fa fa-check"></i><b>5.1</b> 探索性資料分析是什麼？</a></li>
+<li class="chapter" data-level="5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-58"><i class="fa fa-check"></i><b>5.2</b> 以環保署日空氣品質指標開放資料為例進行探索性資料分析</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-59"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-60"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -221,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R語言課程</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R語言課程講義</a>
           </h1>
         </div>
 
@@ -253,8 +284,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="tidy" class="section level2">
 <h2><span class="header-section-number">3.1</span> tidy資料格式簡介</h2>
-<p>在<a href="data-manipulation.html#data_manipulation">運用R語言進行資料處理</a>，我們已經知道在R語言的資料探索與分析中，data frame是相當重要的角色。但仍有許多處理，無法在data frame上完成，需要利用vector及list等資料型態。</p>
-<p>為此緣故，近來R語言的資料科學家發展出一套方式，可以在data frame上完成絕大多數的資料探索與分析。這種方式稱為tidy資料格式。</p>
+<p>在上次的課程<a href="data-manipulation.html#data_manipulation">運用R語言進行資料處理</a>時，我們已經知道在R語言的資料探索與分析中，data frame是相當重要的角色。但仍有許多處理，無法在data frame上完成，需要利用vector及list等資料型態。</p>
+<p>為此緣故，近來R語言的資料科學家發展出一套方式，可以在data frame上完成絕大多數的資料探索與分析。這種方式主要是運用tidy資料格式，並且透過tidyverse中的各種套件完成資料的探索與分析。</p>
 <div id="tidy-1" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> tidy資料格式的特徵</h3>
 <p>一個資料被稱為具有 tidy資料格式的話，必須滿足以下三個條件：</p>
@@ -280,27 +311,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>wide format</li>
 <li>long format</li>
 </ul>
-<p>以下視同一個資料分別以wide format和long format的形式呈現。</p>
+<p>以下是同一個資料分別以wide format和long format的形式呈現。這份資料儲存台北、台中、高雄和花蓮四個城市在2015到2017年的平均氣溫，wide format將各個城市的平均氣溫視為是Variables，依照tidy資料格式的方式：｢每一個Variable為資料上的一行」，每一個Observation對應到某一年份的四個城市平均氣溫，共計4個Observation。long format則將每一年份的每一個城市的平均氣溫視為是一個Observation，因此總共有12個Observation。</p>
 <p><strong>wide format</strong></p>
 <pre><code>##   year Taipei Taichung Kaohsiung Hualien
-## 1 2015     26       28        33      25
-## 2 2016     32       27        34      31
-## 3 2017     34       32        25      32</code></pre>
+## 1 2015     29       33        26      29
+## 2 2016     32       22        34      27
+## 3 2017     33       23        27      23</code></pre>
 <p><strong>long format</strong></p>
 <pre><code>##    year      city temp
-## 1  2015    Taipei   26
+## 1  2015    Taipei   29
 ## 2  2016    Taipei   32
-## 3  2017    Taipei   34
-## 4  2015  Taichung   28
-## 5  2016  Taichung   27
-## 6  2017  Taichung   32
-## 7  2015 Kaohsiung   33
+## 3  2017    Taipei   33
+## 4  2015  Taichung   33
+## 5  2016  Taichung   22
+## 6  2017  Taichung   23
+## 7  2015 Kaohsiung   26
 ## 8  2016 Kaohsiung   34
-## 9  2017 Kaohsiung   25
-## 10 2015   Hualien   25
-## 11 2016   Hualien   31
-## 12 2017   Hualien   32</code></pre>
-<p>在long format上，每一行上只有一個觀測結果。在上面的例子中，觀測結果是每一年各城市的平均氣溫(temp)。</p>
+## 9  2017 Kaohsiung   27
+## 10 2015   Hualien   29
+## 11 2016   Hualien   27
+## 12 2017   Hualien   23</code></pre>
 <p>R語言中使用tidy資料格式時，盡量以long format為主。若是原本的資料為wide format，可以轉變成為long format。</p>
 <p>tidy資料格式使用的資料型態是類似於data frame的<strong>tibble</strong>，tibble上同樣以一列為一個Observation，一行為一個Variable。在tidy data format中，data frame會自動轉換為tibble。</p>
 </div>
@@ -312,6 +342,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</code></pre>
 <p>完成安裝後，載入套件，每次開啟RStudio，如果使用到這個套件，也需要重新載入。</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+<hr />
 <p>以下介紹幾個tidyy資料格式常用的函數</p>
 <ul>
 <li>選取tibble中的幾個Variables： <code>select()</code></li>
@@ -324,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>對Observatiosn進行彙整(加總、平均、…)： <code>summarise()</code></li>
 </ul>
 <p>另外，當較複雜的運算，無法只用單一函數完成時，tidyverse 提供了一個方法可組合多個函數，稱為<strong>pipe</strong>。pipe會將函數的運算結果導入下一個函數，做為下一個函數的第一個參數。</p>
-<p>pipe在R語言中寫成<code>%&gt;%</code>，例如將df的Observations依據Var1的數值大小排序後，選出前10筆Observations，可寫成<code>arrange(df, Var1) %&gt;% slice(1:5)</code>。</p>
+<p>pipe在R語言中寫成<code>%&gt;%</code>，例如將df的Observations依據Var1的數值大小排序後，選出前10筆Observations，可寫成<code>df %&gt;% arrange(Var1) %&gt;% slice(1:5)</code>。</p>
 </div>
 <div id="tidy-data-format" class="section level2">
 <h2><span class="header-section-number">3.3</span> tidy data format的資料分析方法</h2>
@@ -351,6 +382,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>點選<strong>Source</strong>右上方的<strong>Run</strong>執行</li>
 <li>查看df</li>
 </ol>
+<p><img src="image/aqi_data2.png" /></p>
+<p>由於我們直接從網路上取得即時的空氣品質指標資料，因此上面的資料會與現在取得的資料不同。</p>
 </div>
 <div id="tidyverse-2" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> 使用tidyverse套件的函數</h3>
@@ -363,6 +396,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>選取空氣品質指標資料中AQI值最大的五筆紀錄</li>
 <li>計算各縣市的偵測站數目</li>
 </ul>
+<hr />
 <ol style="list-style-type: decimal">
 <li>選取空氣品質指標資料中的縣市、偵測站與空氣品質指標</li>
 </ol>
@@ -374,7 +408,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>在tidy的做法，選取資料中的Variables，可以利用<code>select()</code></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(df, County, SiteName, AQI)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(County, SiteName, AQI)</code></pre>
+<hr />
 <ol start="2" style="list-style-type: decimal">
 <li>選取空氣品質指標資料中前五筆及後五筆</li>
 </ol>
@@ -386,7 +422,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>在tidy的做法，依據位置選取Observations。可以利用<code>slice()</code></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">slice</span>(df, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, (<span class="kw">nrow</span>(df)<span class="op">-</span><span class="dv">4</span>)<span class="op">:</span><span class="kw">nrow</span>(df)))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, (<span class="kw">nrow</span>(df)<span class="op">-</span><span class="dv">4</span>)<span class="op">:</span><span class="kw">nrow</span>(df)))</code></pre>
+<hr />
 <ol start="3" style="list-style-type: decimal">
 <li>選取空氣品質指標資料中AQI值大於或等於120的紀錄</li>
 </ol>
@@ -398,7 +436,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>在tidy的做法，依據條件索引篩選適合的Observations，可以利用<code>filter()</code></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(df, AQI<span class="op">&gt;=</span><span class="dv">120</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(AQI<span class="op">&gt;=</span><span class="dv">120</span>)</code></pre>
+<hr />
 <ol start="4" style="list-style-type: decimal">
 <li>按照AQI的值，排序空氣品質指標資料</li>
 </ol>
@@ -411,7 +451,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>在tidy的做法，依據某一個Variable的大小排序，可以利用<code>arrange()</code></li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(df, AQI)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(AQI)</code></pre>
 <p><strong>由大到小</strong></p>
 <ul>
 <li>先前的做法，利用<code>order()</code>產生按照資料大小的順序，並且指定<code>decreasing=TRUE</code> 表示由大到小</li>
@@ -420,7 +461,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>在tidy的做法，利用<code>arrange()</code>時，如果需要由大到小排列的話，先利用<code>desc()</code>將Variable的大小反轉</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(df, <span class="kw">desc</span>(AQI))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(AQI))</code></pre>
+<hr />
 <ol start="5" style="list-style-type: decimal">
 <li>選取空氣品質指標資料中AQI值最大的五筆紀錄</li>
 </ol>
@@ -432,12 +475,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>tidy的做法(第一種)，可以利用<code>top_n()</code>找出資料最大的前五筆</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">top_n</span>(df, <span class="dv">5</span>, AQI)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">5</span>, AQI)</code></pre>
 <ul>
 <li>在tidy的做法(第二種)，先依照AQI 的數值排列df(<code>arrange()</code>)，然後再取出前五筆的Observations(<code>slice()</code>)。</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(df, <span class="kw">desc</span>(AQI)) <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(AQI)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</code></pre>
+<hr />
 <ol start="6" style="list-style-type: decimal">
 <li>計算各縣市的偵測站數目</li>
 </ol>
@@ -448,33 +494,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>在tidy的做法：先依照縣市欄位的資料將紀錄分群，再彙整統計每一分群的資料數量</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(df, County) <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(County) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>())</code></pre>
 <ul>
 <li>對上面計算各縣市偵測站數目的結果排序</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(df, County) <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(County) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(count))</code></pre>
 </div>
-<div id="section-30" class="section level3">
-<h3><span class="header-section-number">3.3.3</span> 資料整理</h3>
+</div>
+<div id="section-30" class="section level2">
+<h2><span class="header-section-number">3.4</span> 資料整理</h2>
 <ol style="list-style-type: decimal">
 <li>去除AQI為NA的資料紀錄</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">filter</span>(df, <span class="op">!</span><span class="kw">is.na</span>(AQI))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(AQI))</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>將縣市欄位改為factor型態</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">mutate</span>(df, <span class="dt">County=</span><span class="kw">factor</span>(County))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">County=</span><span class="kw">factor</span>(County))</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>將空氣品質狀態欄位改為有順序的factor型態</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">mutate</span>(df, <span class="dt">Status=</span><span class="kw">factor</span>(Status, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;設備維護&quot;</span>, <span class="st">&quot;良好&quot;</span>, <span class="st">&quot;普通&quot;</span>, <span class="st">&quot;對敏感族群不健康&quot;</span>, <span class="st">&quot;對所有族群不健康&quot;</span>, <span class="st">&quot;危害&quot;</span>), <span class="dt">ordered=</span><span class="ot">TRUE</span>))</code></pre>
-</div>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Status=</span><span class="kw">factor</span>(Status, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;設備維護&quot;</span>, <span class="st">&quot;良好&quot;</span>, <span class="st">&quot;普通&quot;</span>, <span class="st">&quot;對敏感族群不健康&quot;</span>, <span class="st">&quot;對所有族群不健康&quot;</span>, <span class="st">&quot;危害&quot;</span>), <span class="dt">ordered=</span><span class="ot">TRUE</span>))</code></pre>
 </div>
 <div id="section-31" class="section level2">
-<h2><span class="header-section-number">3.4</span> 資料分析</h2>
+<h2><span class="header-section-number">3.5</span> 資料分析</h2>
 <p>利用環保署的AQI資料，回答以下幾個問題：</p>
 <ol style="list-style-type: decimal">
 <li>針對某一縣市，找出它有哪幾個偵測站？
@@ -495,31 +546,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ol>
 <div id="section-32" class="section level3">
-<h3><span class="header-section-number">3.4.1</span> 找出某一縣市的偵測站</h3>
+<h3><span class="header-section-number">3.5.1</span> 找出某一縣市的偵測站</h3>
 <p>以雲林縣為例，找出縣市名稱為雲林縣的Observations。然後，選擇偵測站名稱。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(df, County<span class="op">==</span><span class="st">&quot;雲林縣&quot;</span>) <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(County<span class="op">==</span><span class="st">&quot;雲林縣&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(SiteName)</code></pre>
 <p><strong>練習</strong></p>
 <p>新北市各偵測站的空氣品質指數分別是多少</p>
 </div>
 <div id="section-33" class="section level3">
-<h3><span class="header-section-number">3.4.2</span> 找出空氣品質最糟糕的偵測站</h3>
+<h3><span class="header-section-number">3.5.2</span> 找出空氣品質最糟糕的偵測站</h3>
 <p>找到AQI最高的Observations，列出偵測站名稱及AQI值</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">top_n</span>(df, <span class="dv">1</span>, AQI) <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">1</span>, AQI) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(SiteName, AQI)</code></pre>
 <p><strong>練習</strong></p>
 <p>空氣品質最糟糕的偵測站偵測到的PM10和PM2.5指數各是多少？</p>
 </div>
 <div id="section-34" class="section level3">
-<h3><span class="header-section-number">3.4.3</span> 找出汙染物是細懸浮微粒的偵測站數量</h3>
+<h3><span class="header-section-number">3.5.3</span> 找出汙染物是細懸浮微粒的偵測站數量</h3>
 <p>找到汙染物是細懸浮微粒的Observation，然後計算Observation數量</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(df, Pollutant<span class="op">==</span><span class="st">&quot;細懸浮微粒&quot;</span>) <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Pollutant<span class="op">==</span><span class="st">&quot;細懸浮微粒&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>())</code></pre>
 </div>
 <div id="section-35" class="section level3">
-<h3><span class="header-section-number">3.4.4</span> 計算各種空氣品質狀態的偵測站數量</h3>
+<h3><span class="header-section-number">3.5.4</span> 計算各種空氣品質狀態的偵測站數量</h3>
 <p>依據空氣品質狀態分群，統計各分群的數量，然後進行排序</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(df, Status) <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Status) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(count))</code></pre>
 </div>
@@ -572,7 +627,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="data-manipulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
