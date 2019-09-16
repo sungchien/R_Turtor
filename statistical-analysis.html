@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 利用R語言進行基本的統計分析 | R語言課程講義</title>
+  <meta name="description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 利用R語言進行基本的統計分析 | R語言課程講義" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 利用R語言進行基本的統計分析 | R語言課程講義" />
+  
+  <meta name="twitter:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  
+
+<meta name="author" content="林頌堅" />
+
+
+<meta name="date" content="2019-08-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="final-words.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R語言的基本概念與語法</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-1"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-2"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="1.0.1" data-path="intro.html"><a href="intro.html#section-3"><i class="fa fa-check"></i><b>1.0.1</b> 學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.1</b> R語言的基本概念</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r-1"><i class="fa fa-check"></i><b>1.2</b> R語言的運算</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r-2"><i class="fa fa-check"></i><b>1.3</b> R語言的基本資料型態</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#section-4"><i class="fa fa-check"></i><b>1.3.1</b> 數值資料型態</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#section-5"><i class="fa fa-check"></i><b>1.3.2</b> 文字資料型態</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#section-6"><i class="fa fa-check"></i><b>1.3.3</b> 邏輯資料型態</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#factor"><i class="fa fa-check"></i><b>1.3.4</b> factor資料型態</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#r-3"><i class="fa fa-check"></i><b>1.4</b> R語言的特殊資料型態</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector"><i class="fa fa-check"></i><b>1.4.1</b> vector</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#matrix"><i class="fa fa-check"></i><b>1.4.2</b> matrix</a></li>
+<li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#list"><i class="fa fa-check"></i><b>1.4.3</b> list</a></li>
+<li class="chapter" data-level="1.4.4" data-path="intro.html"><a href="intro.html#data-frame"><i class="fa fa-check"></i><b>1.4.4</b> data frame</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-7"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-8"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>2</b> 運用R語言進行資料處理</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-9"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-10"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-11"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-12"><i class="fa fa-check"></i><b>2.1</b> 預備工作</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-13"><i class="fa fa-check"></i><b>2.1.1</b> 設定工作目錄</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-14"><i class="fa fa-check"></i><b>2.2</b> 讀入檔案資料</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-15"><i class="fa fa-check"></i><b>2.2.1</b> 讀入空氣品質指標資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-16"><i class="fa fa-check"></i><b>2.2.2</b> 瀏覽讀入的資料</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-17"><i class="fa fa-check"></i><b>2.3</b> 資料整理</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#aqina"><i class="fa fa-check"></i><b>2.3.1</b> 去除AQI為NA的資料紀錄</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-manipulation.html"><a href="data-manipulation.html#variable"><i class="fa fa-check"></i><b>2.3.2</b> Variable資料型態變更</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-18"><i class="fa fa-check"></i><b>2.4</b> 資料分析</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-19"><i class="fa fa-check"></i><b>2.4.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-20"><i class="fa fa-check"></i><b>2.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-21"><i class="fa fa-check"></i><b>2.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-22"><i class="fa fa-check"></i><b>2.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-manipulation.html"><a href="data-manipulation.html#section-23"><i class="fa fa-check"></i><b>2.5</b> 程式存檔</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-24"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-25"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Tidyverse簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-26"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-27"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-28"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy"><i class="fa fa-check"></i><b>3.1</b> tidy資料格式簡介</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-1"><i class="fa fa-check"></i><b>3.1.1</b> tidy資料格式的特徵</a></li>
+<li class="chapter" data-level="3.1.2" data-path="tidyverse.html"><a href="tidyverse.html#tidy-2"><i class="fa fa-check"></i><b>3.1.2</b> tidy資料格式的優點</a></li>
+<li class="chapter" data-level="3.1.3" data-path="tidyverse.html"><a href="tidyverse.html#wide-format-vs.-long-format"><i class="fa fa-check"></i><b>3.1.3</b> wide format vs. long format</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-1"><i class="fa fa-check"></i><b>3.2</b> tidyverse套件</a></li>
+<li class="chapter" data-level="3.3" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-format"><i class="fa fa-check"></i><b>3.3</b> tidy data format的資料分析方法</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="tidyverse.html"><a href="tidyverse.html#section-29"><i class="fa fa-check"></i><b>3.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-2"><i class="fa fa-check"></i><b>3.3.2</b> 使用tidyverse套件的函數</a></li>
+<li class="chapter" data-level="3.3.3" data-path="tidyverse.html"><a href="tidyverse.html#section-30"><i class="fa fa-check"></i><b>3.3.3</b> 資料整理</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#section-31"><i class="fa fa-check"></i><b>3.4</b> 資料分析</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="tidyverse.html"><a href="tidyverse.html#section-32"><i class="fa fa-check"></i><b>3.4.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="3.4.2" data-path="tidyverse.html"><a href="tidyverse.html#section-33"><i class="fa fa-check"></i><b>3.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="3.4.3" data-path="tidyverse.html"><a href="tidyverse.html#section-34"><i class="fa fa-check"></i><b>3.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="3.4.4" data-path="tidyverse.html"><a href="tidyverse.html#section-35"><i class="fa fa-check"></i><b>3.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-36"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-37"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> 資料視覺化</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-38"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-39"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-40"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#section-41"><i class="fa fa-check"></i><b>4.1</b> 資訊視覺化簡介</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#r-4"><i class="fa fa-check"></i><b>4.2</b> R語言的資料視覺化工具</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.2.1</b> ggplot2的運作概念</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization.html"><a href="data-visualization.html#aesthetics"><i class="fa fa-check"></i><b>4.2.2</b> Aesthetics上幾種常用的資料編碼方式</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-geometrics"><i class="fa fa-check"></i><b>4.2.3</b> ggplot2上幾種常用的圖表類型 (Geometrics)</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-1"><i class="fa fa-check"></i><b>4.2.4</b> 使用ggplot2套件</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#section-42"><i class="fa fa-check"></i><b>4.3</b> 以資料視覺化的方式進行資料探索</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualization.html"><a href="data-visualization.html#section-43"><i class="fa fa-check"></i><b>4.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization.html"><a href="data-visualization.html#section-44"><i class="fa fa-check"></i><b>4.3.2</b> 問題</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#section-45"><i class="fa fa-check"></i><b>4.4</b> 利用直方圖呈現資料的分布情形</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#section-46"><i class="fa fa-check"></i><b>4.5</b> 利用長條圖進行資料之間的比較</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#section-47"><i class="fa fa-check"></i><b>4.6</b> 利用散佈圖呈現兩個數值之間的關係</a></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#section-48"><i class="fa fa-check"></i><b>4.7</b> 使用盒狀圖比較多個群體的分布情形</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#section-49"><i class="fa fa-check"></i><b>4.8</b> 利用並列的多個圖表進行比較</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-50"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-51"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>5</b> 利用R語言進行探索性資料分析</a><ul>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-52"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-53"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-54"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-55"><i class="fa fa-check"></i><b>5.1</b> 探索性資料分析是什麼？</a></li>
+<li class="chapter" data-level="5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-56"><i class="fa fa-check"></i><b>5.2</b> 以環保署日空氣品質指標開放資料為例進行探索性資料分析</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-57"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-58"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="7" data-path="statistical-analysis.html"><a href="statistical-analysis.html"><i class="fa fa-check"></i><b>7</b> 利用R語言進行基本的統計分析</a><ul>
+<li class="chapter" data-level="" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-59"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-60"><i class="fa fa-check"></i>課程簡介</a></li>
+</ul></li>
+<li class="chapter" data-level="7.1" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-61"><i class="fa fa-check"></i><b>7.1</b> 描述性統計</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-62"><i class="fa fa-check"></i><b>7.1.1</b> 測量資料的集中趨勢</a></li>
+<li class="chapter" data-level="7.1.2" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-63"><i class="fa fa-check"></i><b>7.1.2</b> 測量資料的離散程度</a></li>
+<li class="chapter" data-level="7.1.3" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-64"><i class="fa fa-check"></i><b>7.1.3</b> 偏態與峰態</a></li>
+<li class="chapter" data-level="7.1.4" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-65"><i class="fa fa-check"></i><b>7.1.4</b> 小結</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-66"><i class="fa fa-check"></i><b>7.2</b> 資料相關性</a></li>
+<li class="chapter" data-level="7.3" data-path="statistical-analysis.html"><a href="statistical-analysis.html#section-67"><i class="fa fa-check"></i><b>7.3</b> 比較兩組資料的平均數</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R語言課程講義</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistical_analysis" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> 利用R語言進行基本的統計分析</h1>
+<div id="section-59" class="section level2 unnumbered">
+<h2>課程簡介</h2>
+<div id="section-60" class="section level3 unnumbered">
+<h3>課程簡介</h3>
+<p>載入所需的套件</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(lubridate)</code></pre>
+<p>讀取日空氣品質指標檔案</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;AQI_data_2019_07_26.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre>
+<p>資料的清理</p>
+<ul>
+<li>移除AQI遺漏的資料</li>
+<li>將日期改為Date資料型態</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">distinct</span>(df) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(AQI)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">MonitorDate=</span><span class="kw">as.Date</span>(MonitorDate))</code></pre>
+</div>
+</div>
+<div id="section-61" class="section level2">
+<h2><span class="header-section-number">7.1</span> 描述性統計</h2>
+<div id="section-62" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> 測量資料的集中趨勢</h3>
+<p>當有大量資料時，會希望用一個最具有代表性的數值來表示這些數值。此時，在統計上通常一般會使用<strong>平均數(mean)</strong>或<strong>中位數(median)</strong>表示這些資料。以新店偵測站為例，如果要選擇一個數值代表該偵測站今年(2019年)一月到六月測得的空氣品質指標：</p>
+<ol start="0" style="list-style-type: decimal">
+<li>取出新店偵測站2019年一月到六月測得的空氣品質指標</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">aqi_data &lt;-<span class="st"> </span><span class="kw">filter</span>(df, SiteName<span class="op">==</span><span class="st">&quot;新店&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(MonitorDate<span class="op">&gt;=</span><span class="kw">as.Date</span>(<span class="st">&quot;2019/01/01&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>MonitorDate<span class="op">&lt;=</span><span class="kw">as.Date</span>(<span class="st">&quot;2019/06/30&quot;</span>))</code></pre>
+<p>資料的前五筆與後五筆，什麼樣的資料最有代表性？</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">MonitorDate</th>
+<th align="right">AQI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2019-06-30</td>
+<td align="right">51</td>
+</tr>
+<tr class="even">
+<td align="left">2019-06-29</td>
+<td align="right">61</td>
+</tr>
+<tr class="odd">
+<td align="left">2019-06-28</td>
+<td align="right">51</td>
+</tr>
+<tr class="even">
+<td align="left">2019-06-27</td>
+<td align="right">41</td>
+</tr>
+<tr class="odd">
+<td align="left">2019-06-26</td>
+<td align="right">50</td>
+</tr>
+<tr class="even">
+<td align="left">2019-01-05</td>
+<td align="right">74</td>
+</tr>
+<tr class="odd">
+<td align="left">2019-01-04</td>
+<td align="right">40</td>
+</tr>
+<tr class="even">
+<td align="left">2019-01-03</td>
+<td align="right">29</td>
+</tr>
+<tr class="odd">
+<td align="left">2019-01-02</td>
+<td align="right">31</td>
+</tr>
+<tr class="even">
+<td align="left">2019-01-01</td>
+<td align="right">27</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: decimal">
+<li>平均數 (所有的資料加總後，除以資料個數)</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(aqi_data<span class="op">$</span>AQI)</code></pre>
+<pre><code>## [1] 54.40936</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>中位數 (所有的資料依大小順序排列後，取出位於中間的資料)</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(aqi_data<span class="op">$</span>AQI)</code></pre>
+<pre><code>## [1] 47</code></pre>
+</div>
+<div id="section-63" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> 測量資料的離散程度</h3>
+<p>除了以一個最具有代表性的數值表示整體資料之外，對於資料還需要了解它們的離散情形，也就是具有代表性的資料範圍。一般統計學上，常用來測量資料離散程度的方式有全距、四分位距、變異數和標準差。以下仍以新店偵測站今年一月到六月的空氣品質指標資料為例，計算上述的數值：</p>
+<ol style="list-style-type: decimal">
+<li>全距(range) (資料的最大值減最小值)</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(aqi_data<span class="op">$</span>AQI) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(aqi_data<span class="op">$</span>AQI)</code></pre>
+<pre><code>## [1] 158</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>四分位距(interquartile range) (資料的第三四分位數減第一四分位數)</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">IQR</span>(aqi_data<span class="op">$</span>AQI)</code></pre>
+<pre><code>## [1] 28</code></pre>
+<p>另一種寫法，利用<code>quantile()</code>計算出第三四分位數和第一四分位數</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(aqi_data<span class="op">$</span>AQI, <span class="fl">0.75</span>) <span class="op">-</span><span class="st"> </span><span class="kw">quantile</span>(aqi_data<span class="op">$</span>AQI, <span class="fl">0.25</span>)</code></pre>
+<pre><code>## 75% 
+##  28</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>變異數 (資料與平均數之間的差稱為誤差，誤差平方的平均數便是變異數)</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(aqi_data<span class="op">$</span>AQI)</code></pre>
+<pre><code>## [1] 575.8314</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>標準差 (變異數的平方根)</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(aqi_data<span class="op">$</span>AQI)</code></pre>
+<pre><code>## [1] 23.99649</code></pre>
+<p><strong>討論</strong></p>
+<p>不同的資料離散程度測量方式有不同的特質與適用時機，請說明這些測量方式的限制與適用情形。</p>
+</div>
+<div id="section-64" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> 偏態與峰態</h3>
+<p>計算偏態與峰態，請先安裝與載入套件e1071</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;e1071&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)</code></pre>
+<p>偏態是測量資料與平均數相比，小的數值較多或大的數值較多的，如果資料愈接近對稱，偏態值便為0，如果左偏態(左側的尾部較長)，偏態值為負；反之右側的尾部較長，偏態值為正。如以下利用直方圖呈現新店偵測站今年一月到六月的空氣品質指標資料的圖形為例，大家可以猜想這個資料的偏態值為正或負？
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>偏態值的計算</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skewness</span>(aqi_data<span class="op">$</span>AQI)</code></pre>
+<pre><code>## [1] 1.745678</code></pre>
+<p>峰態是表示資料的分布較狹窄或平坦，較狹窄的資料分布，其峰態為正；反之，較平坦的話，則為負。峰態的計算如下：</p>
+<pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">kurtosis</span>(aqi_data<span class="op">$</span>AQI)</code></pre>
+<pre><code>## [1] 4.415238</code></pre>
+</div>
+<div id="section-65" class="section level3">
+<h3><span class="header-section-number">7.1.4</span> 小結</h3>
+<p>描述性統計測量資料X的若干特性，包括：</p>
+<ul>
+<li>集中趨勢
+<ul>
+<li>平均數 (<code>mean(X)</code>)</li>
+<li>中位數 (<code>median(X)</code>)</li>
+</ul></li>
+<li>離散程度
+<ul>
+<li>全域 (<code>max(X)-min(X)</code>)</li>
+<li>四分位距 (<code>IRQ(X)</code>或<code>quantile(X, 0.75)-quantile(X, 0.25)</code>)</li>
+<li>變異數 (<code>var(X)</code>)</li>
+<li>標準差 (<code>sd(X)</code>)</li>
+</ul></li>
+<li>偏態 (<code>skewness(X)</code>)</li>
+<li>峰態 (<code>kurtosis(X)</code>)</li>
+</ul>
+<p>** 練習 **
+本課程提供某一個對不同推薦策略的研究結果user_text.xlsx，每一個Observation包含14個Variables，UserID是使用者編號，involvement、diversity和openness是三種人格特質。請讀取這個檔案，並設法運用描述性統計分析這個檔案中的三種人格特質。</p>
+<pre><code>## New names:
+## * `` -&gt; ...1</code></pre>
+<pre><code>## [1] &quot;平均數為30.6472602739726&quot;</code></pre>
+<pre><code>## [1] &quot;中位數為31&quot;</code></pre>
+<pre><code>## [1] &quot;全距為40&quot;</code></pre>
+<pre><code>## [1] &quot;四分位距為12&quot;</code></pre>
+<pre><code>## [1] &quot;變異數為73.8029821588288&quot;</code></pre>
+<pre><code>## [1] &quot;標準差為8.59086620538516&quot;</code></pre>
+<pre><code>## [1] &quot;偏態為-0.29670514141235&quot;</code></pre>
+<pre><code>## [1] &quot;峰態為-0.381413269585126&quot;</code></pre>
+</div>
+</div>
+<div id="section-66" class="section level2">
+<h2><span class="header-section-number">7.2</span> 資料相關性</h2>
+<p>以下是某三個監測站X1, X2, X3的今年一到六月的空氣品質資料。請問X1與其他兩個監測站彼此間的相關程度如何？也就是是否有當X1的資料愈大時，X2的資料也愈大的現象，或是相反的，X1的資料愈大時，X2的資料卻愈小，或者兩者之間沒有關係。</p>
+<pre><code>##   [1]  27  31  29  40  74  30  31  28  33  61  60  25  31  40  48  47  74
+##  [18]  69  41  66  79  75  70  52  33  34  41  72  58  50  44  97  55  51
+##  [35]  73  60  34  31  31  33  32  43  37  69  33  36  42  62  63  29  36
+##  [52]  39  35  44  81  43  39  91  77  45  51  41  80  47  49  32  67  87
+##  [69]  93  77  64  74  48  76  60 104  90  45  40  48  40  41  84  61  60
+##  [86]  46  67  47  49  52  54  46  90 122 140 112  60  43  46  36  54  74
+## [103]  44  97 177  44  63  87  50  58  43  77  53  36  71  71  47  49  42
+## [120]  49  41  36  44  39  34 122  74  67  34  40  42  74  37  42  46  45
+## [137]  67  45  41  45  48  49  29  30  28  67  74  47  37  29  25  30  31
+## [154]  55  41 126  61 122  44  64  48  46  36  19  30  30  50  41  51  61
+## [171]  51</code></pre>
+<pre><code>##   [1]  12  21  21  49  78  24  34  32  25  63  71  53  43  27  43  45  83
+##  [18]  77  42  67  79  74  80  53  23  34  34  81  64  54  64  92  61  54
+##  [35]  90  79  40  23  17  15  33  38  39  83  20  11  42  71  71  36  41
+##  [52]  20  41  40 106  47  33 105  88  47  60  42  90  30  50  36  71  67
+##  [69]  62  69  43  43  46  86  63  85  99  52  26  34  56  42  76  64  70
+##  [86]  42  57  30  52  66  43  56  64  91 105  87  71  45  35  51  64  53
+## [103]  58  61  74  60  72  70  48  46  52  65  62  35  76  39  25  34  36
+## [120]  29  42  35  29  33  31  55  77  76  52  39  37  56  38  40  30  42
+## [137]  53  46  31  29  32  56  27  42  38  46  47  47  38  31  30  28  29
+## [154]  47  40  46  50  64  70  57  53  44  31  40  27  42  38  35  40  53
+## [171]  36</code></pre>
+<pre><code>##   [1] 26 24 20 21 19 27 28 27 27 29 24 22 25 30 27 48 34 28 30 30 64 61 54
+##  [24] 51 31 26 32 39 34 32 27 27 24 27 35 32 36 26 27 25 23 23 24 20 25 29
+##  [47] 21 36 50 19 31 26 32 32 30 26 29 28 30 31 32 32 35 41 26 28 35 60 54
+##  [70] 47 34 44 49 54 32 23 33 41 29 33 27 31 32 44 63 39 39 35 33 28 33 32
+##  [93] 32 47 58 51 45 31 36 33 31 38 29 32 36 39 52 60 49 32 22 17 37 32 47
+## [116] 37 37 38 26 33 30 26 27 26 21 18 37 52 38 28 34 49 46 32 32 38 37 23
+## [139] 23 32 30 19 23 21 22 17 11 19 25 26 24 16 23 26 41 51 50 31 19 32 33
+## [162] 33 38 35 24 26 26 23 23 23 26</code></pre>
+<p>直接觀察數據並不容易判斷，如果畫成圖形可能比較容易觀察,。將每一個Observation畫為圖形上的一個點，觀察這些點形成的樣式是否接近直線以及其上揚或下抑的趨勢。</p>
+<pre class="sourceCode r"><code class="sourceCode r">lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(X2<span class="op">~</span>X1, aqi_data_set)
+
+<span class="kw">ggplot</span>(aqi_data_set) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span>X1, <span class="dt">y=</span>X2), <span class="dt">color=</span><span class="st">&quot;navyblue&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept=</span>lm1<span class="op">$</span>coefficients[<span class="dv">1</span>], <span class="dt">slope=</span>lm1<span class="op">$</span>coefficients[<span class="dv">2</span>])) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">25</span>), <span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">200</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">25</span>), <span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">200</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;X2監測站AQI值&quot;</span>, <span class="dt">y=</span><span class="st">&quot;X1監測站AQI值&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>())</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(X3<span class="op">~</span>X1, aqi_data_set)
+
+<span class="kw">ggplot</span>(aqi_data_set) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span>X1, <span class="dt">y=</span>X3), <span class="dt">color=</span><span class="st">&quot;firebrick&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept=</span>lm2<span class="op">$</span>coefficients[<span class="dv">1</span>], <span class="dt">slope=</span>lm2<span class="op">$</span>coefficients[<span class="dv">2</span>])) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">25</span>), <span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">200</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="dv">25</span>), <span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">200</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;新店AQI值&quot;</span>, <span class="dt">y=</span><span class="st">&quot;X2監測站AQI值&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>())</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>圖形分布愈趨近於往上的直線者，兩者資料的相關性愈趨近於1。</p>
+<p>或是利用<code>cor()</code>函數計算兩者資料的相關性</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(aqi_data_set<span class="op">$</span>X1, aqi_data_set<span class="op">$</span>X2)</code></pre>
+<pre><code>## [1] 0.7145252</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(aqi_data_set<span class="op">$</span>X1, aqi_data_set<span class="op">$</span>X3)</code></pre>
+<pre><code>## [1] 0.3989189</code></pre>
+<p><strong>練習</strong>
+比較前面對不同推薦策略的研究結果中的三種人格特質彼此間的相關性。</p>
+</div>
+<div id="section-67" class="section level2">
+<h2><span class="header-section-number">7.3</span> 比較兩組資料的平均數</h2>
+<p>以下分別取出去年(2018年)和今年(2019年)一到六月新店偵測站的AQI指標值，計算兩段時間的平均值</p>
+<pre class="sourceCode r"><code class="sourceCode r">y2018.df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(MonitorDate<span class="op">&gt;=</span><span class="kw">ymd</span>(<span class="st">&quot;2018/01/01&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>MonitorDate<span class="op">&lt;=</span><span class="kw">ymd</span>(<span class="st">&quot;2018/06/30&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(SiteName<span class="op">==</span><span class="st">&quot;新店&quot;</span>)
+
+<span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;2018年一到六月新店偵測站的AQI指標平均值&quot;</span>, <span class="kw">mean</span>(y2018.df<span class="op">$</span>AQI)))</code></pre>
+<pre><code>## [1] &quot;2018年一到六月新店偵測站的AQI指標平均值67.7&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">y2019.df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(MonitorDate<span class="op">&gt;=</span><span class="kw">ymd</span>(<span class="st">&quot;2019/01/01&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>MonitorDate<span class="op">&lt;=</span><span class="kw">ymd</span>(<span class="st">&quot;2019/06/30&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(SiteName<span class="op">==</span><span class="st">&quot;新店&quot;</span>)
+
+<span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;2019年一到六月新店偵測站的AQI指標平均值&quot;</span>, <span class="kw">mean</span>(y2019.df<span class="op">$</span>AQI)))</code></pre>
+<pre><code>## [1] &quot;2019年一到六月新店偵測站的AQI指標平均值54.4093567251462&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>((MonitorDate<span class="op">&gt;=</span><span class="kw">ymd</span>(<span class="st">&quot;2018/01/01&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>MonitorDate<span class="op">&lt;=</span><span class="kw">ymd</span>(<span class="st">&quot;2018/06/30&quot;</span>))<span class="op">|</span>(MonitorDate<span class="op">&gt;=</span><span class="kw">ymd</span>(<span class="st">&quot;2019/01/01&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>MonitorDate<span class="op">&lt;=</span><span class="kw">ymd</span>(<span class="st">&quot;2019/06/30&quot;</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Year=</span><span class="kw">factor</span>(<span class="kw">year</span>(MonitorDate))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>AQI, <span class="dt">color=</span>Year)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">mean</span>(y2018.df<span class="op">$</span>AQI), <span class="dt">color=</span><span class="st">&quot;green&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">mean</span>(y2019.df<span class="op">$</span>AQI), <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>))</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(y2018.df<span class="op">$</span>AQI, y2019.df<span class="op">$</span>AQI)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  y2018.df$AQI and y2019.df$AQI
+## t = 4.6457, df = 341.18, p-value = 4.846e-06
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##   7.663549 18.917737
+## sample estimates:
+## mean of x mean of y 
+##  67.70000  54.40936</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(y2018.df<span class="op">$</span>AQI, y2019.df<span class="op">$</span>AQI, <span class="dt">alternative=</span><span class="st">&quot;greater&quot;</span>)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  y2018.df$AQI and y2019.df$AQI
+## t = 4.6457, df = 341.18, p-value = 2.423e-06
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  8.572177      Inf
+## sample estimates:
+## mean of x mean of y 
+##  67.70000  54.40936</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="final-words.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-statistical_analysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

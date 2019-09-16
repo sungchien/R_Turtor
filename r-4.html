@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 R特殊資料型態 | R語言課程</title>
+  <meta name="description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 R特殊資料型態 | R語言課程" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 R特殊資料型態 | R語言課程" />
+  
+  <meta name="twitter:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  
+
+<meta name="author" content="林頌堅" />
+
+
+<meta name="date" content="2019-07-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-2.html">
+<link rel="next" href="literature.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R語言的基本概念與語法</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-1"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.1</b> R語言的基本概念</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r-1"><i class="fa fa-check"></i><b>1.2</b> R語言的運算</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r-"><i class="fa fa-check"></i><b>1.3</b> R語言基礎 | 查詢與設定工作目錄</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#r-help"><i class="fa fa-check"></i><b>1.4</b> R語言基礎 | Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-2.html"><a href="r-2.html"><i class="fa fa-check"></i><b>2</b> R基本資料型態</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-2.html"><a href="r-2.html#r-3"><i class="fa fa-check"></i><b>2.1</b> R基本資料型態</a></li>
+<li class="chapter" data-level="2.2" data-path="r-2.html"><a href="r-2.html#r-integer-numeric"><i class="fa fa-check"></i><b>2.2</b> R基本資料型態 | integer &amp; numeric</a></li>
+<li class="chapter" data-level="2.3" data-path="r-2.html"><a href="r-2.html#r-integer-numeric-1"><i class="fa fa-check"></i><b>2.3</b> R基本資料型態 | integer &amp; numeric</a></li>
+<li class="chapter" data-level="2.4" data-path="r-2.html"><a href="r-2.html#section-2"><i class="fa fa-check"></i><b>2.4</b> 練習</a></li>
+<li class="chapter" data-level="2.5" data-path="r-2.html"><a href="r-2.html#r-integer-numeric-2"><i class="fa fa-check"></i><b>2.5</b> R基本資料型態 | integer &amp; numeric</a></li>
+<li class="chapter" data-level="2.6" data-path="r-2.html"><a href="r-2.html#section-3"><i class="fa fa-check"></i><b>2.6</b> 練習</a></li>
+<li class="chapter" data-level="2.7" data-path="r-2.html"><a href="r-2.html#r-character"><i class="fa fa-check"></i><b>2.7</b> R基本資料型態 | character</a></li>
+<li class="chapter" data-level="2.8" data-path="r-2.html"><a href="r-2.html#r-character-1"><i class="fa fa-check"></i><b>2.8</b> R基本資料型態 | character</a></li>
+<li class="chapter" data-level="2.9" data-path="r-2.html"><a href="r-2.html#section-4"><i class="fa fa-check"></i><b>2.9</b> 練習</a></li>
+<li class="chapter" data-level="2.10" data-path="r-2.html"><a href="r-2.html#r-logic"><i class="fa fa-check"></i><b>2.10</b> R基本資料型態 | logic</a></li>
+<li class="chapter" data-level="2.11" data-path="r-2.html"><a href="r-2.html#section-5"><i class="fa fa-check"></i><b>2.11</b> 練習</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-4.html"><a href="r-4.html"><i class="fa fa-check"></i><b>3</b> R特殊資料型態</a><ul>
+<li class="chapter" data-level="3.1" data-path="r-4.html"><a href="r-4.html#r-5"><i class="fa fa-check"></i><b>3.1</b> R特殊資料型態</a></li>
+<li class="chapter" data-level="3.2" data-path="r-4.html"><a href="r-4.html#r-vector"><i class="fa fa-check"></i><b>3.2</b> R特殊資料型態 | vector</a></li>
+<li class="chapter" data-level="3.3" data-path="r-4.html"><a href="r-4.html#r-vector-1"><i class="fa fa-check"></i><b>3.3</b> R特殊資料型態 | vector</a></li>
+<li class="chapter" data-level="3.4" data-path="r-4.html"><a href="r-4.html#r-vector-2"><i class="fa fa-check"></i><b>3.4</b> R特殊資料型態 | vector運算</a></li>
+<li class="chapter" data-level="3.5" data-path="r-4.html"><a href="r-4.html#r-vector-3"><i class="fa fa-check"></i><b>3.5</b> R特殊資料型態 | vector運算</a></li>
+<li class="chapter" data-level="3.6" data-path="r-4.html"><a href="r-4.html#r-vector-4"><i class="fa fa-check"></i><b>3.6</b> R特殊資料型態 | vector方法</a></li>
+<li class="chapter" data-level="3.7" data-path="r-4.html"><a href="r-4.html#r-vector-5"><i class="fa fa-check"></i><b>3.7</b> R特殊資料型態 | vector方法</a></li>
+<li class="chapter" data-level="3.8" data-path="r-4.html"><a href="r-4.html#r-vector-6"><i class="fa fa-check"></i><b>3.8</b> R特殊資料型態 | vector方法</a></li>
+<li class="chapter" data-level="3.9" data-path="r-4.html"><a href="r-4.html#r-vector-7"><i class="fa fa-check"></i><b>3.9</b> R特殊資料型態 | vector方法</a></li>
+<li class="chapter" data-level="3.10" data-path="r-4.html"><a href="r-4.html#r-vector-8"><i class="fa fa-check"></i><b>3.10</b> R特殊資料型態 | vector方法</a></li>
+<li class="chapter" data-level="3.11" data-path="r-4.html"><a href="r-4.html#r-vector-9"><i class="fa fa-check"></i><b>3.11</b> R特殊資料型態 | 產生等差序列的vector</a></li>
+<li class="chapter" data-level="3.12" data-path="r-4.html"><a href="r-4.html#r-vector-10"><i class="fa fa-check"></i><b>3.12</b> R特殊資料型態 | 產生等差序列的vector</a></li>
+<li class="chapter" data-level="3.13" data-path="r-4.html"><a href="r-4.html#section-6"><i class="fa fa-check"></i><b>3.13</b> 練習</a></li>
+<li class="chapter" data-level="3.14" data-path="r-4.html"><a href="r-4.html#r-vector-11"><i class="fa fa-check"></i><b>3.14</b> R特殊資料型態 | 產生重複序列的vector</a></li>
+<li class="chapter" data-level="3.15" data-path="r-4.html"><a href="r-4.html#r-factor"><i class="fa fa-check"></i><b>3.15</b> R特殊資料型態 | factor</a></li>
+<li class="chapter" data-level="3.16" data-path="r-4.html"><a href="r-4.html#r-factor-1"><i class="fa fa-check"></i><b>3.16</b> R特殊資料型態 | factor</a></li>
+<li class="chapter" data-level="3.17" data-path="r-4.html"><a href="r-4.html#r-matrix"><i class="fa fa-check"></i><b>3.17</b> R特殊資料型態 | matrix</a></li>
+<li class="chapter" data-level="3.18" data-path="r-4.html"><a href="r-4.html#r-matrix-1"><i class="fa fa-check"></i><b>3.18</b> R特殊資料型態 | matrix上的資料</a></li>
+<li class="chapter" data-level="3.19" data-path="r-4.html"><a href="r-4.html#r-matrix-2"><i class="fa fa-check"></i><b>3.19</b> R特殊資料型態 | matrix上的運算</a></li>
+<li class="chapter" data-level="3.20" data-path="r-4.html"><a href="r-4.html#r-matrix-3"><i class="fa fa-check"></i><b>3.20</b> R特殊資料型態 | matrix上的運算</a></li>
+<li class="chapter" data-level="3.21" data-path="r-4.html"><a href="r-4.html#r-matrix-4"><i class="fa fa-check"></i><b>3.21</b> R特殊資料型態 | matrix上的運算</a></li>
+<li class="chapter" data-level="3.22" data-path="r-4.html"><a href="r-4.html#r-array"><i class="fa fa-check"></i><b>3.22</b> R特殊資料型態 | array</a></li>
+<li class="chapter" data-level="3.23" data-path="r-4.html"><a href="r-4.html#r-array-1"><i class="fa fa-check"></i><b>3.23</b> R特殊資料型態 | array上的資料</a></li>
+<li class="chapter" data-level="3.24" data-path="r-4.html"><a href="r-4.html#r-list"><i class="fa fa-check"></i><b>3.24</b> R特殊資料型態 | list</a></li>
+<li class="chapter" data-level="3.25" data-path="r-4.html"><a href="r-4.html#r-list-1"><i class="fa fa-check"></i><b>3.25</b> R特殊資料型態 | 取得list上的資料</a></li>
+<li class="chapter" data-level="3.26" data-path="r-4.html"><a href="r-4.html#r-list-2"><i class="fa fa-check"></i><b>3.26</b> R特殊資料型態 | 取得list上的資料</a></li>
+<li class="chapter" data-level="3.27" data-path="r-4.html"><a href="r-4.html#r-data-frame"><i class="fa fa-check"></i><b>3.27</b> R特殊資料型態 | data frame</a></li>
+<li class="chapter" data-level="3.28" data-path="r-4.html"><a href="r-4.html#r-data-frame-1"><i class="fa fa-check"></i><b>3.28</b> R特殊資料型態 | data frame上的資料欄位名稱</a></li>
+<li class="chapter" data-level="3.29" data-path="r-4.html"><a href="r-4.html#r-data-frame-2"><i class="fa fa-check"></i><b>3.29</b> R特殊資料型態 | data frame的資料數量</a></li>
+<li class="chapter" data-level="3.30" data-path="r-4.html"><a href="r-4.html#r-data-frame-3"><i class="fa fa-check"></i><b>3.30</b> R特殊資料型態 | data frame上各欄位的資料型態</a></li>
+<li class="chapter" data-level="3.31" data-path="r-4.html"><a href="r-4.html#r-data-frame-4"><i class="fa fa-check"></i><b>3.31</b> R特殊資料型態 | 在data frame中保持字串資料類型</a></li>
+<li class="chapter" data-level="3.32" data-path="r-4.html"><a href="r-4.html#r-data-frame-5"><i class="fa fa-check"></i><b>3.32</b> R特殊資料型態 | 取得data frame上的資料</a></li>
+<li class="chapter" data-level="3.33" data-path="r-4.html"><a href="r-4.html#r-data-frame-6"><i class="fa fa-check"></i><b>3.33</b> R特殊資料型態 | 取得data frame上的欄位資料</a></li>
+<li class="chapter" data-level="3.34" data-path="r-4.html"><a href="r-4.html#r-data-frame-7"><i class="fa fa-check"></i><b>3.34</b> R特殊資料型態 | 取得data frame上的紀錄資料</a></li>
+<li class="chapter" data-level="3.35" data-path="r-4.html"><a href="r-4.html#section-7"><i class="fa fa-check"></i><b>3.35</b> 練習</a></li>
+<li class="chapter" data-level="3.36" data-path="r-4.html"><a href="r-4.html#r-data-frame-8"><i class="fa fa-check"></i><b>3.36</b> R特殊資料型態 | 取得data frame上的資料</a></li>
+<li class="chapter" data-level="3.37" data-path="r-4.html"><a href="r-4.html#section-8"><i class="fa fa-check"></i><b>3.37</b> 練習</a></li>
+<li class="chapter" data-level="3.38" data-path="r-4.html"><a href="r-4.html#section-9"><i class="fa fa-check"></i><b>3.38</b> 小結</a></li>
+<li class="chapter" data-level="3.39" data-path="r-4.html"><a href="r-4.html#section-10"><i class="fa fa-check"></i><b>3.39</b> 小結</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>4</b> Literature</a></li>
+<li class="chapter" data-level="5" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>5</b> Methods</a></li>
+<li class="chapter" data-level="6" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>6</b> Applications</a><ul>
+<li class="chapter" data-level="6.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
+<li class="chapter" data-level="6.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>6.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>7</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R語言課程</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-4" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> R特殊資料型態</h1>
+<div id="r-5" class="section level2">
+<h2><span class="header-section-number">3.1</span> R特殊資料型態</h2>
+<ul>
+<li>vector</li>
+<li>factor</li>
+<li>matrix and array</li>
+<li>list</li>
+<li>data frame</li>
+</ul>
+</div>
+<div id="r-vector" class="section level2">
+<h2><span class="header-section-number">3.2</span> R特殊資料型態 | vector</h2>
+<ul>
+<li>一序列相同型態的資料</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>intData &lt;- c(1, 4, 6, 2, 5, 7, 8, 3)
+strData &lt;- c(&quot;ab&quot;, &quot;df&quot;, &quot;4d&quot;, &quot;32&quot;, &quot;bc&quot;)</code></pre>
+<ul>
+<li>在右側的Environment上，觀察vector可以發現：intData為num[1:8]，而strData為chr[1:5]
+<ul>
+<li>num, chr分別表示numeric和character資料型態</li>
+<li>[1:6], [1:5] vector的範圍</li>
+</ul></li>
+</ul>
+</div>
+<div id="r-vector-1" class="section level2">
+<h2><span class="header-section-number">3.3</span> R特殊資料型態 | vector</h2>
+<p><em>元素
+</em> 在Console上輸入下面敘述，並且查看運算結果</p>
+<pre><code>intData[4]
+intData[2:5]
+intData[c(1,3,5)]</code></pre>
+<ul>
+<li>intData[4]表示intData的第2個元素</li>
+<li>intData[2:5]表示intData的第2到第5個元素</li>
+<li>intData[c(1,3,5)]表示intData的第1、3、5個元素</li>
+</ul>
+</div>
+<div id="r-vector-2" class="section level2">
+<h2><span class="header-section-number">3.4</span> R特殊資料型態 | vector運算</h2>
+<ul>
+<li>數值運算</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>intData * 5
+intData + c(1, 2, 3, 4, 5, 6, 7, 8)
+intData + c(1, 2, 3, 4)</code></pre>
+<ul>
+<li>當兩個vector進行運算時，較短的vector會自動延長，以便兩個vector上面的元素一一對應</li>
+</ul>
+</div>
+<div id="r-vector-3" class="section level2">
+<h2><span class="header-section-number">3.5</span> R特殊資料型態 | vector運算</h2>
+<ul>
+<li>合併vectors</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>c(intData, c(1, 2, 3, 4))
+</code></pre>
+</div>
+<div id="r-vector-4" class="section level2">
+<h2><span class="header-section-number">3.6</span> R特殊資料型態 | vector方法</h2>
+<ul>
+<li>length()：vector長度，也就是vector上的元素個數</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>length(intData)</code></pre>
+</div>
+<div id="r-vector-5" class="section level2">
+<h2><span class="header-section-number">3.7</span> R特殊資料型態 | vector方法</h2>
+<ul>
+<li>sum()：計算vector上的元素總和</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>sum(intData)</code></pre>
+</div>
+<div id="r-vector-6" class="section level2">
+<h2><span class="header-section-number">3.8</span> R特殊資料型態 | vector方法</h2>
+<ul>
+<li>sort()：對vector上的元素排序</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>sort(intData)
+sort(intData, decreasing=TRUE)</code></pre>
+<ul>
+<li>sort()函數中預設的decreasing為FALSE，將vector裡的元素由小到大排序</li>
+<li>將decreasing設為TRUE，將vector裡的元素由大到小排列</li>
+</ul>
+</div>
+<div id="r-vector-7" class="section level2">
+<h2><span class="header-section-number">3.9</span> R特殊資料型態 | vector方法</h2>
+<ul>
+<li>由小到大的順序</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>order(intData)
+intData[order(intData)]</code></pre>
+<ul>
+<li>想想看為何intData[order(intData)]的結果也是將intData裡的元素由小到大排序</li>
+</ul>
+</div>
+<div id="r-vector-8" class="section level2">
+<h2><span class="header-section-number">3.10</span> R特殊資料型態 | vector方法</h2>
+<ul>
+<li>由大到小的順序</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>order(vecEx, decreasing=TRUE)
+vecEx[order(vecEx, decreasing=TRUE)]
+</code></pre>
+</div>
+<div id="r-vector-9" class="section level2">
+<h2><span class="header-section-number">3.11</span> R特殊資料型態 | 產生等差序列的vector</h2>
+<ul>
+<li>seq(from, to, by)：從開始的數值from，在不超過結尾數值by的情形下，每次增加一個數值by</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre><code>seq(1, 8)
+seq(1, 8, 2)
+seq(1, 8, 1.5)</code></pre>
+<ul>
+<li>seq(1, 8): from=1, to=8</li>
+<li>seq(1, 8, 2): from=1, to=8, by=2</li>
+<li>seq(1, 8, 1.5): from=1, to=8, by=1.5</li>
+</ul>
+</div>
+<div id="r-vector-10" class="section level2">
+<h2><span class="header-section-number">3.12</span> R特殊資料型態 | 產生等差序列的vector</h2>
+<ul>
+<li>如果差為1時，可以用冒號運算式</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">8</span></code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8</code></pre>
+</div>
+<div id="section-6" class="section level2">
+<h2><span class="header-section-number">3.13</span> 練習</h2>
+<ul>
+<li>產生以下的數列
+<ul>
+<li>1到10間所有奇數</li>
+<li>1到10間所有偶數</li>
+<li>1到10間所有3的倍數</li>
+<li>2的1到10乘方</li>
+</ul></li>
+</ul>
+</div>
+<div id="r-vector-11" class="section level2">
+<h2><span class="header-section-number">3.14</span> R特殊資料型態 | 產生重複序列的vector</h2>
+<ul>
+<li>rep(x, times)：將x重複times次</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">9</span>)</code></pre>
+<pre><code>## [1] 1 1 1 1 1 1 1 1 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">4</span>)</code></pre>
+<pre><code>## [1] 1 2 1 2 1 2 1 2</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">82</span>, <span class="dv">53</span>), <span class="dv">3</span>)</code></pre>
+<pre><code>## [1]  4 82 53  4 82 53  4 82 53</code></pre>
+</div>
+<div id="r-factor" class="section level2">
+<h2><span class="header-section-number">3.15</span> R特殊資料型態 | factor</h2>
+<ul>
+<li>可用於名目尺度</li>
+<li>在Console上輸入下面敘述，並且查看運算結果</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">gender_data &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>)
+gender &lt;-<span class="st"> </span><span class="kw">factor</span>(gender_data, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;女&quot;</span>, <span class="st">&quot;男&quot;</span>))</code></pre>
+</div>
+<div id="r-factor-1" class="section level2">
+<h2><span class="header-section-number">3.16</span> R特殊資料型態 | factor</h2>
+<ul>
+<li>調整其順序</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">gender &lt;-<span class="st"> </span><span class="kw">factor</span>(gender_data, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;女&quot;</span>, <span class="st">&quot;男&quot;</span>), <span class="dt">levels=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</code></pre>
+</div>
+<div id="r-matrix" class="section level2">
+<h2><span class="header-section-number">3.17</span> R特殊資料型態 | matrix</h2>
+<ul>
+<li>2維度的vector</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">intColMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">nrow=</span><span class="dv">4</span>)
+intColMatrix</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">intRowMatrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">nrow=</span><span class="dv">4</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)
+intRowMatrix</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9
+## [4,]   10   11   12</code></pre>
+<ul>
+<li>在matrix裡，橫列稱為row，直行稱為col</li>
+<li>matrix(data, nrow, ncol, byrow)：將data上的資料表示成nrow列或ncol行的matrix
+<ul>
+<li>byrow=FALSE(預設值)，直行優先排列</li>
+<li>byrow=TRUE，橫列優先排列</li>
+</ul></li>
+</ul>
+</div>
+<div id="r-matrix-1" class="section level2">
+<h2><span class="header-section-number">3.18</span> R特殊資料型態 | matrix上的資料</h2>
+<ul>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">intRowMatrix[<span class="dv">1</span>,]</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">intRowMatrix[,<span class="dv">2</span>]</code></pre>
+<pre><code>## [1]  2  5  8 11</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">intRowMatrix[<span class="dv">3</span>,<span class="dv">1</span>]</code></pre>
+<pre><code>## [1] 7</code></pre>
+</div>
+<div id="r-matrix-2" class="section level2">
+<h2><span class="header-section-number">3.19</span> R特殊資料型態 | matrix上的運算</h2>
+<ul>
+<li>rowSums(x)：x的每一橫列上的元素總和</li>
+<li>colSums(x)：x的每一直行上的元素總和</li>
+<li>sum(x)：x上的元素總和</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowSums</span>(intRowMatrix)</code></pre>
+<pre><code>## [1]  6 15 24 33</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colSums</span>(intRowMatrix)</code></pre>
+<pre><code>## [1] 22 26 30</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(intRowMatrix)</code></pre>
+<pre><code>## [1] 78</code></pre>
+</div>
+<div id="r-matrix-3" class="section level2">
+<h2><span class="header-section-number">3.20</span> R特殊資料型態 | matrix上的運算</h2>
+<ul>
+<li>t(x)：轉置x，原先的行做為列，列做為行</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(intRowMatrix)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+</div>
+<div id="r-matrix-4" class="section level2">
+<h2><span class="header-section-number">3.21</span> R特殊資料型態 | matrix上的運算</h2>
+<ul>
+<li>diag(x)：x的對角線</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diag</span>(intRowMatrix)</code></pre>
+<pre><code>## [1] 1 5 9</code></pre>
+</div>
+<div id="r-array" class="section level2">
+<h2><span class="header-section-number">3.22</span> R特殊資料型態 | array</h2>
+<ul>
+<li>多維度的vector</li>
+<li>array(x, dim)：將x表示成array，以dim的資料為array的維度
+<ul>
+<li>dim為一個vector</li>
+<li>dim的長度表示array的維度數目，例如array為三維，dim上便有3個integer</li>
+</ul></li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>), <span class="dv">10</span>)
+intArray &lt;-<span class="st"> </span><span class="kw">array</span>(vec, <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>))
+intArray</code></pre>
+<pre><code>## , , 1
+## 
+##      [,1] [,2] [,3]
+## [1,]    1    5    3
+## [2,]    3    1    5
+## [3,]    5    3    1
+## [4,]    1    5    3
+## [5,]    3    1    5
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3]
+## [1,]    1    5    3
+## [2,]    3    1    5
+## [3,]    5    3    1
+## [4,]    1    5    3
+## [5,]    3    1    5</code></pre>
+</div>
+<div id="r-array-1" class="section level2">
+<h2><span class="header-section-number">3.23</span> R特殊資料型態 | array上的資料</h2>
+<ul>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">intArray[<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>]</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="r-list" class="section level2">
+<h2><span class="header-section-number">3.24</span> R特殊資料型態 | list</h2>
+<ul>
+<li>可以包含不同資料型態的一序列資料</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">spiderman &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">id =</span> <span class="st">&quot;012&quot;</span>,
+                  <span class="dt">name =</span> <span class="st">&quot;Peter&quot;</span>,
+                  <span class="dt">team =</span> <span class="st">&quot;Avengers&quot;</span>,
+                  <span class="dt">height =</span> <span class="dv">178</span>,
+                  <span class="dt">weight =</span> <span class="dv">76</span>)
+spiderman</code></pre>
+<pre><code>## $id
+## [1] &quot;012&quot;
+## 
+## $name
+## [1] &quot;Peter&quot;
+## 
+## $team
+## [1] &quot;Avengers&quot;
+## 
+## $height
+## [1] 178
+## 
+## $weight
+## [1] 76</code></pre>
+</div>
+<div id="r-list-1" class="section level2">
+<h2><span class="header-section-number">3.25</span> R特殊資料型態 | 取得list上的資料</h2>
+<ul>
+<li>根據資料在list上的位置</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">spiderman[[<span class="dv">3</span>]]</code></pre>
+<pre><code>## [1] &quot;Avengers&quot;</code></pre>
+</div>
+<div id="r-list-2" class="section level2">
+<h2><span class="header-section-number">3.26</span> R特殊資料型態 | 取得list上的資料</h2>
+<ul>
+<li>根據資料在list上的名稱</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">spiderman[[<span class="st">&quot;team&quot;</span>]]</code></pre>
+<pre><code>## [1] &quot;Avengers&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">spiderman<span class="op">$</span>team</code></pre>
+<pre><code>## [1] &quot;Avengers&quot;</code></pre>
+</div>
+<div id="r-data-frame" class="section level2">
+<h2><span class="header-section-number">3.27</span> R特殊資料型態 | data frame</h2>
+<ul>
+<li>可以包含不同資料型態的資料集合</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">id &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;001&quot;</span>, <span class="st">&quot;002&quot;</span>, <span class="st">&quot;003&quot;</span>, <span class="st">&quot;004&quot;</span>, <span class="st">&quot;005&quot;</span>)
+name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;superman&quot;</span>, <span class="st">&quot;batman&quot;</span>, <span class="st">&quot;spiderman&quot;</span>, <span class="st">&quot;wolverine&quot;</span>, <span class="st">&quot;wonderwoman&quot;</span>)
+height &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">190</span>, <span class="dv">188</span>, <span class="dv">178</span>, <span class="dv">150</span>, <span class="dv">183</span>)
+weight &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">102</span>, <span class="dv">95</span>, <span class="dv">76</span>, <span class="dv">88</span>, <span class="dv">59</span>)
+gender &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>)
+heroes &lt;-<span class="st"> </span><span class="kw">data.frame</span>(id, name, height, weight, gender)
+heroes</code></pre>
+<pre><code>##    id        name height weight gender
+## 1 001    superman    190    102   Male
+## 2 002      batman    188     95   Male
+## 3 003   spiderman    178     76   Male
+## 4 004   wolverine    150     88   Male
+## 5 005 wonderwoman    183     59 Female</code></pre>
+<ul>
+<li>data.frame為2個維度的資料型態</li>
+<li>橫列為row，可以視為紀錄</li>
+<li>直行為column，可以視為資料欄位</li>
+</ul>
+</div>
+<div id="r-data-frame-1" class="section level2">
+<h2><span class="header-section-number">3.28</span> R特殊資料型態 | data frame上的資料欄位名稱</h2>
+<ul>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(heroes)</code></pre>
+<pre><code>## [1] &quot;id&quot;     &quot;name&quot;   &quot;height&quot; &quot;weight&quot; &quot;gender&quot;</code></pre>
+</div>
+<div id="r-data-frame-2" class="section level2">
+<h2><span class="header-section-number">3.29</span> R特殊資料型態 | data frame的資料數量</h2>
+<ul>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(heroes)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(heroes)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(heroes)</code></pre>
+<pre><code>## [1] 5 5</code></pre>
+</div>
+<div id="r-data-frame-3" class="section level2">
+<h2><span class="header-section-number">3.30</span> R特殊資料型態 | data frame上各欄位的資料型態</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(heroes)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  5 variables:
+##  $ id    : Factor w/ 5 levels &quot;001&quot;,&quot;002&quot;,&quot;003&quot;,..: 1 2 3 4 5
+##  $ name  : Factor w/ 5 levels &quot;batman&quot;,&quot;spiderman&quot;,..: 3 1 2 4 5
+##  $ height: num  190 188 178 150 183
+##  $ weight: num  102 95 76 88 59
+##  $ gender: Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 2 2 2 2 1</code></pre>
+<ul>
+<li>比較id, name及gender等欄位的資料型態</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(id)</code></pre>
+<pre><code>##  chr [1:5] &quot;001&quot; &quot;002&quot; &quot;003&quot; &quot;004&quot; &quot;005&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(name)</code></pre>
+<pre><code>##  chr [1:5] &quot;superman&quot; &quot;batman&quot; &quot;spiderman&quot; &quot;wolverine&quot; &quot;wonderwoman&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gender)</code></pre>
+<pre><code>##  chr [1:5] &quot;Male&quot; &quot;Male&quot; &quot;Male&quot; &quot;Male&quot; &quot;Female&quot;</code></pre>
+<ul>
+<li>從上面，可以發現產生data frame的過程中，字串(character)自動被轉換成factor</li>
+</ul>
+</div>
+<div id="r-data-frame-4" class="section level2">
+<h2><span class="header-section-number">3.31</span> R特殊資料型態 | 在data frame中保持字串資料類型</h2>
+<pre class="sourceCode r"><code class="sourceCode r">heroes &lt;-<span class="st"> </span><span class="kw">data.frame</span>(id, name, height, weight, gender,
+                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+<span class="kw">str</span>(heroes)</code></pre>
+<ul>
+<li>stringsAsFacotrs=FALSE(設定在data frame中保持字串資料類型)</li>
+</ul>
+</div>
+<div id="r-data-frame-5" class="section level2">
+<h2><span class="header-section-number">3.32</span> R特殊資料型態 | 取得data frame上的資料</h2>
+<ul>
+<li>根據data frame上的位置(第幾列、第幾行)</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">heroes[<span class="dv">2</span>, ]</code></pre>
+<pre><code>##    id   name height weight gender
+## 2 002 batman    188     95   Male</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">heroes[,<span class="dv">2</span>]</code></pre>
+<pre><code>## [1] superman    batman      spiderman   wolverine   wonderwoman
+## Levels: batman spiderman superman wolverine wonderwoman</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">heroes[<span class="dv">2</span>, <span class="dv">2</span>]</code></pre>
+<pre><code>## [1] batman
+## Levels: batman spiderman superman wolverine wonderwoman</code></pre>
+</div>
+<div id="r-data-frame-6" class="section level2">
+<h2><span class="header-section-number">3.33</span> R特殊資料型態 | 取得data frame上的欄位資料</h2>
+<ul>
+<li>根據data frame上的名稱</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">heroes[[<span class="st">&quot;name&quot;</span>]]</code></pre>
+<pre><code>## [1] superman    batman      spiderman   wolverine   wonderwoman
+## Levels: batman spiderman superman wolverine wonderwoman</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">heroes<span class="op">$</span>name</code></pre>
+<pre><code>## [1] superman    batman      spiderman   wolverine   wonderwoman
+## Levels: batman spiderman superman wolverine wonderwoman</code></pre>
+</div>
+<div id="r-data-frame-7" class="section level2">
+<h2><span class="header-section-number">3.34</span> R特殊資料型態 | 取得data frame上的紀錄資料</h2>
+<ul>
+<li>根據索引(data frame上符合索引條件的紀錄)</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">heroes[heroes<span class="op">$</span>name<span class="op">==</span><span class="st">&quot;spiderman&quot;</span>,]</code></pre>
+<pre><code>##    id      name height weight gender
+## 3 003 spiderman    178     76   Male</code></pre>
+<ul>
+<li>在Console上輸入下面敘述，查看索引</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">heroes<span class="op">$</span>name<span class="op">==</span><span class="st">&quot;spiderman&quot;</span></code></pre>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE</code></pre>
+</div>
+<div id="section-7" class="section level2">
+<h2><span class="header-section-number">3.35</span> 練習</h2>
+<ul>
+<li>取得性別為女性的超級英雄</li>
+<li>取得身高高於180cm的超級英雄</li>
+</ul>
+</div>
+<div id="r-data-frame-8" class="section level2">
+<h2><span class="header-section-number">3.36</span> R特殊資料型態 | 取得data frame上的資料</h2>
+<ul>
+<li>根據索引(data frame上符合索引條件的紀錄)</li>
+<li>在Console上輸入下面敘述</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">heroes[<span class="kw">which.max</span>(heroes<span class="op">$</span>height),]</code></pre>
+<pre><code>##    id     name height weight gender
+## 1 001 superman    190    102   Male</code></pre>
+<ul>
+<li>在Console上輸入下面敘述，查看索引</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which.max</span>(heroes<span class="op">$</span>height)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<ul>
+<li>which.max(x)：傳回x中最大值的位置</li>
+</ul>
+</div>
+<div id="section-8" class="section level2">
+<h2><span class="header-section-number">3.37</span> 練習</h2>
+<ul>
+<li>取得體重最重的超級英雄</li>
+<li>取得體重最輕的超級英雄</li>
+</ul>
+</div>
+<div id="section-9" class="section level2">
+<h2><span class="header-section-number">3.38</span> 小結</h2>
+<ul>
+<li>R語言中很重要的是使用函數來幫忙完成工作</li>
+<li>在本次課程中，列舉出許多常用的函數</li>
+<li>但還有更多的函數</li>
+<li>面對這些函數，死背下來不是最好的方法</li>
+<li>需要學習如何查找到適合的函數是學習R語言的訣竅</li>
+</ul>
+</div>
+<div id="section-10" class="section level2">
+<h2><span class="header-section-number">3.39</span> 小結</h2>
+<ul>
+<li>在R語言的程式設計當中，vector與data frame是相當重要的資料型態</li>
+<li>許多分析與計算都在vector或data frame上完成</li>
+<li>下一節將主要著重在data frame為主的資料讀取與儲存</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="literature.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

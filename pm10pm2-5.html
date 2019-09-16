@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 各地區觀測站測得的PM10與PM2.5分布 | R語言課程講義</title>
+  <meta name="description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 各地區觀測站測得的PM10與PM2.5分布 | R語言課程講義" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 各地區觀測站測得的PM10與PM2.5分布 | R語言課程講義" />
+  
+  <meta name="twitter:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  
+
+<meta name="author" content="林頌堅" />
+
+
+<meta name="date" content="2019-07-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-visualization.html">
+<link rel="next" href="section-54.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R語言的基本概念與語法</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-1"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-2"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="1.0.1" data-path="intro.html"><a href="intro.html#section-3"><i class="fa fa-check"></i><b>1.0.1</b> 學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.1</b> R語言的基本概念</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r-1"><i class="fa fa-check"></i><b>1.2</b> R語言的運算</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r-2"><i class="fa fa-check"></i><b>1.3</b> R語言的基本資料型態</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#section-4"><i class="fa fa-check"></i><b>1.3.1</b> 數值資料型態</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#section-5"><i class="fa fa-check"></i><b>1.3.2</b> 文字資料型態</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#section-6"><i class="fa fa-check"></i><b>1.3.3</b> 邏輯資料型態</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#factor"><i class="fa fa-check"></i><b>1.3.4</b> factor資料型態</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#r-3"><i class="fa fa-check"></i><b>1.4</b> R語言的特殊資料型態</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector"><i class="fa fa-check"></i><b>1.4.1</b> vector</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#matrix"><i class="fa fa-check"></i><b>1.4.2</b> matrix</a></li>
+<li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#list"><i class="fa fa-check"></i><b>1.4.3</b> list</a></li>
+<li class="chapter" data-level="1.4.4" data-path="intro.html"><a href="intro.html#data-frame"><i class="fa fa-check"></i><b>1.4.4</b> data frame</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-7"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-8"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>2</b> 運用R語言進行資料處理</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-9"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-10"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-11"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-12"><i class="fa fa-check"></i><b>2.1</b> 預備工作</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-13"><i class="fa fa-check"></i><b>2.1.1</b> 設定工作目錄</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-14"><i class="fa fa-check"></i><b>2.2</b> 讀入檔案資料</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-15"><i class="fa fa-check"></i><b>2.2.1</b> 讀入空氣品質指標資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-16"><i class="fa fa-check"></i><b>2.2.2</b> 瀏覽讀入的資料</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-17"><i class="fa fa-check"></i><b>2.3</b> 資料整理</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#aqina"><i class="fa fa-check"></i><b>2.3.1</b> 去除AQI為NA的資料紀錄</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-manipulation.html"><a href="data-manipulation.html#variable"><i class="fa fa-check"></i><b>2.3.2</b> Variable資料型態變更</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-18"><i class="fa fa-check"></i><b>2.4</b> 資料分析</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-19"><i class="fa fa-check"></i><b>2.4.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-20"><i class="fa fa-check"></i><b>2.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-21"><i class="fa fa-check"></i><b>2.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-22"><i class="fa fa-check"></i><b>2.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-manipulation.html"><a href="data-manipulation.html#section-23"><i class="fa fa-check"></i><b>2.5</b> 程式存檔</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-24"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-25"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Tidyverse簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-26"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-27"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-28"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy"><i class="fa fa-check"></i><b>3.1</b> tidy資料格式簡介</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-1"><i class="fa fa-check"></i><b>3.1.1</b> tidy資料格式的特徵</a></li>
+<li class="chapter" data-level="3.1.2" data-path="tidyverse.html"><a href="tidyverse.html#tidy-2"><i class="fa fa-check"></i><b>3.1.2</b> tidy資料格式的優點</a></li>
+<li class="chapter" data-level="3.1.3" data-path="tidyverse.html"><a href="tidyverse.html#wide-format-vs.-long-format"><i class="fa fa-check"></i><b>3.1.3</b> wide format vs. long format</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-1"><i class="fa fa-check"></i><b>3.2</b> tidyverse套件</a></li>
+<li class="chapter" data-level="3.3" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-format"><i class="fa fa-check"></i><b>3.3</b> tidy data format的資料分析方法</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="tidyverse.html"><a href="tidyverse.html#section-29"><i class="fa fa-check"></i><b>3.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-2"><i class="fa fa-check"></i><b>3.3.2</b> 使用tidyverse套件的函數</a></li>
+<li class="chapter" data-level="3.3.3" data-path="tidyverse.html"><a href="tidyverse.html#section-30"><i class="fa fa-check"></i><b>3.3.3</b> 資料整理</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#section-31"><i class="fa fa-check"></i><b>3.4</b> 資料分析</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="tidyverse.html"><a href="tidyverse.html#section-32"><i class="fa fa-check"></i><b>3.4.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="3.4.2" data-path="tidyverse.html"><a href="tidyverse.html#section-33"><i class="fa fa-check"></i><b>3.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="3.4.3" data-path="tidyverse.html"><a href="tidyverse.html#section-34"><i class="fa fa-check"></i><b>3.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="3.4.4" data-path="tidyverse.html"><a href="tidyverse.html#section-35"><i class="fa fa-check"></i><b>3.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-36"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-37"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> 資料視覺化</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-38"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-39"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-40"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#section-41"><i class="fa fa-check"></i><b>4.1</b> 資訊視覺化簡介</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#r-4"><i class="fa fa-check"></i><b>4.2</b> R語言的資料視覺化工具</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.2.1</b> ggplot2的運作概念</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization.html"><a href="data-visualization.html#aesthetics"><i class="fa fa-check"></i><b>4.2.2</b> Aesthetics上幾種常用的資料編碼方式</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-geometrics"><i class="fa fa-check"></i><b>4.2.3</b> ggplot2上幾種常用的圖表類型 (Geometrics)</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-1"><i class="fa fa-check"></i><b>4.2.4</b> 使用ggplot2套件</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#section-42"><i class="fa fa-check"></i><b>4.3</b> 以資料視覺化的方式進行資料探索</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualization.html"><a href="data-visualization.html#section-43"><i class="fa fa-check"></i><b>4.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization.html"><a href="data-visualization.html#section-44"><i class="fa fa-check"></i><b>4.3.2</b> 問題</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#section-45"><i class="fa fa-check"></i><b>4.4</b> 利用直方圖呈現資料的分布情形</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#section-46"><i class="fa fa-check"></i><b>4.5</b> 利用長條圖進行資料之間的比較</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#section-47"><i class="fa fa-check"></i><b>4.6</b> 利用散佈圖呈現兩個數值之間的關係</a></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#section-48"><i class="fa fa-check"></i><b>4.7</b> 使用盒狀圖比較多個群體的分布情形觀測站</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html"><i class="fa fa-check"></i><b>5</b> 各地區觀測站測得的PM10與PM2.5分布</a><ul>
+<li class="chapter" data-level="5.1" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html#section-49"><i class="fa fa-check"></i><b>5.1</b> 並列的圖表</a></li>
+<li class="chapter" data-level="5.2" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html#pm10pm2.5-1"><i class="fa fa-check"></i><b>5.2</b> 取出各地區觀測站測得的PM10與PM2.5</a></li>
+<li class="chapter" data-level="5.3" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html#wide-data-formatlong-data-format"><i class="fa fa-check"></i><b>5.3</b> 從wide data format改為long data format</a></li>
+<li class="chapter" data-level="5.4" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html#pm10pm2.5-2"><i class="fa fa-check"></i><b>5.4</b> 利用圖表層面將各地區觀測站測得的PM10與PM2.5分布畫在並列的圖表上</a></li>
+<li class="chapter" data-level="5.5" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html#section-50"><i class="fa fa-check"></i><b>5.5</b> 取消圖例</a></li>
+<li class="chapter" data-level="5.6" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html#section-51"><i class="fa fa-check"></i><b>5.6</b> 練習</a></li>
+<li class="chapter" data-level="5.7" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html#section-52"><i class="fa fa-check"></i><b>5.7</b> 練習</a></li>
+<li class="chapter" data-level="5.8" data-path="pm10pm2-5.html"><a href="pm10pm2-5.html#section-53"><i class="fa fa-check"></i><b>5.8</b> 簡要複習</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-54.html"><a href="section-54.html"><i class="fa fa-check"></i><b>6</b> 本次課程小結</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-54.html"><a href="section-54.html#section-55"><i class="fa fa-check"></i><b>6.1</b> 小結</a></li>
+<li class="chapter" data-level="6.2" data-path="section-54.html"><a href="section-54.html#section-56"><i class="fa fa-check"></i><b>6.2</b> 小結</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>7</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R語言課程講義</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pm10pm2.5" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> 各地區觀測站測得的PM10與PM2.5分布</h1>
+<div id="section-49" class="section level2">
+<h2><span class="header-section-number">5.1</span> 並列的圖表</h2>
+<ul>
+<li>將多個相同類型的圖表並列</li>
+<li>以下以各地區觀測站的PM10與PM2.5資料為例，在並列的圖表上畫出表示兩個指標分布的盒狀圖</li>
+</ul>
+</div>
+<div id="pm10pm2.5-1" class="section level2">
+<h2><span class="header-section-number">5.2</span> 取出各地區觀測站測得的PM10與PM2.5</h2>
+<pre class="sourceCode r"><code class="sourceCode r">aqi_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(AQI)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Area, SiteName, PM10, PM2<span class="fl">.5</span>)</code></pre>
+<pre><code>##    Area         SiteName PM10 PM2.5
+## 1  中部             二林   18    16
+## 2  北部             三重   29     8
+## 3  北部             三義   15     5
+## 4  北部             土城   31    12
+## 5  北部             士林   25     6
+## 6  北部             大同   31    17
+## 7  中部             大里    1    ND
+## 8  北部             大園   NA     9
+## 9  南部             大寮   19    10
+## 10 南部             小港   28     2
+## 11 北部             中山   26     9
+## 12 北部             中壢   21    23
+## 13 南部             仁武   22     5
+## 14 南部             斗六   16     6
+## 15 東部             冬山   22     8
+## 16 北部             古亭   22     6
+## 17 南部             左營   22     6
+## 18 北部             平鎮   28     4
+## 19 北部             永和   21     3
+## 20 南部             安南   NA    17
+## 21 南部             朴子    6     4
+## 22 北部             汐止   23     8
+## 23 中部             竹山   13     4
+## 24 北部             竹東   22     3
+## 25 中部             西屯   18     5
+## 26 中部             沙鹿   15    ND
+## 27 東部             宜蘭   14     8
+## 28 中部             忠明    9    17
+## 29 北部             松山   23     9
+## 30 北部             板橋   23     7
+## 31 北部             林口   NA     2
+## 32 南部             林園   40     9
+## 33 東部             花蓮   18    ND
+## 34 外島             金門   21     8
+## 35 南部             前金   22    ND
+## 36 南部             前鎮   24    ND
+## 37 中部             南投    9    ND
+## 38 南部             屏東   21    ND
+## 39 南部             恆春   39     7
+## 40 南部             美濃   18     7
+## 41 北部             苗栗   17     7
+## 42 北部       苗栗(後龍)   31    10
+## 43 中部             埔里    7     7
+## 44 北部             桃園   26     8
+## 45 北部 桃園(觀音工業區)   28     6
+## 46 外島             馬公   NA     3
+## 47 外島             馬祖   15     4
+## 48 北部             基隆   18     7
+## 49 南部             崙背   NA     3
+## 50 北部             淡水   25    10
+## 51 南部             麥寮   10     2
+## 52 南部             善化   17     7
+## 53 北部           富貴角   26     8
+## 54 南部             復興   16     4
+## 55 北部             湖口   23     9
+## 56 北部             菜寮   30     6
+## 57 北部             新竹   27     6
+## 58 北部             新店   19     3
+## 59 南部             新港    5     2
+## 60 南部             新營   13     9
+## 61 南部             楠梓   24     7
+## 62 北部             萬里   21     7
+## 63 北部             萬華   21     8
+## 64 南部             嘉義   NA     5
+## 65 中部             彰化   12    10
+## 66 東部             臺東   17     8
+## 67 南部             臺南   21     9
+## 68 南部       臺南(麻豆)   NA    ND
+## 69 南部             鳳山   23     5
+## 70 南部             潮州    8     4
+## 71 中部             線西   23     9
+## 72 南部             橋頭   25     4
+## 73 北部             頭份   22     6
+## 74 北部             龍潭   24     6
+## 75 中部             豐原    8    11
+## 76 北部             觀音   28     9</code></pre>
+</div>
+<div id="wide-data-formatlong-data-format" class="section level2">
+<h2><span class="header-section-number">5.3</span> 從wide data format改為long data format</h2>
+<pre class="sourceCode r"><code class="sourceCode r">aqi_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(AQI)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Area, SiteName, PM10, PM2<span class="fl">.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span>index, <span class="dt">value=</span>value, PM10, PM2<span class="fl">.5</span>)</code></pre>
+<pre><code>##     Area         SiteName index value
+## 1   中部             二林  PM10    18
+## 2   北部             三重  PM10    29
+## 3   北部             三義  PM10    15
+## 4   北部             土城  PM10    31
+## 5   北部             士林  PM10    25
+## 6   北部             大同  PM10    31
+## 7   中部             大里  PM10     1
+## 8   北部             大園  PM10  &lt;NA&gt;
+## 9   南部             大寮  PM10    19
+## 10  南部             小港  PM10    28
+## 11  北部             中山  PM10    26
+## 12  北部             中壢  PM10    21
+## 13  南部             仁武  PM10    22
+## 14  南部             斗六  PM10    16
+## 15  東部             冬山  PM10    22
+## 16  北部             古亭  PM10    22
+## 17  南部             左營  PM10    22
+## 18  北部             平鎮  PM10    28
+## 19  北部             永和  PM10    21
+## 20  南部             安南  PM10  &lt;NA&gt;
+## 21  南部             朴子  PM10     6
+## 22  北部             汐止  PM10    23
+## 23  中部             竹山  PM10    13
+## 24  北部             竹東  PM10    22
+## 25  中部             西屯  PM10    18
+## 26  中部             沙鹿  PM10    15
+## 27  東部             宜蘭  PM10    14
+## 28  中部             忠明  PM10     9
+## 29  北部             松山  PM10    23
+## 30  北部             板橋  PM10    23
+## 31  北部             林口  PM10  &lt;NA&gt;
+## 32  南部             林園  PM10    40
+## 33  東部             花蓮  PM10    18
+## 34  外島             金門  PM10    21
+## 35  南部             前金  PM10    22
+## 36  南部             前鎮  PM10    24
+## 37  中部             南投  PM10     9
+## 38  南部             屏東  PM10    21
+## 39  南部             恆春  PM10    39
+## 40  南部             美濃  PM10    18
+## 41  北部             苗栗  PM10    17
+## 42  北部       苗栗(後龍)  PM10    31
+## 43  中部             埔里  PM10     7
+## 44  北部             桃園  PM10    26
+## 45  北部 桃園(觀音工業區)  PM10    28
+## 46  外島             馬公  PM10  &lt;NA&gt;
+## 47  外島             馬祖  PM10    15
+## 48  北部             基隆  PM10    18
+## 49  南部             崙背  PM10  &lt;NA&gt;
+## 50  北部             淡水  PM10    25
+## 51  南部             麥寮  PM10    10
+## 52  南部             善化  PM10    17
+## 53  北部           富貴角  PM10    26
+## 54  南部             復興  PM10    16
+## 55  北部             湖口  PM10    23
+## 56  北部             菜寮  PM10    30
+## 57  北部             新竹  PM10    27
+## 58  北部             新店  PM10    19
+## 59  南部             新港  PM10     5
+## 60  南部             新營  PM10    13
+## 61  南部             楠梓  PM10    24
+## 62  北部             萬里  PM10    21
+## 63  北部             萬華  PM10    21
+## 64  南部             嘉義  PM10  &lt;NA&gt;
+## 65  中部             彰化  PM10    12
+## 66  東部             臺東  PM10    17
+## 67  南部             臺南  PM10    21
+## 68  南部       臺南(麻豆)  PM10  &lt;NA&gt;
+## 69  南部             鳳山  PM10    23
+## 70  南部             潮州  PM10     8
+## 71  中部             線西  PM10    23
+## 72  南部             橋頭  PM10    25
+## 73  北部             頭份  PM10    22
+## 74  北部             龍潭  PM10    24
+## 75  中部             豐原  PM10     8
+## 76  北部             觀音  PM10    28
+## 77  中部             二林 PM2.5    16
+## 78  北部             三重 PM2.5     8
+## 79  北部             三義 PM2.5     5
+## 80  北部             土城 PM2.5    12
+## 81  北部             士林 PM2.5     6
+## 82  北部             大同 PM2.5    17
+## 83  中部             大里 PM2.5    ND
+## 84  北部             大園 PM2.5     9
+## 85  南部             大寮 PM2.5    10
+## 86  南部             小港 PM2.5     2
+## 87  北部             中山 PM2.5     9
+## 88  北部             中壢 PM2.5    23
+## 89  南部             仁武 PM2.5     5
+## 90  南部             斗六 PM2.5     6
+## 91  東部             冬山 PM2.5     8
+## 92  北部             古亭 PM2.5     6
+## 93  南部             左營 PM2.5     6
+## 94  北部             平鎮 PM2.5     4
+## 95  北部             永和 PM2.5     3
+## 96  南部             安南 PM2.5    17
+## 97  南部             朴子 PM2.5     4
+## 98  北部             汐止 PM2.5     8
+## 99  中部             竹山 PM2.5     4
+## 100 北部             竹東 PM2.5     3
+## 101 中部             西屯 PM2.5     5
+## 102 中部             沙鹿 PM2.5    ND
+## 103 東部             宜蘭 PM2.5     8
+## 104 中部             忠明 PM2.5    17
+## 105 北部             松山 PM2.5     9
+## 106 北部             板橋 PM2.5     7
+## 107 北部             林口 PM2.5     2
+## 108 南部             林園 PM2.5     9
+## 109 東部             花蓮 PM2.5    ND
+## 110 外島             金門 PM2.5     8
+## 111 南部             前金 PM2.5    ND
+## 112 南部             前鎮 PM2.5    ND
+## 113 中部             南投 PM2.5    ND
+## 114 南部             屏東 PM2.5    ND
+## 115 南部             恆春 PM2.5     7
+## 116 南部             美濃 PM2.5     7
+## 117 北部             苗栗 PM2.5     7
+## 118 北部       苗栗(後龍) PM2.5    10
+## 119 中部             埔里 PM2.5     7
+## 120 北部             桃園 PM2.5     8
+## 121 北部 桃園(觀音工業區) PM2.5     6
+## 122 外島             馬公 PM2.5     3
+## 123 外島             馬祖 PM2.5     4
+## 124 北部             基隆 PM2.5     7
+## 125 南部             崙背 PM2.5     3
+## 126 北部             淡水 PM2.5    10
+## 127 南部             麥寮 PM2.5     2
+## 128 南部             善化 PM2.5     7
+## 129 北部           富貴角 PM2.5     8
+## 130 南部             復興 PM2.5     4
+## 131 北部             湖口 PM2.5     9
+## 132 北部             菜寮 PM2.5     6
+## 133 北部             新竹 PM2.5     6
+## 134 北部             新店 PM2.5     3
+## 135 南部             新港 PM2.5     2
+## 136 南部             新營 PM2.5     9
+## 137 南部             楠梓 PM2.5     7
+## 138 北部             萬里 PM2.5     7
+## 139 北部             萬華 PM2.5     8
+## 140 南部             嘉義 PM2.5     5
+## 141 中部             彰化 PM2.5    10
+## 142 東部             臺東 PM2.5     8
+## 143 南部             臺南 PM2.5     9
+## 144 南部       臺南(麻豆) PM2.5    ND
+## 145 南部             鳳山 PM2.5     5
+## 146 南部             潮州 PM2.5     4
+## 147 中部             線西 PM2.5     9
+## 148 南部             橋頭 PM2.5     4
+## 149 北部             頭份 PM2.5     6
+## 150 北部             龍潭 PM2.5     6
+## 151 中部             豐原 PM2.5    11
+## 152 北部             觀音 PM2.5     9</code></pre>
+</div>
+<div id="pm10pm2.5-2" class="section level2">
+<h2><span class="header-section-number">5.4</span> 利用圖表層面將各地區觀測站測得的PM10與PM2.5分布畫在並列的圖表上</h2>
+<ul>
+<li>盒狀圖類似上面的做法，但利用facet_wrap(~index)，將兩種指標的盒狀圖並列</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">aqi_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(AQI)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Area, SiteName, PM10, PM2<span class="fl">.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span>index, <span class="dt">value=</span>value, PM10, PM2<span class="fl">.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Area, <span class="dt">y=</span>value, <span class="dt">color=</span>Area)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>index)</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+<div id="section-50" class="section level2">
+<h2><span class="header-section-number">5.5</span> 取消圖例</h2>
+<pre class="sourceCode r"><code class="sourceCode r">aqi_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(AQI)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Area, SiteName, PM10, PM2<span class="fl">.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span>index, <span class="dt">value=</span>value, PM10, PM2<span class="fl">.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Area, <span class="dt">y=</span>value, <span class="dt">color=</span>Area)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>index) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+<div id="section-51" class="section level2">
+<h2><span class="header-section-number">5.6</span> 練習</h2>
+<ul>
+<li>將X軸與Y軸的標題改為中文，並加上圖表標題
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-29-1.png" width="672" /></li>
+</ul>
+</div>
+<div id="section-52" class="section level2">
+<h2><span class="header-section-number">5.7</span> 練習</h2>
+<ul>
+<li>利用scale_color_brewer()修改圖形顏色
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-30-1.png" width="672" /></li>
+</ul>
+</div>
+<div id="section-53" class="section level2">
+<h2><span class="header-section-number">5.8</span> 簡要複習</h2>
+<ul>
+<li>比較資料分布可利用點狀圖、盒狀圖和小提琴圖，三種圖形各有擅長表現的訊息。
+<ul>
+<li>點狀圖藉由點的密度表現資料分布情形，也能夠比較不同種類資料的數量，但無法表現重要的統計訊息，如中位數等。</li>
+<li>盒狀圖節由關鍵位置的視覺圖示(如盒子的上下緣和中間的橫線等)表現出資料分布的重要統計訊息，但缺乏較細緻的資料分布情形，並且無法比較不同種類資料的數量。</li>
+<li>小提琴圖由圖形寬度變化表現資料分布情形，可以大致看出資料的集中與分散，但無法表現重要的統計訊息，也無法比較不同種類資料的數量。</li>
+</ul></li>
+<li>facet_wrap可以產生並列的圖形，但需要注意座標是否需要綁定。</li>
+<li>圖形的外觀可由theme()進行設定。</li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-visualization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-54.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-data_visualization.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

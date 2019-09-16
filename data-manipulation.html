@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 運用R語言進行資料處理 | R語言課程講義</title>
+  <meta name="description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 運用R語言進行資料處理 | R語言課程講義" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 運用R語言進行資料處理 | R語言課程講義" />
+  
+  <meta name="twitter:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  
+
+<meta name="author" content="林頌堅" />
+
+
+<meta name="date" content="2019-07-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html">
+<link rel="next" href="tidyverse.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R語言的基本概念與語法</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-1"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-2"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="1.0.1" data-path="intro.html"><a href="intro.html#section-3"><i class="fa fa-check"></i><b>1.0.1</b> 學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.1</b> R語言的基本概念</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r-1"><i class="fa fa-check"></i><b>1.2</b> R語言的運算</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r-2"><i class="fa fa-check"></i><b>1.3</b> R語言的基本資料型態</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#section-4"><i class="fa fa-check"></i><b>1.3.1</b> 數值資料型態</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#section-5"><i class="fa fa-check"></i><b>1.3.2</b> 文字資料型態</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#section-6"><i class="fa fa-check"></i><b>1.3.3</b> 邏輯資料型態</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#factor"><i class="fa fa-check"></i><b>1.3.4</b> factor資料型態</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#r-3"><i class="fa fa-check"></i><b>1.4</b> R語言的特殊資料型態</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector"><i class="fa fa-check"></i><b>1.4.1</b> vector</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#matrix"><i class="fa fa-check"></i><b>1.4.2</b> matrix</a></li>
+<li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#list"><i class="fa fa-check"></i><b>1.4.3</b> list</a></li>
+<li class="chapter" data-level="1.4.4" data-path="intro.html"><a href="intro.html#data-frame"><i class="fa fa-check"></i><b>1.4.4</b> data frame</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-7"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-8"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>2</b> 運用R語言進行資料處理</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-9"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-10"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-11"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-12"><i class="fa fa-check"></i><b>2.1</b> 預備工作</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-13"><i class="fa fa-check"></i><b>2.1.1</b> 設定工作目錄</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-14"><i class="fa fa-check"></i><b>2.2</b> 讀入檔案資料</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-15"><i class="fa fa-check"></i><b>2.2.1</b> 讀入空氣品質指標資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-16"><i class="fa fa-check"></i><b>2.2.2</b> 瀏覽讀入的資料</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-17"><i class="fa fa-check"></i><b>2.3</b> 資料整理</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#aqina"><i class="fa fa-check"></i><b>2.3.1</b> 去除AQI為NA的資料紀錄</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-manipulation.html"><a href="data-manipulation.html#variable"><i class="fa fa-check"></i><b>2.3.2</b> Variable資料型態變更</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-18"><i class="fa fa-check"></i><b>2.4</b> 資料分析</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-19"><i class="fa fa-check"></i><b>2.4.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-20"><i class="fa fa-check"></i><b>2.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-21"><i class="fa fa-check"></i><b>2.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-22"><i class="fa fa-check"></i><b>2.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-manipulation.html"><a href="data-manipulation.html#section-23"><i class="fa fa-check"></i><b>2.5</b> 程式存檔</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-24"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-25"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Tidyverse簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-26"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-27"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-28"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy"><i class="fa fa-check"></i><b>3.1</b> tidy資料格式簡介</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-1"><i class="fa fa-check"></i><b>3.1.1</b> tidy資料格式的特徵</a></li>
+<li class="chapter" data-level="3.1.2" data-path="tidyverse.html"><a href="tidyverse.html#tidy-2"><i class="fa fa-check"></i><b>3.1.2</b> tidy資料格式的優點</a></li>
+<li class="chapter" data-level="3.1.3" data-path="tidyverse.html"><a href="tidyverse.html#wide-format-vs.-long-format"><i class="fa fa-check"></i><b>3.1.3</b> wide format vs. long format</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-1"><i class="fa fa-check"></i><b>3.2</b> tidyverse套件</a></li>
+<li class="chapter" data-level="3.3" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-format"><i class="fa fa-check"></i><b>3.3</b> tidy data format的資料分析方法</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="tidyverse.html"><a href="tidyverse.html#section-29"><i class="fa fa-check"></i><b>3.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-2"><i class="fa fa-check"></i><b>3.3.2</b> 使用tidyverse套件的函數</a></li>
+<li class="chapter" data-level="3.3.3" data-path="tidyverse.html"><a href="tidyverse.html#section-30"><i class="fa fa-check"></i><b>3.3.3</b> 資料整理</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#section-31"><i class="fa fa-check"></i><b>3.4</b> 資料分析</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="tidyverse.html"><a href="tidyverse.html#section-32"><i class="fa fa-check"></i><b>3.4.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="3.4.2" data-path="tidyverse.html"><a href="tidyverse.html#section-33"><i class="fa fa-check"></i><b>3.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="3.4.3" data-path="tidyverse.html"><a href="tidyverse.html#section-34"><i class="fa fa-check"></i><b>3.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="3.4.4" data-path="tidyverse.html"><a href="tidyverse.html#section-35"><i class="fa fa-check"></i><b>3.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-36"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-37"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> 資料視覺化</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-38"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-39"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-40"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#section-41"><i class="fa fa-check"></i><b>4.1</b> 資訊視覺化簡介</a></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#section-42"><i class="fa fa-check"></i><b>4.2</b> 資料處理與分析的步驟</a></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#section-43"><i class="fa fa-check"></i><b>4.3</b> 視覺化常見的應用問題</a></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#r--ggplot2"><i class="fa fa-check"></i><b>4.4</b> R 語言的資料視覺化工具 | ggplot2</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.5</b> ggplot2的運作概念</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-1"><i class="fa fa-check"></i><b>4.6</b> 幾種常用的ggplot2資料編碼</a></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-2"><i class="fa fa-check"></i><b>4.7</b> 幾種常用的ggplot2圖表類型</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#section-44"><i class="fa fa-check"></i><b>4.8</b> 準備工作目錄與檔案</a></li>
+<li class="chapter" data-level="4.9" data-path="data-visualization.html"><a href="data-visualization.html#section-45"><i class="fa fa-check"></i><b>4.9</b> 設定工作目錄</a></li>
+<li class="chapter" data-level="4.10" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-3"><i class="fa fa-check"></i><b>4.10</b> 使用ggplot2套件</a></li>
+<li class="chapter" data-level="4.11" data-path="data-visualization.html"><a href="data-visualization.html#csv"><i class="fa fa-check"></i><b>4.11</b> 讀取粉絲專頁發文資料csv檔案</a></li>
+<li class="chapter" data-level="4.12" data-path="data-visualization.html"><a href="data-visualization.html#section-46"><i class="fa fa-check"></i><b>4.12</b> 讀取縣市地區對照資料</a></li>
+<li class="chapter" data-level="4.13" data-path="data-visualization.html"><a href="data-visualization.html#section-47"><i class="fa fa-check"></i><b>4.13</b> 將地區資料加入空氣品質指標資料</a></li>
+<li class="chapter" data-level="4.14" data-path="data-visualization.html"><a href="data-visualization.html#characterfactor"><i class="fa fa-check"></i><b>4.14</b> 將部分Character型態的資料欄位改成Factor</a></li>
+<li class="chapter" data-level="4.15" data-path="data-visualization.html"><a href="data-visualization.html#section-48"><i class="fa fa-check"></i><b>4.15</b> 以資料視覺化的方式回答以下的問題</a></li>
+<li class="chapter" data-level="4.16" data-path="data-visualization.html"><a href="data-visualization.html#section-49"><i class="fa fa-check"></i><b>4.16</b> 先了解各地空氣品質指標的統計摘要</a></li>
+<li class="chapter" data-level="4.17" data-path="data-visualization.html"><a href="data-visualization.html#section-50"><i class="fa fa-check"></i><b>4.17</b> 資料分布一般採用直方圖</a></li>
+<li class="chapter" data-level="4.18" data-path="data-visualization.html"><a href="data-visualization.html#section-51"><i class="fa fa-check"></i><b>4.18</b> 設置區間範圍</a></li>
+<li class="chapter" data-level="4.19" data-path="data-visualization.html"><a href="data-visualization.html#x"><i class="fa fa-check"></i><b>4.19</b> 加入X軸座標</a></li>
+<li class="chapter" data-level="4.20" data-path="data-visualization.html"><a href="data-visualization.html#section-52"><i class="fa fa-check"></i><b>4.20</b> 修改與加入標題</a></li>
+<li class="chapter" data-level="4.21" data-path="data-visualization.html"><a href="data-visualization.html#section-53"><i class="fa fa-check"></i><b>4.21</b> 練習</a></li>
+<li class="chapter" data-level="4.22" data-path="data-visualization.html"><a href="data-visualization.html#section-54"><i class="fa fa-check"></i><b>4.22</b> 練習</a></li>
+<li class="chapter" data-level="4.23" data-path="data-visualization.html"><a href="data-visualization.html#section-55"><i class="fa fa-check"></i><b>4.23</b> 簡要複習</a></li>
+<li class="chapter" data-level="4.24" data-path="data-visualization.html"><a href="data-visualization.html#section-56"><i class="fa fa-check"></i><b>4.24</b> 統計各地區的觀測站數量</a></li>
+<li class="chapter" data-level="4.25" data-path="data-visualization.html"><a href="data-visualization.html#ggplot"><i class="fa fa-check"></i><b>4.25</b> 運用ggplot的長條圖繪製各地區的觀測站數量</a></li>
+<li class="chapter" data-level="4.26" data-path="data-visualization.html"><a href="data-visualization.html#section-57"><i class="fa fa-check"></i><b>4.26</b> 加上排序的長條圖</a></li>
+<li class="chapter" data-level="4.27" data-path="data-visualization.html"><a href="data-visualization.html#y"><i class="fa fa-check"></i><b>4.27</b> 修改y軸上的標示</a></li>
+<li class="chapter" data-level="4.28" data-path="data-visualization.html"><a href="data-visualization.html#section-58"><i class="fa fa-check"></i><b>4.28</b> 加上標題</a></li>
+<li class="chapter" data-level="4.29" data-path="data-visualization.html"><a href="data-visualization.html#section-59"><i class="fa fa-check"></i><b>4.29</b> 統計各類型的發文比例</a></li>
+<li class="chapter" data-level="4.30" data-path="data-visualization.html"><a href="data-visualization.html#section-60"><i class="fa fa-check"></i><b>4.30</b> 劃出長條圖</a></li>
+<li class="chapter" data-level="4.31" data-path="data-visualization.html"><a href="data-visualization.html#section-61"><i class="fa fa-check"></i><b>4.31</b> 練習</a></li>
+<li class="chapter" data-level="4.32" data-path="data-visualization.html"><a href="data-visualization.html#section-62"><i class="fa fa-check"></i><b>4.32</b> 簡要複習</a></li>
+<li class="chapter" data-level="4.33" data-path="data-visualization.html"><a href="data-visualization.html#section-63"><i class="fa fa-check"></i><b>4.33</b> 比較各地區觀測站測得的空氣品質分布</a></li>
+<li class="chapter" data-level="4.34" data-path="data-visualization.html"><a href="data-visualization.html#section-64"><i class="fa fa-check"></i><b>4.34</b> 使用盒狀圖畫出各地區觀測站測得的空氣品質分布</a></li>
+<li class="chapter" data-level="4.35" data-path="data-visualization.html"><a href="data-visualization.html#aqi"><i class="fa fa-check"></i><b>4.35</b> 以不同的顏色呈現各地區的AQI分布</a></li>
+<li class="chapter" data-level="4.36" data-path="data-visualization.html"><a href="data-visualization.html#legend"><i class="fa fa-check"></i><b>4.36</b> 取消圖例(legend)</a></li>
+<li class="chapter" data-level="4.37" data-path="data-visualization.html"><a href="data-visualization.html#section-65"><i class="fa fa-check"></i><b>4.37</b> 使用小提琴圖畫出各地區觀測站測得的空氣品質分布</a></li>
+<li class="chapter" data-level="4.38" data-path="data-visualization.html"><a href="data-visualization.html#section-66"><i class="fa fa-check"></i><b>4.38</b> 使用點狀圖畫出各地區觀測站測得的空氣品質分布</a></li>
+<li class="chapter" data-level="4.39" data-path="data-visualization.html"><a href="data-visualization.html#section-67"><i class="fa fa-check"></i><b>4.39</b> 修改顏色</a></li>
+<li class="chapter" data-level="4.40" data-path="data-visualization.html"><a href="data-visualization.html#section-68"><i class="fa fa-check"></i><b>4.40</b> 修改背景顏色</a></li>
+<li class="chapter" data-level="4.41" data-path="data-visualization.html"><a href="data-visualization.html#section-69"><i class="fa fa-check"></i><b>4.41</b> 並列的圖表</a></li>
+<li class="chapter" data-level="4.42" data-path="data-visualization.html"><a href="data-visualization.html#pm10pm2.5"><i class="fa fa-check"></i><b>4.42</b> 取出各地區觀測站測得的PM10與PM2.5</a></li>
+<li class="chapter" data-level="4.43" data-path="data-visualization.html"><a href="data-visualization.html#wide-data-formatlong-data-format"><i class="fa fa-check"></i><b>4.43</b> 從wide data format改為long data format</a></li>
+<li class="chapter" data-level="4.44" data-path="data-visualization.html"><a href="data-visualization.html#pm10pm2.5-1"><i class="fa fa-check"></i><b>4.44</b> 利用圖表層面將各地區觀測站測得的PM10與PM2.5分布畫在並列的圖表上</a></li>
+<li class="chapter" data-level="4.45" data-path="data-visualization.html"><a href="data-visualization.html#section-70"><i class="fa fa-check"></i><b>4.45</b> 取消圖例</a></li>
+<li class="chapter" data-level="4.46" data-path="data-visualization.html"><a href="data-visualization.html#section-71"><i class="fa fa-check"></i><b>4.46</b> 練習</a></li>
+<li class="chapter" data-level="4.47" data-path="data-visualization.html"><a href="data-visualization.html#section-72"><i class="fa fa-check"></i><b>4.47</b> 練習</a></li>
+<li class="chapter" data-level="4.48" data-path="data-visualization.html"><a href="data-visualization.html#section-73"><i class="fa fa-check"></i><b>4.48</b> 簡要複習</a></li>
+<li class="chapter" data-level="4.49" data-path="data-visualization.html"><a href="data-visualization.html#section-74"><i class="fa fa-check"></i><b>4.49</b> 散佈圖可以用來兩個數值之間的關係</a></li>
+<li class="chapter" data-level="4.50" data-path="data-visualization.html"><a href="data-visualization.html#section-75"><i class="fa fa-check"></i><b>4.50</b> 什麼樣類型的發文可以獲得較多的按讚數</a></li>
+<li class="chapter" data-level="4.51" data-path="data-visualization.html"><a href="data-visualization.html#section-76"><i class="fa fa-check"></i><b>4.51</b> 修改標題</a></li>
+<li class="chapter" data-level="4.52" data-path="data-visualization.html"><a href="data-visualization.html#section-77"><i class="fa fa-check"></i><b>4.52</b> 進行線性迴歸分析</a></li>
+<li class="chapter" data-level="4.53" data-path="data-visualization.html"><a href="data-visualization.html#section-78"><i class="fa fa-check"></i><b>4.53</b> 畫出直線</a></li>
+<li class="chapter" data-level="4.54" data-path="data-visualization.html"><a href="data-visualization.html#section-79"><i class="fa fa-check"></i><b>4.54</b> 小結</a></li>
+<li class="chapter" data-level="4.55" data-path="data-visualization.html"><a href="data-visualization.html#section-80"><i class="fa fa-check"></i><b>4.55</b> 小結</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R語言課程講義</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data_manipulation" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> 運用R語言進行資料處理</h1>
+<div id="section-9" class="section level2 unnumbered">
+<h2>課程簡介</h2>
+<div id="section-10" class="section level3 unnumbered">
+<h3>課程簡介</h3>
+<p>本次課程的目的為運用上單元學習到的若干概念，進行資料探索與處理，包括以下的內容：</p>
+<ul>
+<li>讀入資料，儲存為data frame資料形態</li>
+<li>瀏覽與檢視資料內容</li>
+<li>整理資料成適合分析的形式</li>
+<li>進行簡單分析</li>
+</ul>
+<p>本次課程將以環境資源資料開放平臺上的空氣品質指標為例，進行上述的資料探索與處理。</p>
+</div>
+<div id="section-11" class="section level3 unnumbered">
+<h3>學習目標</h3>
+<ul>
+<li>能夠在R語言中讀入csv格式的資料檔案</li>
+<li>能夠利用R語言進行簡單的探索性分析</li>
+<li>能夠將分析過程的程式寫入檔案，便於日後使用在同樣或類似的工作上</li>
+</ul>
+</div>
+</div>
+<div id="section-12" class="section level2">
+<h2><span class="header-section-number">2.1</span> 預備工作</h2>
+<div id="section-13" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> 設定工作目錄</h3>
+<p>在運用R語言時，首要工作是設定工作目錄。</p>
+<ol style="list-style-type: decimal">
+<li>首先利用Windows的檔案總管，在“我的文件下”建立新的工作目錄</li>
+<li>在<strong>Source</strong>中增加新的Script</li>
+<li>在Script上設定這個任務的工作目錄</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;rCourse02&quot;</span>)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>執行可點選<strong>Source</strong>右上方的<strong>Run</strong></li>
+<li>可以在<strong>Console</strong>上，輸入<code>getwd()</code>檢查設定工作目錄是否成功</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre>
+<pre><code>## [1] &quot;C:/Users/Leo/Documents/GitHub/bookdown-demo&quot;</code></pre>
+<p><strong>注意</strong>：為什麼<code>setwd("rCourse/02")</code>寫在Source上，而<code>getwd()</code>卻寫在Console？Source與Console上寫入的指令是否不同？</p>
+</div>
+</div>
+<div id="section-14" class="section level2">
+<h2><span class="header-section-number">2.2</span> 讀入檔案資料</h2>
+<div id="section-15" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> 讀入空氣品質指標資料</h3>
+<ol style="list-style-type: decimal">
+<li>進入<a href="https://opendata.epa.gov.tw/">環境資源資料開放平臺</a></li>
+<li>查詢空氣品質指標</li>
+<li>點選<a href="https://opendata.epa.gov.tw/Data/Contents/AQI/">空氣品質指標(AQI)</a></li>
+</ol>
+<p>環境資源資料開放平臺提供三種資料科學最常見的資料格式</p>
+<ul>
+<li>CSV</li>
+<li>XML</li>
+<li>JSON</li>
+</ul>
+<p><strong>CSV</strong>是Comma Separated Values的縮寫。它是一種利用逗點(,)分隔每個Variable的資料檔案格式。在CSV檔案裡，除了第一列為資料名稱之外，其他列為Observation。</p>
+<p><strong>XML</strong>是eXtensible Markup Language
+的縮寫。XML將資料表示成xml元素的集合，例如<DATA><AQI>32</AQI><CO>0.26</CO></DATA>。在CSV檔案裡，每一個元素由<strong>標籤(tag)</strong>構成，例如<AQI>32</AQI>，前面的標籤稱為開始標籤，後面的則稱為結束標籤，以前面的例子來說，開始標籤是<AQI>，結束標籤則是</AQI>。標籤裡是資料名稱，開始標籤與結束標籤之間便是資料值。</p>
+<p><strong>JSON</strong>代表JavaScript Object Notation，也就是以JavaScript物件(object)的方式表示資料的檔案格式，例如：{“AQI”:“32”, “CO”:“0.26”}。其中的AQI為資料名稱，32為資料值。</p>
+<p>在本次課程中，先以CSV格式讀取空氣品質指標檔案，未來可利用R語言的套件直接讀取XML和JSON格式資料。</p>
+<p>在R中讀入csv資料，</p>
+<ol style="list-style-type: decimal">
+<li>在<strong>Script</strong>上輸入下面的敘述</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 讀入空氣品質指標資料CSV檔案</span>
+df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file=</span><span class="st">&quot;http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&amp;$skip=0&amp;$top=1000&amp;format=csv&quot;</span>, 
+               <span class="dt">fileEncoding=</span><span class="st">&quot;UTF-8-BOM&quot;</span>,
+               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre>
+<p><code>read.csv()</code>上包含以下的參數：</p>
+<ul>
+<li><code>file</code>參數為檔案名稱</li>
+<li><code>fileEncoding</code>參數是檔案的文字編碼方式。因為AQI資料的檔案文字編碼格式為UTF-8 with BOM，所以<code>read.csv()</code>的fileEncoding參數設為“UTF-8-BOM”</li>
+<li><code>stringsAsFactors</code>參數讀入的文字資料是否存成factor。希望讀入的不要存成factor，而是以character的形式存在，所以將stringsAsFactors參數設為FALSE。</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>點選敘述，然後將滑鼠指標移到<strong>Source</strong>右上的<strong>Run</strong>，點擊執行</p></li>
+<li><p>查看<strong>Environment</strong>可發現新增一個名稱為df的data frame。這是由讀入的資料形成行與列為基礎的資料結構：data frame。
+注意有多少個observations (列)和多少個variables (行)。</p></li>
+</ol>
+</div>
+<div id="section-16" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> 瀏覽讀入的資料</h3>
+<p>大抵來說，在拿到資料後，往往不會馬上知道如何使用，所以會先對資料進行探索，先看看資料形式。</p>
+<ul>
+<li>有哪些資料？</li>
+<li>包含哪些欄位？</li>
+<li>資料的數量？</li>
+<li>資料的型態？</li>
+<li>資料的分布？</li>
+</ul>
+<p>首先檢視讀入的資料。data frame的資料檢視可以直接點選Environment上的df或在Console輸入</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(df)</code></pre>
+<p>若是資料數量太多，可以先檢視頭尾幾筆資料。</p>
+<ul>
+<li><code>head(x, n)</code>：檢視data frame x的前n筆資料，<code>n</code>預設為6</li>
+<li><code>tail(x, n)</code>：檢視data frame x的後n筆資料，<code>n</code>預設為6</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(df)
+<span class="kw">tail</span>(df)</code></pre>
+<p>接著查看data frame 的資料數量，有多少列(多少個Observations)？多少行(多少個Variables)？</p>
+<ul>
+<li>nrow(x)：x上有多少列 (Observations)？</li>
+<li>ncol(x)：x上有多少行 (Variable)？</li>
+<li>dim(x)：x上有多少列、行？</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(df)
+<span class="kw">ncol</span>(df)
+<span class="kw">dim</span>(df)</code></pre>
+<p>然後，再利用<code>str()</code>查看data frame上各欄位的資料型態</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(df)</code></pre>
+<p>目前df上各行的資料型態可以看到有int(integer)、num(numeric)和chr(character)</p>
+<p>最後，利用<code>summary(x)</code>檢視上各行(欄位)的資料分布情形</p>
+<ul>
+<li>若是Variable的資料型態為integer或numeric，會呈現最小值、第一四分位數、中位數、平均數、第三四分位數、最大值等</li>
+<li>若是Variable的資料型態為character，只會呈現它的型態</li>
+<li>資料中是否有NA(non-available)？</li>
+</ul>
+<p><strong>注意</strong>：原本檔案中如果有遺漏的資料時，讀入資料後會以NA方式呈現，檢查資料摘要時需要特別留意。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)</code></pre>
+</div>
+</div>
+<div id="section-17" class="section level2">
+<h2><span class="header-section-number">2.3</span> 資料整理</h2>
+<div id="aqina" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> 去除AQI為NA的資料紀錄</h3>
+<p>先利用<code>is.na()</code>查看AQI為NA的資料紀錄。is.na(x)：如果x是NA的話，結果為TRUE，否則為FALSE。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df[<span class="kw">is.na</span>(df<span class="op">$</span>AQI), ]</code></pre>
+<p>去除AQI為NA的資料紀錄</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df[<span class="op">!</span><span class="kw">is.na</span>(df<span class="op">$</span>AQI), ]</code></pre>
+<p><strong>練習</strong></p>
+<p>請在Console上再次查看df的資料數量、資料型態、資料摘要，看看與先前執行有何不同</p>
+</div>
+<div id="variable" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Variable資料型態變更</h3>
+<p>將某些character型態的欄位資料改為factor</p>
+<pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>County &lt;-<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>County)</code></pre>
+<p><strong>練習</strong></p>
+<p>在執行上面的敘述後，在Console再次查看資料型態與資料摘要，注意County欄位的結果。原本County的資料型態是character，現在改為factor之後，會呈現各種值(各縣市)的出現次數。</p>
+<p>某些character型態的欄位資料則修改為有順序的factor，例如狀態(Status)。首先查看狀態(Status)上有哪些值</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(df<span class="op">$</span>Status)</code></pre>
+<p>狀態的值，可以依據AQI值的大小排序，“良好” &lt; “普通” &lt; “對敏感族群不健康” &lt; “對所有族群不健康” &lt; “危害”(參考<a href="https://taqm.epa.gov.tw/taqm/tw/b0201.aspx">環保署空氣品質監測網</a>對空氣品質指標的定義)，另外還有“設備維護”。</p>
+<ul>
+<li>在Script上輸入，並執行</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>Status &lt;-<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>Status, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;設備維護&quot;</span>, <span class="st">&quot;良好&quot;</span>, <span class="st">&quot;普通&quot;</span>, <span class="st">&quot;對敏感族群不健康&quot;</span>, <span class="st">&quot;對所有族群不健康&quot;</span>, <span class="st">&quot;危害&quot;</span>), <span class="dt">ordered=</span><span class="ot">TRUE</span>)</code></pre>
+<p><strong>練習</strong></p>
+<p>在執行上面的敘述後，在Console再次查看資料型態與資料摘要，注意Status欄位的結果。</p>
+</div>
+</div>
+<div id="section-18" class="section level2">
+<h2><span class="header-section-number">2.4</span> 資料分析</h2>
+<p>利用環保署的AQI資料，回答以下幾個問題：</p>
+<ol style="list-style-type: decimal">
+<li>針對某一縣市，找出它有哪幾個偵測站？
+<ul>
+<li>關鍵點：選擇偵測站所在縣市</li>
+</ul></li>
+<li>找出空氣品質最糟糕的偵測站？
+<ul>
+<li>關鍵點：空氣品質指數最高的紀錄是第幾筆</li>
+</ul></li>
+<li>找出汙染物是細懸浮微粒的偵測站數量？
+<ul>
+<li>關鍵點：選擇汙染物是細懸浮微粒的偵測站，然後計算它的數量</li>
+</ul></li>
+<li>計算各種空氣品質狀態的偵測站數量？
+<ul>
+<li>關鍵點：對各種空氣品質狀態統計</li>
+</ul></li>
+</ol>
+<div id="section-19" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> 找出某一縣市的偵測站</h3>
+<p>df資料的County欄位是偵測站所在的縣市。以雲林縣為例，當偵測站所在縣市是雲林縣時，<code>df$County=="雲林縣"</code>為TRUE，否則為FALSE。所以利用<code>df$SiteName[df$County=="雲林縣"]</code>可以傳回在雲林縣的偵測站名稱。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>SiteName[df<span class="op">$</span>County<span class="op">==</span><span class="st">&quot;雲林縣&quot;</span>]</code></pre>
+<p><strong>練習</strong></p>
+<p>新北市各偵測站的空氣品質指數分別是多少</p>
+</div>
+<div id="section-20" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> 找出空氣品質最糟糕的偵測站</h3>
+<p>空氣品質最糟糕也就是AQI最大，所以可以用<code>which.max(df$AQI)</code>找到空氣品質最糟糕的記錄。因此，<code>df$SiteName[which.max(df$AQI)]</code>便是空氣品質最糟糕的偵測站名稱。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df[<span class="kw">which.max</span>(df<span class="op">$</span>AQI), <span class="kw">c</span>(<span class="st">&quot;SiteName&quot;</span>, <span class="st">&quot;AQI&quot;</span>)]</code></pre>
+<p><strong>練習</strong></p>
+<p>空氣品質最糟糕的偵測站偵測到的PM10和PM2.5指數各是多少？</p>
+</div>
+<div id="section-21" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> 找出汙染物是細懸浮微粒的偵測站數量</h3>
+<p>利用<code>df$SiteName[df$Pollutant=="細懸浮微粒"]</code>找出汙染物是細懸浮微粒的偵測站名稱。然後利用<code>length()</code>計算偵測站名稱的數量。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(df<span class="op">$</span>SiteName[df<span class="op">$</span>Pollutant<span class="op">==</span><span class="st">&quot;細懸浮微粒&quot;</span>])</code></pre>
+</div>
+<div id="section-22" class="section level3">
+<h3><span class="header-section-number">2.4.4</span> 計算各種空氣品質狀態的偵測站數量</h3>
+<p><code>df$Status</code>列出各偵測站的狀態。<code>table(df$Status)</code>可以統計各種狀態的數量。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(df<span class="op">$</span>Status)</code></pre>
+</div>
+</div>
+<div id="section-23" class="section level2">
+<h2><span class="header-section-number">2.5</span> 程式存檔</h2>
+<p>為了便於日後修改與使用，可將Script 存檔。建議利用工具列File 下面的<strong>Save with Encoding</strong> 存檔，Choose Encoding選擇UTF-8，以UTF-8文字編碼格式存檔。</p>
+<p>未來有需要再開啟這個Script 的話，可以利用File 下的<strong>Reopen with Encoding</strong>，再選擇UTF-8，重新開啟。</p>
+</div>
+<div id="section-24" class="section level2 unnumbered">
+<h2>小結</h2>
+<ul>
+<li>資料處理與分析的步驟
+<ol style="list-style-type: decimal">
+<li>問題擬定</li>
+<li>資料取得</li>
+<li>資料清理</li>
+<li>資料分析</li>
+<li>結果解釋</li>
+</ol></li>
+<li><p>初學者常問程式的敘述在Script上或是在Console上寫？我的建議是如果未來還會使用或是敘述較長，可以在Script上編寫，便於日後執行與修改。如果如果是暫時性(一次性)而且敘述較短，在Console上寫，較為省事簡便。</p></li>
+<li>本次課程主要運用R語言中vector、factor和data frame等的進階資料型態以及相關函數，進行資料探索與處理。幾種常用的函數可以加以留意
+<ul>
+<li><code>length()</code></li>
+<li><code>which.max()</code></li>
+<li><code>order()</code></li>
+<li><code>table()</code></li>
+</ul></li>
+<li><p>data frame中什麼時候用character？什麼時候用factor？通常在需要進行字串運算、文本處理等文字為主的運用時，我會使用character；在需要進行統計時，則用factor。</p></li>
+</ul>
+</div>
+<div id="section-25" class="section level2 unnumbered">
+<h2>延伸思考</h2>
+<ul>
+<li>當收到一個新的資料檔案時，如何了解這些資料以便利用？</li>
+<li>在你的工作或研究中，有哪些資料可以拿來進行分析？</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-data_manipulation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
