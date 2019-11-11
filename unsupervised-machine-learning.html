@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 利用R語言進行非監督式機器學習 | R語言課程講義</title>
+  <meta name="description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 利用R語言進行非監督式機器學習 | R語言課程講義" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 利用R語言進行非監督式機器學習 | R語言課程講義" />
+  
+  <meta name="twitter:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
+  
+
+<meta name="author" content="林頌堅" />
+
+
+<meta name="date" content="2019-09-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-mining-case-study.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R語言課程講義</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R語言的基本概念與語法</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-1"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-2"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-3"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.1</b> R語言的基本概念</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r-1"><i class="fa fa-check"></i><b>1.2</b> R語言的運算</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r-2"><i class="fa fa-check"></i><b>1.3</b> R語言的基本資料型態</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#section-4"><i class="fa fa-check"></i><b>1.3.1</b> 數值資料型態</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#section-5"><i class="fa fa-check"></i><b>1.3.2</b> 文字資料型態</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#section-6"><i class="fa fa-check"></i><b>1.3.3</b> 邏輯資料型態</a></li>
+<li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#factor"><i class="fa fa-check"></i><b>1.3.4</b> factor資料型態</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#r-3"><i class="fa fa-check"></i><b>1.4</b> R語言的特殊資料型態</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector"><i class="fa fa-check"></i><b>1.4.1</b> vector</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#matrix"><i class="fa fa-check"></i><b>1.4.2</b> matrix</a></li>
+<li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#list"><i class="fa fa-check"></i><b>1.4.3</b> list</a></li>
+<li class="chapter" data-level="1.4.4" data-path="intro.html"><a href="intro.html#data-frame"><i class="fa fa-check"></i><b>1.4.4</b> data frame</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-7"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-8"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>2</b> 運用R語言進行資料處理</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-9"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-10"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-11"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-12"><i class="fa fa-check"></i><b>2.1</b> 預備工作</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-13"><i class="fa fa-check"></i><b>2.1.1</b> 設定工作目錄</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-14"><i class="fa fa-check"></i><b>2.2</b> 讀入檔案資料</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-15"><i class="fa fa-check"></i><b>2.2.1</b> 讀入空氣品質指標資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-16"><i class="fa fa-check"></i><b>2.2.2</b> 瀏覽讀入的資料</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-17"><i class="fa fa-check"></i><b>2.3</b> 資料整理</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#aqina"><i class="fa fa-check"></i><b>2.3.1</b> 去除AQI為NA的資料紀錄</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-manipulation.html"><a href="data-manipulation.html#variable"><i class="fa fa-check"></i><b>2.3.2</b> Variable資料型態變更</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-18"><i class="fa fa-check"></i><b>2.4</b> 資料分析</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-19"><i class="fa fa-check"></i><b>2.4.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-20"><i class="fa fa-check"></i><b>2.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-21"><i class="fa fa-check"></i><b>2.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-22"><i class="fa fa-check"></i><b>2.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-manipulation.html"><a href="data-manipulation.html#section-23"><i class="fa fa-check"></i><b>2.5</b> 程式存檔</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-24"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-25"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Tidyverse簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-26"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-27"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-28"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="3.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy"><i class="fa fa-check"></i><b>3.1</b> tidy資料格式簡介</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-1"><i class="fa fa-check"></i><b>3.1.1</b> tidy資料格式的特徵</a></li>
+<li class="chapter" data-level="3.1.2" data-path="tidyverse.html"><a href="tidyverse.html#tidy-2"><i class="fa fa-check"></i><b>3.1.2</b> tidy資料格式的優點</a></li>
+<li class="chapter" data-level="3.1.3" data-path="tidyverse.html"><a href="tidyverse.html#wide-format-vs.-long-format"><i class="fa fa-check"></i><b>3.1.3</b> wide format vs. long format</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-1"><i class="fa fa-check"></i><b>3.2</b> tidyverse套件</a></li>
+<li class="chapter" data-level="3.3" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-format"><i class="fa fa-check"></i><b>3.3</b> tidy data format的資料分析方法</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="tidyverse.html"><a href="tidyverse.html#section-29"><i class="fa fa-check"></i><b>3.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-2"><i class="fa fa-check"></i><b>3.3.2</b> 使用tidyverse套件的函數</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#section-30"><i class="fa fa-check"></i><b>3.4</b> 資料整理</a></li>
+<li class="chapter" data-level="3.5" data-path="tidyverse.html"><a href="tidyverse.html#section-31"><i class="fa fa-check"></i><b>3.5</b> 資料分析</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="tidyverse.html"><a href="tidyverse.html#section-32"><i class="fa fa-check"></i><b>3.5.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="3.5.2" data-path="tidyverse.html"><a href="tidyverse.html#section-33"><i class="fa fa-check"></i><b>3.5.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="3.5.3" data-path="tidyverse.html"><a href="tidyverse.html#section-34"><i class="fa fa-check"></i><b>3.5.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="3.5.4" data-path="tidyverse.html"><a href="tidyverse.html#section-35"><i class="fa fa-check"></i><b>3.5.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-36"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-37"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> 資料視覺化</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-38"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-39"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-40"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#section-41"><i class="fa fa-check"></i><b>4.1</b> 資訊視覺化簡介</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="data-visualization.html"><a href="data-visualization.html#section-42"><i class="fa fa-check"></i><b>4.1.1</b> 視覺化的應用</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-visualization.html"><a href="data-visualization.html#section-43"><i class="fa fa-check"></i><b>4.1.2</b> 應用圖形呈現各種問題</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#r-4"><i class="fa fa-check"></i><b>4.2</b> R語言的資料視覺化工具</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.2.1</b> ggplot2的運作概念</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualization.html"><a href="data-visualization.html#aesthetics"><i class="fa fa-check"></i><b>4.2.2</b> Aesthetics上幾種常用的資料編碼方式</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-geometrics"><i class="fa fa-check"></i><b>4.2.3</b> ggplot2上幾種常用的圖表類型 (Geometrics)</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-1"><i class="fa fa-check"></i><b>4.2.4</b> 使用ggplot2套件</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#section-44"><i class="fa fa-check"></i><b>4.3</b> 以資料視覺化的方式進行資料探索</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-visualization.html"><a href="data-visualization.html#section-45"><i class="fa fa-check"></i><b>4.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization.html"><a href="data-visualization.html#section-46"><i class="fa fa-check"></i><b>4.3.2</b> 問題</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#section-47"><i class="fa fa-check"></i><b>4.4</b> 利用直方圖呈現資料的分布情形</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#section-48"><i class="fa fa-check"></i><b>4.5</b> 利用長條圖進行資料之間的比較</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#section-49"><i class="fa fa-check"></i><b>4.6</b> 利用散佈圖呈現兩個數值之間的關係</a></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#section-50"><i class="fa fa-check"></i><b>4.7</b> 使用盒狀圖比較多個群體的分布情形</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#section-51"><i class="fa fa-check"></i><b>4.8</b> 利用並列的多個圖表進行比較</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-52"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-53"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>5</b> 利用R語言進行探索性資料分析</a><ul>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-54"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-55"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-56"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-57"><i class="fa fa-check"></i><b>5.1</b> 探索性資料分析是什麼？</a></li>
+<li class="chapter" data-level="5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-58"><i class="fa fa-check"></i><b>5.2</b> 以環保署日空氣品質指標開放資料為例進行探索性資料分析</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-59"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-60"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html"><i class="fa fa-check"></i><b>6</b> 資料探勘在傳播學的應用案例</a><ul>
+<li class="chapter" data-level="" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-61"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-62"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-63"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="6.1" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-64"><i class="fa fa-check"></i><b>6.1</b> 資料探勘的定義</a></li>
+<li class="chapter" data-level="6.2" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-65"><i class="fa fa-check"></i><b>6.2</b> 資料探勘的步驟</a></li>
+<li class="chapter" data-level="6.3" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-66"><i class="fa fa-check"></i><b>6.3</b> 資料探勘的分類</a></li>
+<li class="chapter" data-level="6.4" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-67"><i class="fa fa-check"></i><b>6.4</b> 資料探勘於傳播學的應用</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-68"><i class="fa fa-check"></i><b>6.4.1</b> 監督式機器學習</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-69"><i class="fa fa-check"></i><b>6.4.2</b> 非監督式機器學習</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html"><i class="fa fa-check"></i><b>7</b> 利用R語言進行非監督式機器學習</a><ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-70"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-71"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-72"><i class="fa fa-check"></i>學習目標</a></li>
+</ul></li>
+<li class="chapter" data-level="7.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-73"><i class="fa fa-check"></i><b>7.1</b> 集群分析</a></li>
+<li class="chapter" data-level="7.2" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-74"><i class="fa fa-check"></i><b>7.2</b> 以進出站人數統計資料對臺鐵主要車站進行集群分析</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-75"><i class="fa fa-check"></i><b>7.2.1</b> 載入相關套件</a></li>
+<li class="chapter" data-level="7.2.2" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-76"><i class="fa fa-check"></i><b>7.2.2</b> 選取資料</a></li>
+<li class="chapter" data-level="7.2.3" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-77"><i class="fa fa-check"></i><b>7.2.3</b> 資料的清除與整理等前處理</a></li>
+<li class="chapter" data-level="7.2.4" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-78"><i class="fa fa-check"></i><b>7.2.4</b> 產生站點資料特徵</a></li>
+<li class="chapter" data-level="7.2.5" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-79"><i class="fa fa-check"></i><b>7.2.5</b> 維度縮減</a></li>
+<li class="chapter" data-level="7.2.6" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-80"><i class="fa fa-check"></i><b>7.2.6</b> 將站點依據彼此距離視覺化</a></li>
+<li class="chapter" data-level="7.2.7" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-81"><i class="fa fa-check"></i><b>7.2.7</b> 站點集群</a></li>
+<li class="chapter" data-level="7.2.8" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-82"><i class="fa fa-check"></i><b>7.2.8</b> 結果的解釋</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-83"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-84"><i class="fa fa-check"></i>延伸思考</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R語言課程講義</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="unsupervised_machine_learning" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> 利用R語言進行非監督式機器學習</h1>
+<div id="section-70" class="section level2 unnumbered">
+<h2>課程簡介</h2>
+<div id="section-71" class="section level3 unnumbered">
+<h3>課程簡介</h3>
+<p>本次課程的目的為介紹非監督式機器學習中的集群分析，並且利用臺鐵提供的各站點進出站人數統計資料，從統計資訊抽取特徵，做為主要車站的特徵，進行集群分析的練習。本次課程包含以下的內容：</p>
+<ul>
+<li>集群分析簡介</li>
+<li>集群分析AP (Affinity Propagation)演算法的應用</li>
+</ul>
+</div>
+<div id="section-72" class="section level3 unnumbered">
+<h3>學習目標</h3>
+<ul>
+<li>能夠說明集群分析的概念，並選擇適用的問題</li>
+<li>能夠應用AP演算法的套件apcluster進行集群分析</li>
+</ul>
+</div>
+</div>
+<div id="section-73" class="section level2">
+<h2><span class="header-section-number">7.1</span> 集群分析</h2>
+<p>如<a href="data-mining-case-study.html#data_mining_case_study">資料探勘在傳播學的應用案例</a>所言，集群分析一種非監督式機器學習的資料探勘方法。其概念是根據資料的特性，設法找到一個可以良好地突顯資料的特徵間彼此相似性與相異性的方式。換言之，集群分析的結果是根據輸入資料特徵之間彼此的相似性，自動找到一種劃分方法使得特徵相似性較高的資料會被劃分在同一群組內，不在同一群組內的資料特徵之間相似性則比較低。</p>
+<p><img src="image/clustering.png" /></p>
+<p>集群分析的演算法非常多，如</p>
+<ol style="list-style-type: decimal">
+<li>K-means</li>
+<li>EM (expectation-maximization)</li>
+<li>AHC (agglomerative hierarchical clustering, 聚合式階層集群)</li>
+<li>DBSCAN</li>
+<li>AP (affinity propagation)</li>
+</ol>
+<p>本章將利用AP演算發，對台鐵各站點，依照進出站人數統計資料的相似性，進行集群分析。</p>
+<p>AP演算法可參考
+Bodenhofer, U., Kothmeier, A., &amp; Hochreiter, S. (2011). APCluster: an R package for affinity propagation clustering. Bioinformatics, 27(17), 2463-2464.</p>
+</div>
+<div id="section-74" class="section level2">
+<h2><span class="header-section-number">7.2</span> 以進出站人數統計資料對臺鐵主要車站進行集群分析</h2>
+<p>在政府開放資料平台上，臺鐵提供了每日各站點進出人數。</p>
+<p>我們推測不同車站的定位事實上可能可以從它的進出人數上反應出來。例如某一個車站它的平常上班日比起週末假日有較多的進出人數，這個車站可能是提供給附近上班族通勤之用。如果在週末假日有較多的進出人數，而且週五、週六的出站人數比進站人數多，這個車站的旅客可能主要為返鄉遊子或旅行的遊客。在本章中，我們將利用臺鐵主要車站週一到週日每天進出人數的比例做為各車站的特徵，進行集群分析，將具有相似特徵的車站，聚集起來，分析與討論各車站的定位。</p>
+<p>在本章的應用中，我們可以根據KDD過程中的各個步驟進行集群分析，個步驟為：</p>
+<ol style="list-style-type: decimal">
+<li>選取資料 (Selection)</li>
+<li>資料的清除與整理等前處理 (Preprocessing)</li>
+<li>轉換資料為有效描述和預測的特徵 (Transformation)</li>
+<li>運用機器學習(machine learning)的技術建立資料模型 (狹義的資料探勘) (Data Mining)</li>
+<li>解釋、評估與應用 (Intepretation/Evaluation)</li>
+</ol>
+<p><img src="image/Fayyad96kdd-process.png" /></p>
+<div id="section-75" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> 載入相關套件</h3>
+<p>首先載入輸入與處理資料的相關套件，因為臺鐵的資料多為JSON型式，所以載入JSON處理相關套件<code>jsonlite</code>。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(jsonlite)</code></pre>
+</div>
+<div id="section-76" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> 選取資料</h3>
+<p>讀取臺鐵的<a href="https://data.gov.tw/dataset/8792">每日各站點進出人數</a>資料。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(<span class="st">&quot;https://ods.railway.gov.tw/tra-ods-web/ods/download/dataResource/8ae4cabf6973990e0169947ed32454b9&quot;</span>)</code></pre>
+<p><img src="image/station_io.png" /></p>
+<p>查看資料型態</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)</code></pre>
+<pre><code>##   trnOpDate           staCode          gateInComingCnt   
+##  Length:31133       Length:31133       Length:31133      
+##  Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character  
+##  gateOutGoingCnt   
+##  Length:31133      
+##  Class :character  
+##  Mode  :character</code></pre>
+<ul>
+<li>trnOpDate： 營運日期</li>
+<li>staCode： 車站代碼</li>
+<li>gateInComingCnt： 進站人數</li>
+<li>gateOutGoingCnt： 出站人數</li>
+</ul>
+<p>將trnOpDate改變為日期資料型態，gateInComingCnt和gateOutGoingCnt則分別改為numeric資料型態。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">trnOpDate=</span><span class="kw">ymd</span>(trnOpDate)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gateInComingCnt=</span><span class="kw">as.numeric</span>(gateInComingCnt)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gateOutGoingCnt=</span><span class="kw">as.numeric</span>(gateOutGoingCnt))</code></pre>
+<p>再查看一次資料型態</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)</code></pre>
+<pre><code>##    trnOpDate            staCode          gateInComingCnt gateOutGoingCnt
+##  Min.   :2019-04-23   Length:31133       Min.   :    0   Min.   :    0  
+##  1st Qu.:2019-05-25   Class :character   1st Qu.:  143   1st Qu.:  150  
+##  Median :2019-06-27   Mode  :character   Median :  648   Median :  648  
+##  Mean   :2019-06-26                      Mean   : 2693   Mean   : 2693  
+##  3rd Qu.:2019-07-30                      3rd Qu.: 2132   3rd Qu.: 2110  
+##  Max.   :2019-08-31                      Max.   :78285   Max.   :83524</code></pre>
+<hr />
+<p>因為出入站資料僅有包含車站代碼，所以從另外一個開放資料<a href="https://data.gov.tw/dataset/33425">車站基本資料集</a>，讀取站點編號對應的名稱資料。</p>
+<pre class="sourceCode r"><code class="sourceCode r">site.df &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(<span class="st">&quot;http://ods.railway.gov.tw/tra-ods-web/ods/download/dataResource/0518b833e8964d53bfea3f7691aea0ee&quot;</span>)</code></pre>
+<p><img src="image/station.png" /></p>
+<p>將進出站點資料加入站點名稱。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(<span class="kw">select</span>(site.df, <span class="dt">staCode=</span>stationCode, <span class="dt">staName=</span>stationName))</code></pre>
+<p><img src="image/station_name.png" /></p>
+<p>是否有站點資料缺少站點名稱？</p>
+<pre class="sourceCode r"><code class="sourceCode r">df[<span class="kw">is.na</span>(df<span class="op">$</span>staName),]</code></pre>
+<p>刪除沒有站點名稱的資料</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(staName))</code></pre>
+</div>
+<div id="section-77" class="section level3">
+<h3><span class="header-section-number">7.2.3</span> 資料的清除與整理等前處理</h3>
+<p>首先查看資料的樣貌，並且修改可能的錯誤。</p>
+<p>以臺北站為例，畫出每天的進出站人數情形</p>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(staName<span class="op">==</span><span class="st">&quot;臺北&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span>IO, <span class="dt">value=</span>Count, <span class="op">-</span>staName, <span class="op">-</span>staCode, <span class="op">-</span>trnOpDate) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>trnOpDate, <span class="dt">y=</span>Count, <span class="dt">color=</span>IO)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">90000</span>), <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">90000</span>, <span class="dv">10000</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;進站&quot;</span>, <span class="st">&quot;出站&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;日期&quot;</span>, <span class="dt">y=</span><span class="st">&quot;進出站人數&quot;</span>, <span class="dt">color=</span><span class="st">&quot;進出&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey20&quot;</span>),
+        <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>))</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><strong>討論</strong></p>
+<ol style="list-style-type: decimal">
+<li>資料分布的範圍？</li>
+<li>資料分布的樣式？</li>
+<li>是否有異常值(outliers)？</li>
+</ol>
+</div>
+<div id="section-78" class="section level3">
+<h3><span class="header-section-number">7.2.4</span> 產生站點資料特徵</h3>
+<p>站點資料特徵便是用來一組描述站點特性的資料。</p>
+<p>首先計算每個站點每天平均進出站人數，以便接下來找出主要的車站</p>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(staName) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">In=</span><span class="kw">mean</span>(gateInComingCnt, <span class="dt">trim=</span><span class="fl">0.05</span>), <span class="dt">Out=</span><span class="kw">mean</span>(gateOutGoingCnt, <span class="dt">trim=</span><span class="fl">0.05</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(In))</code></pre>
+<pre><code>## # A tibble: 238 x 3
+##    staName     In    Out
+##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+##  1 臺北    63944. 63210.
+##  2 桃園    27568. 28571.
+##  3 中壢    26321. 26439.
+##  4 臺南    25743. 25904.
+##  5 臺中    25521. 24451.
+##  6 板橋    21314. 21384.
+##  7 新竹    20112. 20408.
+##  8 花蓮    16934. 15926.
+##  9 高雄    16856. 16939.
+## 10 松山    16807. 16851.
+## # ... with 228 more rows</code></pre>
+<p>選取主要車站(每天平均進入人數達5000人以上)</p>
+<pre class="sourceCode r"><code class="sourceCode r">cand_sta &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(staName) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">In=</span><span class="kw">mean</span>(gateInComingCnt, <span class="dt">trim=</span><span class="fl">0.05</span>), <span class="dt">Out=</span><span class="kw">mean</span>(gateOutGoingCnt, <span class="dt">trim=</span><span class="fl">0.05</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(In<span class="op">&gt;=</span><span class="dv">5000</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pull</span>(staName)</code></pre>
+<p>從原始資料中取出主要車站的資料</p>
+<pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(staName <span class="op">%in%</span><span class="st"> </span>cand_sta)</code></pre>
+<p>根據前面的折線圖，我們可以觀察到進出站人數具有週期性變化的情形，而其週期大約是一週(一星期)。所以可能可以以一週為單位，彙整每一天進出站人數資料(取平均)，同時也注意避免雜訊(某一天突然增加或減少的異常值)。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df1 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">trnOpDateW=</span><span class="kw">wday</span>(trnOpDate, <span class="dt">label=</span><span class="ot">TRUE</span>, <span class="dt">locale=</span><span class="st">&quot;English&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(staName, trnOpDateW) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">In=</span><span class="kw">mean</span>(gateInComingCnt, <span class="dt">trim=</span><span class="fl">0.05</span>), <span class="dt">Out=</span><span class="kw">mean</span>(gateOutGoingCnt, <span class="dt">trim=</span><span class="fl">0.05</span>)) <span class="co"># 捨棄前後0.05最大與最小的資料</span></code></pre>
+<p>檢視汐科站在一週每天的進出人數分布範圍。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(staName<span class="op">==</span><span class="st">&quot;汐科&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span><span class="st">&quot;Var&quot;</span>, <span class="dt">value=</span><span class="st">&quot;Count&quot;</span>, <span class="op">-</span>staName, <span class="op">-</span>trnOpDateW) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x=</span>trnOpDateW, <span class="dt">y=</span>Count, <span class="dt">fill=</span>Var), <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;進站&quot;</span>, <span class="st">&quot;出站&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">15000</span>), <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">15000</span>, <span class="dv">3000</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;平均進出站人數&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>再檢視臺東站在一週每天的進出人數分布範圍。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(staName<span class="op">==</span><span class="st">&quot;臺東&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span><span class="st">&quot;Var&quot;</span>, <span class="dt">value=</span><span class="st">&quot;Count&quot;</span>, <span class="op">-</span>staName, <span class="op">-</span>trnOpDateW) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x=</span>trnOpDateW, <span class="dt">y=</span>Count, <span class="dt">fill=</span>Var), <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;進站&quot;</span>, <span class="st">&quot;出站&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">15000</span>), <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">15000</span>, <span class="dv">3000</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;平均進出站人數&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>最後，檢視臺北站在一週每天的進出人數分布範圍。</p>
+<pre class="sourceCode r"><code class="sourceCode r">df1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(staName<span class="op">==</span><span class="st">&quot;臺北&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span><span class="st">&quot;Var&quot;</span>, <span class="dt">value=</span><span class="st">&quot;Count&quot;</span>, <span class="op">-</span>staName, <span class="op">-</span>trnOpDateW) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x=</span>trnOpDateW, <span class="dt">y=</span>Count, <span class="dt">fill=</span>Var), <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;進站&quot;</span>, <span class="st">&quot;出站&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">80000</span>), <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">80000</span>, <span class="dv">8000</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;平均進出站人數&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>注意週日和週五、週六與平日的情形，汐科站平日進出站人數多於週日和週六，每天的進出站人數大致相同；臺東站的週五和週六出站多於進站，週日則相反；臺北站的週五和週六則是進站多於出站；且臺北和臺東的週末進出人數都多於週間平日。</p>
+<p>針對上述的現象，我們決定以兩組特徵來表示，第一組特徵表現平日進出站人數與週六、日的不同。</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf1 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span>Var, <span class="dt">value=</span>Value, <span class="op">-</span>staName, <span class="op">-</span>trnOpDateW) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(staName, Var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Value=</span>Value<span class="op">/</span><span class="kw">sum</span>(Value)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unite</span>(temp, trnOpDateW, Var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">temp=</span><span class="kw">paste0</span>(temp,<span class="st">&quot;_w&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key=</span>temp, <span class="dt">value=</span>Value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, scale)</code></pre>
+<p>第二組特徵表現每日進出站人數的不同。</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf2 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span>Var, <span class="dt">value=</span>Value, <span class="op">-</span>staName, <span class="op">-</span>trnOpDateW) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(staName, trnOpDateW) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Value=</span>Value<span class="op">/</span><span class="kw">sum</span>(Value)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unite</span>(temp, trnOpDateW, Var) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">temp=</span><span class="kw">paste0</span>(temp,<span class="st">&quot;_io&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key=</span>temp, <span class="dt">value=</span>Value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, scale)</code></pre>
+<p>將兩組特徵合併</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf &lt;-<span class="st"> </span><span class="kw">inner_join</span>(sta_inf1, sta_inf2)</code></pre>
+<pre><code>## Joining, by = &quot;staName&quot;</code></pre>
+<p>檢視產生的資料</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sta_inf)</code></pre>
+<pre><code>##    staName              Fri_In_w.V1         Fri_Out_w.V1    
+##  Length:36          Min.   :-1.276874   Min.   :-1.6093740  
+##  Class :character   1st Qu.:-0.639623   1st Qu.:-0.7377653  
+##  Mode  :character   Median :-0.096976   Median :-0.2863320  
+##                     Mean   : 0.000000   Mean   : 0.0000000  
+##                     3rd Qu.: 0.268691   3rd Qu.: 0.6638751  
+##                     Max.   : 4.132199   Max.   : 2.7955580  
+##      Mon_In_w.V1          Mon_Out_w.V1         Sat_In_w.V1     
+##  Min.   :-2.6987936   Min.   :-2.0964255   Min.   :-3.1499370  
+##  1st Qu.:-0.4912200   1st Qu.:-0.7292553   1st Qu.:-0.6664704  
+##  Median :-0.0876732   Median :-0.0243491   Median : 0.0721176  
+##  Mean   : 0.0000000   Mean   : 0.0000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.5592767   3rd Qu.: 0.4869955   3rd Qu.: 0.6107071  
+##  Max.   : 2.9021935   Max.   : 2.9836449   Max.   : 1.9961918  
+##     Sat_Out_w.V1         Sun_In_w.V1          Sun_Out_w.V1    
+##  Min.   :-3.217937   Min.   :-2.5738867   Min.   :-2.5991941  
+##  1st Qu.:-0.634222   1st Qu.:-0.5928445   1st Qu.:-0.5771461  
+##  Median : 0.122576   Median : 0.0744366   Median : 0.0502050  
+##  Mean   : 0.000000   Mean   : 0.0000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.708453   3rd Qu.: 0.6366084   3rd Qu.: 0.6430324  
+##  Max.   : 1.832209   Max.   : 1.8178845   Max.   : 2.2226150  
+##      Thu_In_w.V1          Thu_Out_w.V1         Tue_In_w.V1     
+##  Min.   :-1.5713884   Min.   :-1.8541290   Min.   :-1.9229734  
+##  1st Qu.:-0.5626685   1st Qu.:-0.6511630   1st Qu.:-0.7752349  
+##  Median : 0.0269359   Median :-0.0830160   Median : 0.0138334  
+##  Mean   : 0.0000000   Mean   : 0.0000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.6047232   3rd Qu.: 0.5395086   3rd Qu.: 0.6122144  
+##  Max.   : 2.8385023   Max.   : 2.9209650   Max.   : 2.6583812  
+##      Tue_Out_w.V1         Wed_In_w.V1          Wed_Out_w.V1    
+##  Min.   :-1.5068113   Min.   :-1.9935137   Min.   :-1.7452971  
+##  1st Qu.:-0.7622279   1st Qu.:-0.6554031   1st Qu.:-0.6685683  
+##  Median :-0.0516707   Median : 0.0222826   Median : 0.0544686  
+##  Mean   : 0.0000000   Mean   : 0.0000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.6126834   3rd Qu.: 0.6631785   3rd Qu.: 0.6012407  
+##  Max.   : 2.5951995   Max.   : 2.4485020   Max.   : 2.4532347  
+##     Fri_In_io.V1        Fri_Out_io.V1        Mon_In_io.V1    
+##  Min.   :-1.680625   Min.   :-3.541495   Min.   :-2.2629623  
+##  1st Qu.:-0.452765   1st Qu.:-0.454977   1st Qu.:-0.4445177  
+##  Median :-0.017745   Median : 0.017745   Median :-0.1514378  
+##  Mean   : 0.000000   Mean   : 0.000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.454977   3rd Qu.: 0.452765   3rd Qu.: 0.4333648  
+##  Max.   : 3.541495   Max.   : 1.680625   Max.   : 2.3132125  
+##     Mon_Out_io.V1         Sat_In_io.V1        Sat_Out_io.V1    
+##  Min.   :-2.3132125   Min.   :-2.9811858   Min.   :-2.6337002  
+##  1st Qu.:-0.4333648   1st Qu.:-0.5540231   1st Qu.:-0.4481342  
+##  Median : 0.1514378   Median : 0.1209663   Median :-0.1209663  
+##  Mean   : 0.0000000   Mean   : 0.0000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.4445177   3rd Qu.: 0.4481342   3rd Qu.: 0.5540231  
+##  Max.   : 2.2629623   Max.   : 2.6337002   Max.   : 2.9811858  
+##      Sun_In_io.V1        Sun_Out_io.V1         Thu_In_io.V1    
+##  Min.   :-1.2624100   Min.   :-2.4739790   Min.   :-2.0250063  
+##  1st Qu.:-0.7221824   1st Qu.:-0.4291188   1st Qu.:-0.5892039  
+##  Median :-0.2156506   Median : 0.2156506   Median :-0.1236127  
+##  Mean   : 0.0000000   Mean   : 0.0000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.4291188   3rd Qu.: 0.7221824   3rd Qu.: 0.4818378  
+##  Max.   : 2.4739790   Max.   : 1.2624100   Max.   : 2.7765850  
+##     Thu_Out_io.V1         Tue_In_io.V1        Tue_Out_io.V1    
+##  Min.   :-2.7765850   Min.   :-2.3248179   Min.   :-3.1180183  
+##  1st Qu.:-0.4818378   1st Qu.:-0.5164029   1st Qu.:-0.3783587  
+##  Median : 0.1236127   Median :-0.1906397   Median : 0.1906397  
+##  Mean   : 0.0000000   Mean   : 0.0000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.5892039   3rd Qu.: 0.3783587   3rd Qu.: 0.5164029  
+##  Max.   : 2.0250063   Max.   : 3.1180183   Max.   : 2.3248179  
+##      Wed_In_io.V1        Wed_Out_io.V1    
+##  Min.   :-2.2071782   Min.   :-2.7369284  
+##  1st Qu.:-0.4736462   1st Qu.:-0.2505282  
+##  Median :-0.1656674   Median : 0.1656674  
+##  Mean   : 0.0000000   Mean   : 0.0000000  
+##  3rd Qu.: 0.2505282   3rd Qu.: 0.4736462  
+##  Max.   : 2.7369284   Max.   : 2.2071782</code></pre>
+<p>取出各站點的特徵(第2到最後一個variable)，形成特徵矩陣，用來計算站點間的相似性，也就是估計矩陣的列(row)與列是否相似。</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf.mat &lt;-<span class="st"> </span>sta_inf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">2</span><span class="op">:</span><span class="kw">ncol</span>(.)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.matrix</span>()</code></pre>
+</div>
+<div id="section-79" class="section level3">
+<h3><span class="header-section-number">7.2.5</span> 維度縮減</h3>
+<p>上面產生的特徵共有28個維度(dimensions)，也就是28個variables。在計算站點間的相似性之前，可以先看看是否可以用比較少的維度，便達到相近的計算結果。這個從高維度轉換成低維度的運算稱為<strong>維度縮減 (dimension reduction)</strong>，是資料探勘中相當重要的步驟。許多研究對於維度縮減提出相當多不同的方法，在此我們選用<strong>主成分分析 (principal component analysis, pca)</strong>。</p>
+<p>將資料特徵輸入R語言的主成分分析函數<code>prcomp()</code>。</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(sta_inf.mat)</code></pre>
+<p>主成分分析產生的結果為一組與原先相同維度的矩陣，以上例而言，其結果在<code>sta_inf.pca$x</code>。經過主成分分析後，第一個維度的特徵(稱為PC1)是最重要的資料描述方式，其次是最二個維度的特徵(PC2)，依序下來為PC3、PC4、…。</p>
+<p>查看主成分分析產生結果的解釋</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sta_inf.pca)</code></pre>
+<pre><code>## Importance of components:
+##                           PC1    PC2    PC3     PC4     PC5     PC6
+## Standard deviation     3.5157 2.7056 2.4310 1.13420 0.64187 0.56826
+## Proportion of Variance 0.4414 0.2614 0.2111 0.04594 0.01471 0.01153
+## Cumulative Proportion  0.4414 0.7029 0.9140 0.95989 0.97460 0.98613
+##                            PC7     PC8     PC9    PC10    PC11    PC12
+## Standard deviation     0.36118 0.31703 0.23765 0.21965 0.18008 0.11279
+## Proportion of Variance 0.00466 0.00359 0.00202 0.00172 0.00116 0.00045
+## Cumulative Proportion  0.99079 0.99438 0.99640 0.99812 0.99928 0.99974
+##                           PC13    PC14    PC15    PC16     PC17     PC18
+## Standard deviation     0.07661 0.03183 0.01708 0.01014 0.008181 0.005854
+## Proportion of Variance 0.00021 0.00004 0.00001 0.00000 0.000000 0.000000
+## Cumulative Proportion  0.99995 0.99998 0.99999 1.00000 1.000000 1.000000
+##                            PC19      PC20      PC21      PC22      PC23
+## Standard deviation     0.004553 3.316e-15 2.962e-15 2.937e-15 2.194e-15
+## Proportion of Variance 0.000000 0.000e+00 0.000e+00 0.000e+00 0.000e+00
+## Cumulative Proportion  1.000000 1.000e+00 1.000e+00 1.000e+00 1.000e+00
+##                             PC24      PC25     PC26      PC27      PC28
+## Standard deviation     1.681e-15 1.211e-15 9.97e-16 4.862e-16 3.681e-16
+## Proportion of Variance 0.000e+00 0.000e+00 0.00e+00 0.000e+00 0.000e+00
+## Cumulative Proportion  1.000e+00 1.000e+00 1.00e+00 1.000e+00 1.000e+00</code></pre>
+<p>其中的Standard deviation是只用這個維度上的特徵的標準差，可以利用標準差計算變異數所佔的比例(Proportion of Varience)，以第一個維度(PC1)來說，變異數所佔的比例約為0.44，也就是只用第一個維度的特徵便可以表現0.44的訊息，因此第一個維度是最重要的資料描述方式。第二個維度的變異數所佔的比例比第一個維度小，但比其他維度大，所以在資料描述方式上，它是第二重要的。以下依此類推。並且前四個維度(PC1、PC2、PC3和PC4)的變異數比例累積(Cumulative Proportion)約為0.96，也就是說只使用這四個維度便可以表現整個資料訊息的0.96。所以，以下的分析將使用前四個維度。</p>
+<p>將各個維度的變異數比例累積畫成圖形來看。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">dim_order=</span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">ncol</span>(sta_inf.mat)),
+           <span class="dt">var=</span>sta_inf.pca<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop_varex=</span>var<span class="op">/</span><span class="kw">sum</span>(var)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cum_prop_varex=</span><span class="kw">cumsum</span>(prop_varex)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>dim_order, <span class="dt">y=</span>cum_prop_varex)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">ncol</span>(sta_inf.mat)), <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">ncol</span>(sta_inf.mat), <span class="dv">1</span>), <span class="dt">minor_breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;維度&quot;</span>, <span class="dt">y=</span><span class="st">&quot;累積變異數比例&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>),
+        <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray70&quot;</span>),
+        <span class="dt">panel.grid.minor =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;gray90&quot;</span>))</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>取出經過前四個維度的資料。</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf.pf &lt;-<span class="st"> </span>sta_inf.pca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre>
+</div>
+<div id="section-80" class="section level3">
+<h3><span class="header-section-number">7.2.6</span> 將站點依據彼此距離視覺化</h3>
+<p>本節中將依據站點彼此間的相似性，將各站點映射到圖形上，使相似性較大的站點在圖形上的距離較近</p>
+<p>載入映射演算法套件</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rtsne)</code></pre>
+<p>計算站點之間的距離(相似性可以視為距離的負值，相似性愈大，距離愈小)。<code>dist()</code>提供矩陣的每列之間各種距離的計算方式，這裡我們採用內定而且是最常用的Euclidean distance(歐基里得距離)。</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_d &lt;-<span class="st"> </span><span class="kw">dist</span>(sta_inf.pf)</code></pre>
+<p>依據站點特徵之間的歐基里得距離計算站點映射在圖形上的位置</p>
+<pre class="sourceCode r"><code class="sourceCode r">tsne_out &lt;-<span class="st"> </span><span class="kw">Rtsne</span>(sta_d, <span class="dt">perplexity=</span><span class="dv">10</span>, <span class="dt">theta=</span><span class="fl">0.0</span>, <span class="dt">is_distance=</span><span class="ot">TRUE</span>)</code></pre>
+<p>tsne對每個資料產生它在圖形上的映射位置，其結果放在一個行數為2的矩陣Y上，每一列分別代表分別表示一個資料在圖形上的坐標。例如：前五個站點在圖形上的坐標為</p>
+<pre class="sourceCode r"><code class="sourceCode r">tsne_out<span class="op">$</span>Y[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,]</code></pre>
+<pre><code>##           [,1]      [,2]
+## [1,] -81.75982 -27.29534
+## [2,]  27.58531 -16.62390
+## [3,] -48.95666 -19.53042
+## [4,]  58.66139   8.23115
+## [5,] -79.23273 -14.03723</code></pre>
+<p>將每個站點加上它映射的坐標後，依據其坐標畫成圖形</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(staName) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x=</span>tsne_out<span class="op">$</span>Y[,<span class="dv">1</span>], <span class="dt">y=</span>tsne_out<span class="op">$</span>Y[,<span class="dv">2</span>]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">label=</span>staName), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>())</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+</div>
+<div id="section-81" class="section level3">
+<h3><span class="header-section-number">7.2.7</span> 站點集群</h3>
+<p>載入Affinity Propagation集群演算法套件</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apcluster)</code></pre>
+<p>AP集群演算法的輸入是資料項目間的相似性，所以我們利用前面計算得到的站點間的距離乘上-1，做為站點間的相似性。</p>
+<pre class="sourceCode r"><code class="sourceCode r">s1 &lt;-<span class="st"> </span><span class="dv">-1</span><span class="op">*</span><span class="kw">as.matrix</span>(sta_d)</code></pre>
+<p>將站點間的相似性輸入AP集群演算法</p>
+<pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">apcluster</span>(s1, <span class="dt">q=</span><span class="fl">0.1</span>)</code></pre>
+<p>顯示集群分析的結果。Number of clusters是集群數量，Clusters是每個集群的成員，Exemplars是每個集群的核心成員。</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show</span>(res)</code></pre>
+<pre><code>## 
+## APResult object
+## 
+## Number of samples     =  36 
+## Number of iterations  =  134 
+## Input preference      =  -10.92391 
+## Sum of similarities   =  -99.78838 
+## Sum of preferences    =  -43.69564 
+## Net similarity        =  -143.484 
+## Number of clusters    =  4 
+## 
+## Exemplars:
+##    5 7 11 18
+## Clusters:
+##    Cluster 1, exemplar 5:
+##       1 5 6 9 12 26
+##    Cluster 2, exemplar 7:
+##       3 7 8 10 16 17 24 25 30 33 36
+##    Cluster 3, exemplar 11:
+##       11 19 31
+##    Cluster 4, exemplar 18:
+##       2 4 13 14 15 18 20 21 22 23 27 28 29 32 34 35</code></pre>
+<p>查看每個集群內的站點</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq</span>(<span class="kw">length</span>(res<span class="op">@</span>clusters))) {
+  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Cluster&quot;</span>, i))
+  <span class="kw">print</span>(sta_inf1<span class="op">$</span>staName[res<span class="op">@</span>clusters[[i]]])
+}</code></pre>
+<pre><code>## [1] &quot;Cluster 1&quot;
+## [1] &quot;七堵&quot; &quot;汐止&quot; &quot;汐科&quot; &quot;松山&quot; &quot;南港&quot; &quot;瑞芳&quot;
+## [1] &quot;Cluster 2&quot;
+##  [1] &quot;內壢&quot; &quot;竹北&quot; &quot;竹南&quot; &quot;板橋&quot; &quot;埔心&quot; &quot;桃園&quot; &quot;新豐&quot; &quot;楊梅&quot; &quot;臺北&quot; &quot;樹林&quot;
+## [11] &quot;鶯歌&quot;
+## [1] &quot;Cluster 3&quot;
+## [1] &quot;花蓮&quot; &quot;基隆&quot; &quot;臺東&quot;
+## [1] &quot;Cluster 4&quot;
+##  [1] &quot;中壢&quot;   &quot;斗六&quot;   &quot;屏東&quot;   &quot;苗栗&quot;   &quot;員林&quot;   &quot;高雄&quot;   &quot;新左營&quot;
+##  [8] &quot;新竹&quot;   &quot;新烏日&quot; &quot;新營&quot;   &quot;嘉義&quot;   &quot;彰化&quot;   &quot;臺中&quot;   &quot;臺南&quot;  
+## [15] &quot;豐原&quot;   &quot;羅東&quot;</code></pre>
+<p>將站點映射到相對應的坐標上，並以顏色區分它們的集群。</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(staName) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x=</span>tsne_out<span class="op">$</span>Y[,<span class="dv">1</span>], <span class="dt">y=</span>tsne_out<span class="op">$</span>Y[,<span class="dv">2</span>]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cl=</span><span class="kw">factor</span>(<span class="kw">labels</span>(res, <span class="dt">type=</span><span class="st">&quot;enum&quot;</span>))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y, <span class="dt">label=</span>staName, <span class="dt">color=</span>cl), <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="kw">min</span>(tsne_out<span class="op">$</span>Y[,<span class="dv">1</span>])<span class="op">-</span><span class="dv">1</span>, <span class="kw">max</span>(tsne_out<span class="op">$</span>Y[,<span class="dv">1</span>])<span class="op">+</span><span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="kw">min</span>(tsne_out<span class="op">$</span>Y[,<span class="dv">2</span>])<span class="op">-</span><span class="dv">1</span>, <span class="kw">max</span>(tsne_out<span class="op">$</span>Y[,<span class="dv">2</span>])<span class="op">+</span><span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+</div>
+<div id="section-82" class="section level3">
+<h3><span class="header-section-number">7.2.8</span> 結果的解釋</h3>
+<p>各集群的核心成員</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf<span class="op">$</span>staName[res<span class="op">@</span>exemplars]</code></pre>
+<pre><code>## [1] &quot;汐止&quot; &quot;竹北&quot; &quot;花蓮&quot; &quot;高雄&quot;</code></pre>
+<p>比較核心成員的第一組特徵：平日進出站人數與週六、日的不同</p>
+<pre class="sourceCode r"><code class="sourceCode r">sta_inf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">slice</span>(res<span class="op">@</span>exemplars) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(staName, <span class="kw">ends_with</span>(<span class="st">&quot;w&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key=</span>Var, <span class="dt">value=</span>value, <span class="op">-</span>staName) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">trnOpDateW=</span><span class="kw">substr</span>(Var, <span class="dv">1</span>, <span class="dv">3</span>), <span class="dt">IO=</span><span class="kw">substr</span>(Var, <span class="dv">5</span>, <span class="kw">nchar</span>(Var)<span class="op">-</span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">trnOpDateW=</span><span class="kw">factor</span>(trnOpDateW, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>, <span class="st">&quot;Sun&quot;</span>), <span class="dt">ordered=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x=</span>trnOpDateW, <span class="dt">y=</span>value, <span class="dt">fill=</span>IO), <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;人數比例&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;進出&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;進站&quot;</span>, <span class="st">&quot;出站&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>staName) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre>
+<pre><code>## Warning: attributes are not identical across measure variables;
+## they will be dropped</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>以下請分析各個集群表現的特色。建議：可以先從最右邊的集群開始分析。</p>
+</div>
+</div>
+<div id="section-83" class="section level2 unnumbered">
+<h2>小結</h2>
+<ul>
+<li><p>本節探討集群分析。集群分析的目的是將具有相似特徵的資料聚集成群，使得群組內的資料有比較相似的特徵，反之，群組外的資料其特徵較不相似。</p></li>
+<li><p>為了達到上述目的，研究人員發展出許多集群分析演算法，例如：K-means、EM、AHC、DBSCAN和本次課程中使用的AP集群分析演算法。不同的集群分析演算法來自不同的集群構想，適合應用在不同的問題。</p></li>
+<li><p>除了集群分析演算法，另外會影響集群分析的結果還包括資料的特徵以及資料之間的特徵相似性測量。為了達到較有意義而有效的集群結果，往往需要對資料進行仔細的觀察，找出適當的特徵表示以及相似性測量方法。</p></li>
+<li><p>集群分析後，還需要評估結果的優劣。常見的評估方法包括：群組內資料差距的平均以及Silhouette Value。</p></li>
+</ul>
+</div>
+<div id="section-84" class="section level2 unnumbered">
+<h2>延伸思考</h2>
+<ul>
+<li><p>什麼樣性質的問題適合應用集群分析？</p></li>
+<li><p>除了AP外，還有許多集群分析演算法，如何在R語言中找到適合的套件，並且應用這些套件撰寫程式？</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-mining-case-study.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-unsuperivsed_ml.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
