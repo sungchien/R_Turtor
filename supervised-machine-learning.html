@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 利用R語言進行監督式機器學習 | R語言課程講義</title>
+  <title>Chapter 8 利用R語言進行監督式機器學習 | R語言課程講義</title>
   <meta name="description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 利用R語言進行監督式機器學習 | R語言課程講義" />
+  <meta property="og:title" content="Chapter 8 利用R語言進行監督式機器學習 | R語言課程講義" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 利用R語言進行監督式機器學習 | R語言課程講義" />
+  <meta name="twitter:title" content="Chapter 8 利用R語言進行監督式機器學習 | R語言課程講義" />
   
   <meta name="twitter:description" content="本課程介紹R語言的基本語法以及一些簡單的應用。" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="林頌堅" />
 
 
-<meta name="date" content="2019-11-11" />
+<meta name="date" content="2019-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="unsupervised-machine-learning.html">
-<link rel="next" href="data-mining-case-study.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,67 +50,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -131,179 +105,169 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R語言的基本概念與語法</a><ul>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-1"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-2"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-3"><i class="fa fa-check"></i>學習目標</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#e8aab2e7a88be7b0a1e4bb8b"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#e5adb8e7bf92e79baee6a899"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.1</b> R語言的基本概念</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r-1"><i class="fa fa-check"></i><b>1.2</b> R語言的運算</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r-2"><i class="fa fa-check"></i><b>1.3</b> R語言的基本資料型態</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#section-4"><i class="fa fa-check"></i><b>1.3.1</b> 數值資料型態</a></li>
-<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#section-5"><i class="fa fa-check"></i><b>1.3.2</b> 文字資料型態</a></li>
-<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#section-6"><i class="fa fa-check"></i><b>1.3.3</b> 邏輯資料型態</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.2</b> R語言的運算</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.3</b> R語言的基本資料型態</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#section-1.3.1"><i class="fa fa-check"></i><b>1.3.1</b> 數值資料型態</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#section-1.3.2"><i class="fa fa-check"></i><b>1.3.2</b> 文字資料型態</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#section-1.3.3"><i class="fa fa-check"></i><b>1.3.3</b> 邏輯資料型態</a></li>
 <li class="chapter" data-level="1.3.4" data-path="intro.html"><a href="intro.html#factor"><i class="fa fa-check"></i><b>1.3.4</b> factor資料型態</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#r-3"><i class="fa fa-check"></i><b>1.4</b> R語言的特殊資料型態</a><ul>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.4</b> R語言的特殊資料型態</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector"><i class="fa fa-check"></i><b>1.4.1</b> vector</a></li>
 <li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#matrix"><i class="fa fa-check"></i><b>1.4.2</b> matrix</a></li>
 <li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#list"><i class="fa fa-check"></i><b>1.4.3</b> list</a></li>
 <li class="chapter" data-level="1.4.4" data-path="intro.html"><a href="intro.html#data-frame"><i class="fa fa-check"></i><b>1.4.4</b> data frame</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-7"><i class="fa fa-check"></i>小結</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#section-8"><i class="fa fa-check"></i>延伸思考</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#e5b08fe7b590"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#e5bbb6e4bcb8e6809de88083"><i class="fa fa-check"></i>延伸思考</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-manipulation.html"><a href="data-manipulation.html"><i class="fa fa-check"></i><b>2</b> 運用R語言進行資料處理</a><ul>
-<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-9"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-10"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-11"><i class="fa fa-check"></i>學習目標</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#-2"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#-3"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
-<li class="chapter" data-level="2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-12"><i class="fa fa-check"></i><b>2.1</b> 預備工作</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-13"><i class="fa fa-check"></i><b>2.1.1</b> 設定工作目錄</a></li>
+<li class="chapter" data-level="2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 預備工作</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.1.1"><i class="fa fa-check"></i><b>2.1.1</b> 設定工作目錄</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-14"><i class="fa fa-check"></i><b>2.2</b> 讀入檔案資料</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-15"><i class="fa fa-check"></i><b>2.2.1</b> 讀入空氣品質指標資料</a></li>
-<li class="chapter" data-level="2.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-16"><i class="fa fa-check"></i><b>2.2.2</b> 瀏覽讀入的資料</a></li>
+<li class="chapter" data-level="2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.2"><i class="fa fa-check"></i><b>2.2</b> 讀入檔案資料</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.2.1"><i class="fa fa-check"></i><b>2.2.1</b> 讀入空氣品質指標資料</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.2.2"><i class="fa fa-check"></i><b>2.2.2</b> 瀏覽讀入的資料</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-17"><i class="fa fa-check"></i><b>2.3</b> 資料整理</a><ul>
+<li class="chapter" data-level="2.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.3"><i class="fa fa-check"></i><b>2.3</b> 資料整理</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#aqina"><i class="fa fa-check"></i><b>2.3.1</b> 去除AQI為NA的資料紀錄</a></li>
 <li class="chapter" data-level="2.3.2" data-path="data-manipulation.html"><a href="data-manipulation.html#variable"><i class="fa fa-check"></i><b>2.3.2</b> Variable資料型態變更</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-18"><i class="fa fa-check"></i><b>2.4</b> 資料分析</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-19"><i class="fa fa-check"></i><b>2.4.1</b> 找出某一縣市的偵測站</a></li>
-<li class="chapter" data-level="2.4.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-20"><i class="fa fa-check"></i><b>2.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
-<li class="chapter" data-level="2.4.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-21"><i class="fa fa-check"></i><b>2.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
-<li class="chapter" data-level="2.4.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-22"><i class="fa fa-check"></i><b>2.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+<li class="chapter" data-level="2.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 資料分析</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.4.1"><i class="fa fa-check"></i><b>2.4.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.4.2"><i class="fa fa-check"></i><b>2.4.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="2.4.3" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.4.3"><i class="fa fa-check"></i><b>2.4.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="2.4.4" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.4.4"><i class="fa fa-check"></i><b>2.4.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="data-manipulation.html"><a href="data-manipulation.html#section-23"><i class="fa fa-check"></i><b>2.5</b> 程式存檔</a></li>
-<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-24"><i class="fa fa-check"></i>小結</a></li>
-<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#section-25"><i class="fa fa-check"></i>延伸思考</a></li>
+<li class="chapter" data-level="2.5" data-path="data-manipulation.html"><a href="data-manipulation.html#section-2.5"><i class="fa fa-check"></i><b>2.5</b> 程式存檔</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i>延伸思考</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>3</b> Tidyverse簡介</a><ul>
-<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-26"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-27"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-28"><i class="fa fa-check"></i>學習目標</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#-4"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#-5"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#-2"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
 <li class="chapter" data-level="3.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy"><i class="fa fa-check"></i><b>3.1</b> tidy資料格式簡介</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy-1"><i class="fa fa-check"></i><b>3.1.1</b> tidy資料格式的特徵</a></li>
-<li class="chapter" data-level="3.1.2" data-path="tidyverse.html"><a href="tidyverse.html#tidy-2"><i class="fa fa-check"></i><b>3.1.2</b> tidy資料格式的優點</a></li>
-<li class="chapter" data-level="3.1.3" data-path="tidyverse.html"><a href="tidyverse.html#wide-format-vs.-long-format"><i class="fa fa-check"></i><b>3.1.3</b> wide format vs. long format</a></li>
+<li class="chapter" data-level="3.1.1" data-path="tidyverse.html"><a href="tidyverse.html#tidy"><i class="fa fa-check"></i><b>3.1.1</b> tidy資料格式的特徵</a></li>
+<li class="chapter" data-level="3.1.2" data-path="tidyverse.html"><a href="tidyverse.html#tidy"><i class="fa fa-check"></i><b>3.1.2</b> tidy資料格式的優點</a></li>
+<li class="chapter" data-level="3.1.3" data-path="tidyverse.html"><a href="tidyverse.html#wide-format-vs.long-format"><i class="fa fa-check"></i><b>3.1.3</b> wide format vs. long format</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-1"><i class="fa fa-check"></i><b>3.2</b> tidyverse套件</a></li>
+<li class="chapter" data-level="3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse"><i class="fa fa-check"></i><b>3.2</b> tidyverse套件</a></li>
 <li class="chapter" data-level="3.3" data-path="tidyverse.html"><a href="tidyverse.html#tidy-data-format"><i class="fa fa-check"></i><b>3.3</b> tidy data format的資料分析方法</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="tidyverse.html"><a href="tidyverse.html#section-29"><i class="fa fa-check"></i><b>3.3.1</b> 預備工作</a></li>
-<li class="chapter" data-level="3.3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-2"><i class="fa fa-check"></i><b>3.3.2</b> 使用tidyverse套件的函數</a></li>
+<li class="chapter" data-level="3.3.1" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i><b>3.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="3.3.2" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse"><i class="fa fa-check"></i><b>3.3.2</b> 使用tidyverse套件的函數</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="tidyverse.html"><a href="tidyverse.html#section-30"><i class="fa fa-check"></i><b>3.4</b> 資料整理</a></li>
-<li class="chapter" data-level="3.5" data-path="tidyverse.html"><a href="tidyverse.html#section-31"><i class="fa fa-check"></i><b>3.5</b> 資料分析</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="tidyverse.html"><a href="tidyverse.html#section-32"><i class="fa fa-check"></i><b>3.5.1</b> 找出某一縣市的偵測站</a></li>
-<li class="chapter" data-level="3.5.2" data-path="tidyverse.html"><a href="tidyverse.html#section-33"><i class="fa fa-check"></i><b>3.5.2</b> 找出空氣品質最糟糕的偵測站</a></li>
-<li class="chapter" data-level="3.5.3" data-path="tidyverse.html"><a href="tidyverse.html#section-34"><i class="fa fa-check"></i><b>3.5.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
-<li class="chapter" data-level="3.5.4" data-path="tidyverse.html"><a href="tidyverse.html#section-35"><i class="fa fa-check"></i><b>3.5.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
+<li class="chapter" data-level="3.4" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i><b>3.4</b> 資料整理</a></li>
+<li class="chapter" data-level="3.5" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i><b>3.5</b> 資料分析</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i><b>3.5.1</b> 找出某一縣市的偵測站</a></li>
+<li class="chapter" data-level="3.5.2" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i><b>3.5.2</b> 找出空氣品質最糟糕的偵測站</a></li>
+<li class="chapter" data-level="3.5.3" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i><b>3.5.3</b> 找出汙染物是細懸浮微粒的偵測站數量</a></li>
+<li class="chapter" data-level="3.5.4" data-path="intro.html"><a href="intro.html#-1"><i class="fa fa-check"></i><b>3.5.4</b> 計算各種空氣品質狀態的偵測站數量</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-36"><i class="fa fa-check"></i>小結</a></li>
-<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#section-37"><i class="fa fa-check"></i>延伸思考</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#-2"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#-2"><i class="fa fa-check"></i>延伸思考</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>4</b> 資料視覺化</a><ul>
-<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-38"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-39"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-40"><i class="fa fa-check"></i>學習目標</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#-6"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#-7"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#-3"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
-<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#section-41"><i class="fa fa-check"></i><b>4.1</b> 資訊視覺化簡介</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="data-visualization.html"><a href="data-visualization.html#section-42"><i class="fa fa-check"></i><b>4.1.1</b> 視覺化的應用</a></li>
-<li class="chapter" data-level="4.1.2" data-path="data-visualization.html"><a href="data-visualization.html#section-43"><i class="fa fa-check"></i><b>4.1.2</b> 應用圖形呈現各種問題</a></li>
+<li class="chapter" data-level="4.1" data-path="data-visualization.html"><a href="data-visualization.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 資訊視覺化簡介</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="data-visualization.html"><a href="data-visualization.html#section-4.1.1"><i class="fa fa-check"></i><b>4.1.1</b> 視覺化的應用</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-visualization.html"><a href="data-visualization.html#section-4.1.2"><i class="fa fa-check"></i><b>4.1.2</b> 應用圖形呈現各種問題</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="data-visualization.html"><a href="data-visualization.html#r-4"><i class="fa fa-check"></i><b>4.2</b> R語言的資料視覺化工具</a><ul>
+<li class="chapter" data-level="4.2" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>4.2</b> R語言的資料視覺化工具</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.2.1</b> ggplot2的運作概念</a></li>
 <li class="chapter" data-level="4.2.2" data-path="data-visualization.html"><a href="data-visualization.html#aesthetics"><i class="fa fa-check"></i><b>4.2.2</b> Aesthetics上幾種常用的資料編碼方式</a></li>
 <li class="chapter" data-level="4.2.3" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-geometrics"><i class="fa fa-check"></i><b>4.2.3</b> ggplot2上幾種常用的圖表類型 (Geometrics)</a></li>
-<li class="chapter" data-level="4.2.4" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2-1"><i class="fa fa-check"></i><b>4.2.4</b> 使用ggplot2套件</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-visualization.html"><a href="data-visualization.html#ggplot2"><i class="fa fa-check"></i><b>4.2.4</b> 使用ggplot2套件</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#section-44"><i class="fa fa-check"></i><b>4.3</b> 以資料視覺化的方式進行資料探索</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="data-visualization.html"><a href="data-visualization.html#section-45"><i class="fa fa-check"></i><b>4.3.1</b> 預備工作</a></li>
-<li class="chapter" data-level="4.3.2" data-path="data-visualization.html"><a href="data-visualization.html#section-46"><i class="fa fa-check"></i><b>4.3.2</b> 問題</a></li>
+<li class="chapter" data-level="4.3" data-path="data-visualization.html"><a href="data-visualization.html#section-4.3"><i class="fa fa-check"></i><b>4.3</b> 以資料視覺化的方式進行資料探索</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="data-manipulation.html"><a href="data-manipulation.html#-2"><i class="fa fa-check"></i><b>4.3.1</b> 預備工作</a></li>
+<li class="chapter" data-level="4.3.2" data-path="data-visualization.html"><a href="data-visualization.html#section-4.3.2"><i class="fa fa-check"></i><b>4.3.2</b> 問題</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#section-47"><i class="fa fa-check"></i><b>4.4</b> 利用直方圖呈現資料的分布情形</a></li>
-<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#section-48"><i class="fa fa-check"></i><b>4.5</b> 利用長條圖進行資料之間的比較</a></li>
-<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#section-49"><i class="fa fa-check"></i><b>4.6</b> 利用散佈圖呈現兩個數值之間的關係</a></li>
-<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#section-50"><i class="fa fa-check"></i><b>4.7</b> 使用盒狀圖比較多個群體的分布情形</a></li>
-<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#section-51"><i class="fa fa-check"></i><b>4.8</b> 利用並列的多個圖表進行比較</a></li>
-<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-52"><i class="fa fa-check"></i>小結</a></li>
-<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#section-53"><i class="fa fa-check"></i>延伸思考</a></li>
+<li class="chapter" data-level="4.4" data-path="data-visualization.html"><a href="data-visualization.html#section-4.4"><i class="fa fa-check"></i><b>4.4</b> 利用直方圖呈現資料的分布情形</a></li>
+<li class="chapter" data-level="4.5" data-path="data-visualization.html"><a href="data-visualization.html#section-4.5"><i class="fa fa-check"></i><b>4.5</b> 利用長條圖進行資料之間的比較</a></li>
+<li class="chapter" data-level="4.6" data-path="data-visualization.html"><a href="data-visualization.html#section-4.6"><i class="fa fa-check"></i><b>4.6</b> 利用散佈圖呈現兩個數值之間的關係</a></li>
+<li class="chapter" data-level="4.7" data-path="data-visualization.html"><a href="data-visualization.html#section-4.7"><i class="fa fa-check"></i><b>4.7</b> 使用盒狀圖比較多個群體的分布情形</a></li>
+<li class="chapter" data-level="4.8" data-path="data-visualization.html"><a href="data-visualization.html#section-4.8"><i class="fa fa-check"></i><b>4.8</b> 利用並列的多個圖表進行比較</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#-3"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-manipulation.html"><a href="data-manipulation.html#-3"><i class="fa fa-check"></i>延伸思考</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>5</b> 利用R語言進行探索性資料分析</a><ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-54"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-55"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-56"><i class="fa fa-check"></i>學習目標</a></li>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#-8"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#-9"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#-4"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
-<li class="chapter" data-level="5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-57"><i class="fa fa-check"></i><b>5.1</b> 探索性資料分析是什麼？</a></li>
-<li class="chapter" data-level="5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-58"><i class="fa fa-check"></i><b>5.2</b> 以環保署日空氣品質指標開放資料為例進行探索性資料分析</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-59"><i class="fa fa-check"></i>小結</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-60"><i class="fa fa-check"></i>延伸思考</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-61"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-62"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-63"><i class="fa fa-check"></i>學習目標</a></li>
+<li class="chapter" data-level="5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.1"><i class="fa fa-check"></i><b>5.1</b> 探索性資料分析是什麼？</a></li>
+<li class="chapter" data-level="5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-5.2"><i class="fa fa-check"></i><b>5.2</b> 以環保署日空氣品質指標開放資料為例進行探索性資料分析</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#-4"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#-4"><i class="fa fa-check"></i>延伸思考</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-64"><i class="fa fa-check"></i><b>5.3</b> 資料探勘的定義</a></li>
-<li class="chapter" data-level="5.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-65"><i class="fa fa-check"></i><b>5.4</b> 資料探勘的步驟</a></li>
-<li class="chapter" data-level="5.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-66"><i class="fa fa-check"></i><b>5.5</b> 資料探勘的分類</a></li>
-<li class="chapter" data-level="5.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-67"><i class="fa fa-check"></i><b>5.6</b> 資料探勘於傳播學的應用</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-68"><i class="fa fa-check"></i><b>5.6.1</b> 監督式機器學習</a></li>
-<li class="chapter" data-level="5.6.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#section-69"><i class="fa fa-check"></i><b>5.6.2</b> 非監督式機器學習</a></li>
+<li class="chapter" data-level="6" data-path="data-mining.html"><a href="data-mining.html"><i class="fa fa-check"></i><b>6</b> 資料探勘</a><ul>
+<li class="chapter" data-level="" data-path="data-mining.html"><a href="data-mining.html#-10"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="data-mining.html"><a href="data-mining.html#-11"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#-5"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
+<li class="chapter" data-level="6.1" data-path="data-mining.html"><a href="data-mining.html#section-6.1"><i class="fa fa-check"></i><b>6.1</b> 資料探勘的定義</a></li>
+<li class="chapter" data-level="6.2" data-path="data-mining.html"><a href="data-mining.html#section-6.2"><i class="fa fa-check"></i><b>6.2</b> 資料探勘的步驟</a></li>
+<li class="chapter" data-level="6.3" data-path="data-mining.html"><a href="data-mining.html#section-6.3"><i class="fa fa-check"></i><b>6.3</b> 資料探勘的分類</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html"><i class="fa fa-check"></i><b>6</b> 利用R語言進行非監督式機器學習</a><ul>
-<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-70"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-71"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-72"><i class="fa fa-check"></i>學習目標</a></li>
+<li class="chapter" data-level="7" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html"><i class="fa fa-check"></i><b>7</b> 利用R語言進行非監督式機器學習</a><ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#-12"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#-13"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#-6"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
-<li class="chapter" data-level="6.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-73"><i class="fa fa-check"></i><b>6.1</b> 集群分析</a></li>
-<li class="chapter" data-level="6.2" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-74"><i class="fa fa-check"></i><b>6.2</b> 以進出站人數統計資料對臺鐵主要車站進行集群分析</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-75"><i class="fa fa-check"></i><b>6.2.1</b> 載入相關套件</a></li>
-<li class="chapter" data-level="6.2.2" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-76"><i class="fa fa-check"></i><b>6.2.2</b> 選取資料</a></li>
-<li class="chapter" data-level="6.2.3" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-77"><i class="fa fa-check"></i><b>6.2.3</b> 資料的清除與整理等前處理</a></li>
-<li class="chapter" data-level="6.2.4" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-78"><i class="fa fa-check"></i><b>6.2.4</b> 產生站點資料特徵</a></li>
-<li class="chapter" data-level="6.2.5" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-79"><i class="fa fa-check"></i><b>6.2.5</b> 維度縮減</a></li>
-<li class="chapter" data-level="6.2.6" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-80"><i class="fa fa-check"></i><b>6.2.6</b> 將站點依據彼此距離視覺化</a></li>
-<li class="chapter" data-level="6.2.7" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-81"><i class="fa fa-check"></i><b>6.2.7</b> 站點集群</a></li>
-<li class="chapter" data-level="6.2.8" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-82"><i class="fa fa-check"></i><b>6.2.8</b> 結果的解釋</a></li>
+<li class="chapter" data-level="7.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.1"><i class="fa fa-check"></i><b>7.1</b> 集群分析</a></li>
+<li class="chapter" data-level="7.2" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2"><i class="fa fa-check"></i><b>7.2</b> 以進出站人數統計資料對臺鐵主要車站進行集群分析</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2.1"><i class="fa fa-check"></i><b>7.2.1</b> 載入相關套件</a></li>
+<li class="chapter" data-level="7.2.2" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2.2"><i class="fa fa-check"></i><b>7.2.2</b> 選取資料</a></li>
+<li class="chapter" data-level="7.2.3" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2.3"><i class="fa fa-check"></i><b>7.2.3</b> 資料的清除與整理等前處理</a></li>
+<li class="chapter" data-level="7.2.4" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2.4"><i class="fa fa-check"></i><b>7.2.4</b> 產生站點資料特徵</a></li>
+<li class="chapter" data-level="7.2.5" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2.5"><i class="fa fa-check"></i><b>7.2.5</b> 維度縮減</a></li>
+<li class="chapter" data-level="7.2.6" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2.6"><i class="fa fa-check"></i><b>7.2.6</b> 將站點依據彼此距離視覺化</a></li>
+<li class="chapter" data-level="7.2.7" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2.7"><i class="fa fa-check"></i><b>7.2.7</b> 站點集群</a></li>
+<li class="chapter" data-level="7.2.8" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-7.2.8"><i class="fa fa-check"></i><b>7.2.8</b> 結果的解釋</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-83"><i class="fa fa-check"></i>小結</a></li>
-<li class="chapter" data-level="" data-path="unsupervised-machine-learning.html"><a href="unsupervised-machine-learning.html#section-84"><i class="fa fa-check"></i>延伸思考</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#-5"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="tidyverse.html"><a href="tidyverse.html#-5"><i class="fa fa-check"></i>延伸思考</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html"><i class="fa fa-check"></i><b>7</b> 利用R語言進行監督式機器學習</a><ul>
-<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-85"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-86"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-87"><i class="fa fa-check"></i>學習目標</a></li>
+<li class="chapter" data-level="8" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html"><i class="fa fa-check"></i><b>8</b> 利用R語言進行監督式機器學習</a><ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#-14"><i class="fa fa-check"></i>課程簡介</a><ul>
+<li class="chapter" data-level="" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#-15"><i class="fa fa-check"></i>課程簡介</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#-7"><i class="fa fa-check"></i>學習目標</a></li>
 </ul></li>
-<li class="chapter" data-level="7.1" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-88"><i class="fa fa-check"></i><b>7.1</b> 監督式機器學習</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-89"><i class="fa fa-check"></i><b>7.1.1</b> 分類</a></li>
+<li class="chapter" data-level="8.1" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.1"><i class="fa fa-check"></i><b>8.1</b> 監督式機器學習</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.1.1"><i class="fa fa-check"></i><b>8.1.1</b> 分類</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#tmdb"><i class="fa fa-check"></i><b>7.2</b> TMDB電影評分預測</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#tidyverse-3"><i class="fa fa-check"></i><b>7.2.1</b> 載入tidyverse套件</a></li>
-<li class="chapter" data-level="7.2.2" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-90"><i class="fa fa-check"></i><b>7.2.2</b> 讀入資料</a></li>
-<li class="chapter" data-level="7.2.3" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-91"><i class="fa fa-check"></i><b>7.2.3</b> 資料的清除與整理</a></li>
-<li class="chapter" data-level="7.2.4" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-92"><i class="fa fa-check"></i><b>7.2.4</b> 轉換資料為有效描述和預測的特徵</a></li>
+<li class="chapter" data-level="8.2" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#tmdb"><i class="fa fa-check"></i><b>8.2</b> TMDB電影評分預測</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse"><i class="fa fa-check"></i><b>8.2.1</b> 載入tidyverse套件</a></li>
+<li class="chapter" data-level="8.2.2" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.2.2"><i class="fa fa-check"></i><b>8.2.2</b> 讀入資料</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#k-nearest-neightbors"><i class="fa fa-check"></i><b>7.3</b> 進行K-Nearest Neightbors分類</a></li>
-<li class="chapter" data-level="7.4" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#naive-bayes"><i class="fa fa-check"></i><b>7.4</b> 進行Naive Bayes演算法分類</a></li>
-<li class="chapter" data-level="7.5" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-93"><i class="fa fa-check"></i><b>7.5</b> 進行支持向量機分類</a></li>
-<li class="chapter" data-level="7.6" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-94"><i class="fa fa-check"></i><b>7.6</b> 進行決策樹分類</a></li>
-<li class="chapter" data-level="7.7" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-95"><i class="fa fa-check"></i><b>7.7</b> 進行隨機森林監督式學習</a></li>
-<li class="chapter" data-level="7.8" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-96"><i class="fa fa-check"></i><b>7.8</b> 隨機梯度增強</a></li>
-<li class="chapter" data-level="7.9" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-97"><i class="fa fa-check"></i><b>7.9</b> 類神經網路</a></li>
+<li class="chapter" data-level="8.3" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.3"><i class="fa fa-check"></i><b>8.3</b> 資料處理與特徵抽取</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.3.1"><i class="fa fa-check"></i><b>8.3.1</b> 資料的清除與整理</a></li>
+<li class="chapter" data-level="8.3.2" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.3.2"><i class="fa fa-check"></i><b>8.3.2</b> 轉換資料為有效描述和預測的特徵</a></li>
+<li class="chapter" data-level="8.3.3" data-path="intro.html"><a href="intro.html#data-frame"><i class="fa fa-check"></i><b>8.3.3</b> 建立一個data frame用來比較各種分類演算法</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html"><i class="fa fa-check"></i><b>8</b> 資料探勘在傳播學的應用案例</a><ul>
-<li class="chapter" data-level="" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-98"><i class="fa fa-check"></i>課程簡介</a><ul>
-<li class="chapter" data-level="" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-99"><i class="fa fa-check"></i>課程簡介</a></li>
-<li class="chapter" data-level="" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-100"><i class="fa fa-check"></i>學習目標</a></li>
-</ul></li>
-<li class="chapter" data-level="8.1" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-101"><i class="fa fa-check"></i><b>8.1</b> 資料探勘的定義</a></li>
-<li class="chapter" data-level="8.2" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-102"><i class="fa fa-check"></i><b>8.2</b> 資料探勘的步驟</a></li>
-<li class="chapter" data-level="8.3" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-103"><i class="fa fa-check"></i><b>8.3</b> 資料探勘的分類</a></li>
-<li class="chapter" data-level="8.4" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-104"><i class="fa fa-check"></i><b>8.4</b> 資料探勘於傳播學的應用</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-105"><i class="fa fa-check"></i><b>8.4.1</b> 監督式機器學習</a></li>
-<li class="chapter" data-level="8.4.2" data-path="data-mining-case-study.html"><a href="data-mining-case-study.html#section-106"><i class="fa fa-check"></i><b>8.4.2</b> 非監督式機器學習</a></li>
-</ul></li>
+<li class="chapter" data-level="8.4" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#k-nearest-neightbors"><i class="fa fa-check"></i><b>8.4</b> 進行K-Nearest Neightbors分類</a></li>
+<li class="chapter" data-level="8.5" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#naive-bayes"><i class="fa fa-check"></i><b>8.5</b> 進行Naive Bayes演算法分類</a></li>
+<li class="chapter" data-level="8.6" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.6"><i class="fa fa-check"></i><b>8.6</b> 進行支持向量機分類</a></li>
+<li class="chapter" data-level="8.7" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.7"><i class="fa fa-check"></i><b>8.7</b> 進行決策樹分類</a></li>
+<li class="chapter" data-level="8.8" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.8"><i class="fa fa-check"></i><b>8.8</b> 進行隨機森林分類</a></li>
+<li class="chapter" data-level="8.9" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.9"><i class="fa fa-check"></i><b>8.9</b> 進行梯度提升機分類</a></li>
+<li class="chapter" data-level="8.10" data-path="supervised-machine-learning.html"><a href="supervised-machine-learning.html#section-8.10"><i class="fa fa-check"></i><b>8.10</b> 比較各分類器的結果</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#-6"><i class="fa fa-check"></i>小結</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#-6"><i class="fa fa-check"></i>延伸思考</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -326,51 +290,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="supervised_machine_learning" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> 利用R語言進行監督式機器學習</h1>
-<div id="section-85" class="section level2 unnumbered">
+<h1><span class="header-section-number">Chapter 8</span> 利用R語言進行監督式機器學習</h1>
+<div id="-14" class="section level2 unnumbered">
 <h2>課程簡介</h2>
-<div id="section-86" class="section level3 unnumbered">
+<div id="-15" class="section level3 unnumbered">
 <h3>課程簡介</h3>
-<p><strong>分類</strong>是根據蒐集的資料案例，以訓練演算法建立一個模型，來指定新的資料的類別。本次課程的目的為介紹監督式機器學習中的分類問題，並且利用TMDB電影資料，從片長、類型、製作公司、預算、收入、…等電影資料，預測電影的評分，進行分類的練習。本次課程包含以下的內容：</p>
+<p><strong>分類</strong>是根據蒐集的資料案例，以訓練演算法建立一個模型，來指定新的資料的類別。本次課程的目的為介紹監督式機器學習中的分類問題，並且以實際案例說明分類問題的資料處理、特徵抽取與運用各種演算法進行分類。本次課程中將利用TMDB電影資料，從片長、類型、製作公司、預算、收入、…等電影資料，預測電影的評分，進行分類的練習。本次課程包含以下的內容：</p>
+<ul>
+<li>分類演算法的概念與應用</li>
+<li>資料處理與特徵抽取</li>
+<li>R語言的分類演算法實作</li>
+</ul>
 </div>
-<div id="section-87" class="section level3 unnumbered">
+<div id="-7" class="section level3 unnumbered">
 <h3>學習目標</h3>
 </div>
 </div>
-<div id="section-88" class="section level2">
-<h2><span class="header-section-number">7.1</span> 監督式機器學習</h2>
+<div id="section-8.1" class="section level2">
+<h2><span class="header-section-number">8.1</span> 監督式機器學習</h2>
 <p>監督式機器學習 (supervised machine learning)是利用一組已經標注結果的資料，預測尚未標注結果的新資料的可能結果。以數學的方式來表示這個概念，監督式機器學習利用一組資料 <span class="math inline">\(X_{1}, X_{2}, ..., X_{N}\)</span> (<span class="math inline">\(X_{i}\)</span>稱為預測變數或解釋變數)以及其對應的結果 <span class="math inline">\(Y_{1}, Y_{2}, ..., Y_{N}\)</span> (<span class="math inline">\(Y_{i}\)</span>稱為目標變數)，設法找到一個模型 <span class="math inline">\(f(x)\)</span> ，盡可能使 <span class="math inline">\(f(X_{1}) = Y_{1}\)</span> 、 <span class="math inline">\(f(X_{2}) = Y_{2}\)</span> 、…、 <span class="math inline">\(f(X_{N}) = Y_{N}\)</span> 。當有新的資料 <span class="math inline">\(\hat{X}\)</span> 進入時，可以利用 <span class="math inline">\(f(x)\)</span> 計算的結果 <span class="math inline">\(f(\hat{X})\)</span> ，做為可能結果的預測。</p>
 <hr />
 <p>通常來說，如果要預測的結果是連續的數值，通常將這類的問題稱為<strong>迴歸 (regression)</strong>，如果是離散型的結果的話，則稱為<strong>分類 (classification)</strong>。</p>
-<div id="section-89" class="section level3">
-<h3><span class="header-section-number">7.1.1</span> 分類</h3>
+<div id="section-8.1.1" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> 分類</h3>
 <p>分類的問題可以視為運用現有的資料 <span class="math inline">\(X_{1}, X_{2}, ..., X_{N}\)</span> 以及其對應的類別 <span class="math inline">\(Y_{1}, Y_{2}, ..., Y_{N}\)</span> ，嘗試找到一個分類器模型 <span class="math inline">\(f(x)\)</span> 來預測新資料 <span class="math inline">\(\hat{X}\)</span> 的類別 <span class="math inline">\(f(\hat{X})\)</span> 。</p>
 <p>常用的分類演算法:</p>
 <ul>
 <li>K-Nearest Neighbors演算法</li>
 <li>Naive Bayes 分類演算法</li>
-<li>決策樹(devision tree)</li>
-<li></li>
+<li>支援向量機 (support vector machine)</li>
+<li>決策樹 (decision tree)</li>
+<li>隨機森林 (random forest)</li>
+<li>梯度提升機 (gradient boosting machine)</li>
 </ul>
+<p>這些分類演算法各有各的優點，有的容易實作，有的效率高，有的產生的結果容易解釋，有的則是整合其他分類演算法的結果。在應用上，可以依據分類問題的特性進行選擇。</p>
 </div>
 </div>
 <div id="tmdb" class="section level2">
-<h2><span class="header-section-number">7.2</span> TMDB電影評分預測</h2>
+<h2><span class="header-section-number">8.2</span> TMDB電影評分預測</h2>
 <p>TMDB資料是<a href="https://www.kaggle.com/">Kaggle</a>提供做為學習資料科學的資料集。Kaggle利用<a href="https://www.themoviedb.org/?language=zh-TW">TMDB (The Movie Database)</a>提供的電影資料建立的資料集，大約有5000筆電影資料，在Kaggle上的下載點為<a href="https://www.kaggle.com/tmdb/tmdb-movie-metadata/downloads/tmdb-5000-movie-dataset.zip/2">TMDB 5000 Movie Dataset</a>。</p>
-<p><img src="image/tmdb.png" /></p>
-<p>本次課程將利用TMDB資料集說明如何應用電影資料(片長、類型、製作公司、預算、收入、…等)，進行監督式機器學習，預測電影評分。可參考<a href="http://rstudio-pubs-static.s3.amazonaws.com/342210_7c8d57cfdd784cf58dc077d3eb7a2ca3.html#problem-statement">Project Report: IMDB 5000 Movie Dataset</a>，有類似的做法。</p>
-<div id="tidyverse-3" class="section level3">
-<h3><span class="header-section-number">7.2.1</span> 載入tidyverse套件</h3>
-<p>載入<code>tidyverse</code>套件</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre>
+<div class="figure">
+<img src="image/tmdb.png" />
+
 </div>
-<div id="section-90" class="section level3">
-<h3><span class="header-section-number">7.2.2</span> 讀入資料</h3>
+<p>本次課程將利用TMDB資料集說明如何應用電影資料(片長、類型、製作公司、預算、收入、…等)，進行監督式機器學習，預測電影評分。可參考<a href="http://rstudio-pubs-static.s3.amazonaws.com/342210_7c8d57cfdd784cf58dc077d3eb7a2ca3.html#problem-statement">Project Report: IMDB 5000 Movie Dataset</a>，有類似的做法。</p>
+<div id="tidyverse" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> 載入tidyverse套件</h3>
+<p>載入<code>tidyverse</code>套件</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+</div>
+<div id="section-8.2.2" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> 讀入資料</h3>
 <p>讀取TMDB資料集</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;tmdb_5000_movies.csv&quot;</span>)</code></pre>
-<p><img src="image/tmdb_data.png" /></p>
-<p>讀入資料後，先看資料的情況。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(movies)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;tmdb_5000_movies.csv&quot;</span>)</code></pre></div>
+<div class="figure">
+<img src="image/tmdb_data.png" />
+
+</div>
+<p>讀入資料集後，先看資料集的情況。</p>
+<p>資料集上各個variable的資料型態</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(movies)</code></pre></div>
 <pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 4803 obs. of  20 variables:
 ##  $ budget              : num  2.37e+08 3.00e+08 2.45e+08 2.50e+08 2.60e+08 2.58e+08 2.60e+08 2.80e+08 2.50e+08 2.50e+08 ...
 ##  $ genres              : chr  &quot;[{\&quot;id\&quot;: 28, \&quot;name\&quot;: \&quot;Action\&quot;}, {\&quot;id\&quot;: 12, \&quot;name\&quot;: \&quot;Adventure\&quot;}, {\&quot;id\&quot;: 14, \&quot;name\&quot;: \&quot;Fantasy\&quot;}&quot;| __truncated__ &quot;[{\&quot;id\&quot;: 12, \&quot;name\&quot;: \&quot;Adventure\&quot;}, {\&quot;id\&quot;: 14, \&quot;name\&quot;: \&quot;Fantasy\&quot;}, {\&quot;id\&quot;: 28, \&quot;name\&quot;: \&quot;Action\&quot;}]&quot; &quot;[{\&quot;id\&quot;: 28, \&quot;name\&quot;: \&quot;Action\&quot;}, {\&quot;id\&quot;: 12, \&quot;name\&quot;: \&quot;Adventure\&quot;}, {\&quot;id\&quot;: 80, \&quot;name\&quot;: \&quot;Crime\&quot;}]&quot; &quot;[{\&quot;id\&quot;: 28, \&quot;name\&quot;: \&quot;Action\&quot;}, {\&quot;id\&quot;: 80, \&quot;name\&quot;: \&quot;Crime\&quot;}, {\&quot;id\&quot;: 18, \&quot;name\&quot;: \&quot;Drama\&quot;}, {\&quot;i&quot;| __truncated__ ...
@@ -415,7 +394,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   ..   vote_average = col_double(),
 ##   ..   vote_count = col_double()
 ##   .. )</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(movies)</code></pre>
+<p>資料集上各個variable的統計描述資訊</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(movies)</code></pre></div>
 <pre><code>##      budget             genres            homepage        
 ##  Min.   :        0   Length:4803        Length:4803       
 ##  1st Qu.:   790000   Class :character   Class :character  
@@ -465,8 +445,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##                     Max.   :10.000   Max.   :13752.0  
 ## </code></pre>
 </div>
-<div id="section-91" class="section level3">
-<h3><span class="header-section-number">7.2.3</span> 資料的清除與整理</h3>
+</div>
+<div id="section-8.3" class="section level2">
+<h2><span class="header-section-number">8.3</span> 資料處理與特徵抽取</h2>
+<div id="section-8.3.1" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> 資料的清除與整理</h3>
 <p>整理各個variable，分為以下四類</p>
 <ol style="list-style-type: decimal">
 <li>電影編號：id</li>
@@ -479,15 +462,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <p><strong>處理與本次分析無關的variables</strong></p>
 <p>與本次分析無關的variables，不需進一步分析，可以直接捨棄。</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>homepage, <span class="op">-</span>keywords, <span class="op">-</span>original_title, <span class="op">-</span>overview, <span class="op">-</span>production_countries, <span class="op">-</span>spoken_languages, <span class="op">-</span>status, <span class="op">-</span>tagline, <span class="op">-</span>title)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>homepage, <span class="op">-</span>keywords, <span class="op">-</span>original_title, <span class="op">-</span>overview, <span class="op">-</span>production_countries, <span class="op">-</span>spoken_languages, <span class="op">-</span>status, <span class="op">-</span>tagline, <span class="op">-</span>title)</code></pre></div>
 <p>捨棄這些variables後，資料集從20個variables，轉換為11個variables。</p>
 <hr />
 <p><strong>整理數值資料類型的variables</strong></p>
 <p>觀察每個數值資料的範圍</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(budget, popularity, revenue, runtime, vote_average, vote_count) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summary</span>()</code></pre>
+<span class="st">  </span><span class="kw">summary</span>()</code></pre></div>
 <pre><code>##      budget            popularity         revenue             runtime     
 ##  Min.   :        0   Min.   :  0.000   Min.   :0.000e+00   Min.   :  0.0  
 ##  1st Qu.:   790000   1st Qu.:  4.668   1st Qu.:0.000e+00   1st Qu.: 94.0  
@@ -505,12 +488,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Max.   :10.000   Max.   :13752.0  
 ## </code></pre>
 <p><code>budget</code>(預算)、<code>revenue</code>(收入)、<code>runtime</code>(放映時間)、<code>vote_count</code>(投票人數)等為0並不合理，首先刪除這些資料為0者</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(budget<span class="op">&gt;</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>revenue<span class="op">&gt;</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>runtime<span class="op">&gt;</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>vote_count<span class="op">&gt;</span><span class="dv">0</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(budget<span class="op">&gt;</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>revenue<span class="op">&gt;</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>runtime<span class="op">&gt;</span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>vote_count<span class="op">&gt;</span><span class="dv">0</span>)</code></pre></div>
 <p>再觀察每個數值資料的範圍</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(budget, popularity, revenue, runtime, vote_average, vote_count) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summary</span>()</code></pre>
+<span class="st">  </span><span class="kw">summary</span>()</code></pre></div>
 <pre><code>##      budget            popularity        revenue             runtime     
 ##  Min.   :        1   Min.   :  0.02   Min.   :5.000e+00   Min.   : 41.0  
 ##  1st Qu.: 10500000   1st Qu.: 10.48   1st Qu.:1.704e+07   1st Qu.: 96.0  
@@ -527,46 +510,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Max.   :8.500   Max.   :13752.0</code></pre>
 <hr />
 <p><code>budget</code>最小為1 ，看起來仍然不合理。顯示<code>budget</code>少於10000的電影共幾筆？</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;budget少於10000的電影數量：&quot;</span>, <span class="kw">nrow</span>(movies[movies<span class="op">$</span>budget<span class="op">&lt;</span><span class="dv">10000</span>,])))</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;budget少於10000的電影數量：&quot;</span>, <span class="kw">nrow</span>(movies[movies<span class="op">$</span>budget<span class="op">&lt;</span><span class="dv">10000</span>,])))</code></pre></div>
 <pre><code>## [1] &quot;budget少於10000的電影數量： 15&quot;</code></pre>
 <p>刪除<code>budget</code>少於10000的電影</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(budget<span class="op">&gt;=</span><span class="dv">10000</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(budget<span class="op">&gt;=</span><span class="dv">10000</span>)</code></pre></div>
 <hr />
 <p>收入太少，也不正常，顯示<code>revenue</code>少於10000的電影共幾筆？</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;revenue少於10000的電影數量：&quot;</span>, <span class="kw">nrow</span>(movies[movies<span class="op">$</span>revenue<span class="op">&lt;</span><span class="dv">10000</span>,])))</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;revenue少於10000的電影數量：&quot;</span>, <span class="kw">nrow</span>(movies[movies<span class="op">$</span>revenue<span class="op">&lt;</span><span class="dv">10000</span>,])))</code></pre></div>
 <pre><code>## [1] &quot;revenue少於10000的電影數量： 8&quot;</code></pre>
 <p>再刪除<code>revenue</code>少於10000的電影</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(revenue<span class="op">&gt;=</span><span class="dv">10000</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(revenue<span class="op">&gt;=</span><span class="dv">10000</span>)</code></pre></div>
 <hr />
 <p>分析<code>runtime</code>的分布情形</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(movies<span class="op">$</span>runtime)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(movies<span class="op">$</span>runtime)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    41.0    96.0   107.0   110.8   121.0   338.0</code></pre>
 <p>畫成直方圖看看</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>runtime), <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">360</span>, <span class="dv">30</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">360</span>, <span class="dv">30</span>), <span class="dt">minor_breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;電影數量&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
         <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>),
-        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>))</code></pre>
+        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>))</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>刪除runtime小於60分鐘的電影</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(runtime<span class="op">&gt;=</span><span class="dv">60</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(runtime<span class="op">&gt;=</span><span class="dv">60</span>)</code></pre></div>
 <hr />
 <p>最後分析<code>vote_count</code>，由於我們希望預測電影的評分資料，如果評分人數太少，評分可能較不準確。顯示<code>vote_count</code>少於100的電影共幾筆？</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;vote_count少於100的電影數量：&quot;</span>, <span class="kw">nrow</span>(movies[movies<span class="op">$</span>vote_count<span class="op">&lt;</span><span class="dv">100</span>,])))</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;vote_count少於100的電影數量：&quot;</span>, <span class="kw">nrow</span>(movies[movies<span class="op">$</span>vote_count<span class="op">&lt;</span><span class="dv">100</span>,])))</code></pre></div>
 <pre><code>## [1] &quot;vote_count少於100的電影數量： 496&quot;</code></pre>
 <p>再刪除<code>vote_count</code>少於100的電影</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(vote_count<span class="op">&gt;=</span><span class="dv">100</span>)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(vote_count<span class="op">&gt;=</span><span class="dv">100</span>)</code></pre></div>
 <hr />
 <p>我們要預測的目標是平均評分<code>vote_average</code>，檢視這個variable的分布情形。</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>vote_average), <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.5</span>), <span class="dt">minor_breaks =</span> <span class="ot">NULL</span>) <span class="op">+</span>
@@ -574,14 +557,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
         <span class="dt">axis.line=</span><span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>),
         <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>),
-        <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">60</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</code></pre>
+        <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">60</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>從上面的圖形可以發現資料分布在2.5到8.5之間
-根據<code>vote_average</code>的分布情形，決定將這個variable分為x&lt;=5.5, 5.5&lt;x&lt;=6.5, 6.5&lt;x&lt;=7.5以及7.5&lt;x等四個區間，將<code>vote_average</code>改為新的變數<code>vote_average_p</code>，做為接下來預測的目標。也就是以其他的variables來預測<code>vote_average_p</code>在哪一個區間(類別)。</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote_average_p=</span><span class="kw">cut</span>(vote_average, <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>, <span class="fl">7.5</span>, <span class="dv">10</span>)))</code></pre>
+<p>從上面的圖形可以發現資料分布在2.5到8.5之間 根據<code>vote_average</code>的分布情形，決定將這個variable分為<span class="math inline">\(x\leq5.5\)</span>, <span class="math inline">\(5.5&lt;x\leq6.5\)</span>, <span class="math inline">\(6.5&lt;x\leq7.5\)</span>以及<span class="math inline">\(7.5&lt;x\)</span>等四個區間，將<code>vote_average</code>改為新的變數<code>vote_average_p</code>，做為接下來預測的目標。也就是以其他的variables來預測<code>vote_average_p</code>在哪一個區間(類別)。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote_average_p=</span><span class="kw">cut</span>(vote_average, <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>, <span class="fl">7.5</span>, <span class="dv">10</span>)))</code></pre></div>
+<pre><code>## Warning: The `printer` argument is deprecated as of rlang 0.3.0.
+## This warning is displayed once per session.</code></pre>
 <p>檢視各類別內的資料數量</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(vote_average_p) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio=</span>count<span class="op">/</span><span class="kw">sum</span>(count)) <span class="op">%&gt;%</span>
@@ -590,12 +574,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;vote_average_p類別&quot;</span>, <span class="dt">y=</span><span class="st">&quot;電影數量比率&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
         <span class="dt">axis.line=</span><span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>),
-        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>))</code></pre>
+        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>))</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <hr />
 <p>捨棄<code>vote_count</code>和<code>vote_average</code>兩個variables</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>vote_count, <span class="op">-</span>vote_average)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>vote_count, <span class="op">-</span>vote_average)</code></pre></div>
 <hr />
 <p><strong>修改日期資料類型的variables成factor資料類型，然後轉換成one-hot encoding的形式</strong></p>
 <p>說明：</p>
@@ -604,16 +588,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>one-hot encoding適用於名目或順序尺度的variables。對於某一個名目或順序尺度的variables，如果它有m個可能值，那麼經過one-hot encoding碼後，就變成了m個二元variables(0或1)。每一個二元variable表示原先的variable的一種可能值。例如，某一個variable(稱為light)的可能值為“red”、“yellow”和“green”，將light經過one-hot encoding後，將會產生3個二元variables(red、yellow和green)。如果某一個observation在light上的值是“red”，經過one-hot encoding後，這個observation在red上的值為1，yellow和green則都是0。</p></li>
 </ol>
 <p>分析<code>release_date</code>，因為其資料型態是<code>Date</code>，所以載入日期時間處理套件</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)</code></pre></div>
 <p>觀察<code>release_date</code>的分布情形</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(movies<span class="op">$</span>release_date)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(movies<span class="op">$</span>release_date)</code></pre></div>
 <pre><code>##         Min.      1st Qu.       Median         Mean      3rd Qu. 
 ## &quot;1927-01-10&quot; &quot;1999-07-14&quot; &quot;2006-03-06&quot; &quot;2003-05-31&quot; &quot;2011-05-14&quot; 
 ##         Max. 
 ## &quot;2016-09-09&quot;</code></pre>
 <p>從1927年到2016年，最早期的電影數較少</p>
 <p>查看每年的上映電影數</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">release_year=</span><span class="kw">year</span>(release_date)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(release_year) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
@@ -623,14 +607,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;放映年份&quot;</span>, <span class="dt">y=</span><span class="st">&quot;電影數量&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey70&quot;</span>),
-        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</code></pre>
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>以放映年份取代放映日期，並分為1990年前、1991-2000年、2001-2010年與2011年後等四個區間，便於之後的分析</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">release_year=</span><span class="kw">year</span>(release_date)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">release_year=</span><span class="kw">cut</span>(release_year, <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">1900</span>, <span class="dv">1990</span>, <span class="dv">2000</span>, <span class="dv">2010</span>, <span class="dv">2020</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;before1990&quot;</span>, <span class="st">&quot;between1991_2000&quot;</span>, <span class="st">&quot;between2001_2010&quot;</span>, <span class="st">&quot;after2011&quot;</span>)))</code></pre>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">release_year=</span><span class="kw">cut</span>(release_year, <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">1900</span>, <span class="dv">1990</span>, <span class="dv">2000</span>, <span class="dv">2010</span>, <span class="dv">2020</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;before1990&quot;</span>, <span class="st">&quot;between1991_2000&quot;</span>, <span class="st">&quot;between2001_2010&quot;</span>, <span class="st">&quot;after2011&quot;</span>)))</code></pre></div>
 <p>檢視各類別內的資料數量</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(release_year) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio=</span>count<span class="op">/</span><span class="kw">sum</span>(count)) <span class="op">%&gt;%</span>
@@ -639,27 +623,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;出品年代&quot;</span>, <span class="dt">y=</span><span class="st">&quot;電影數量比率&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
         <span class="dt">axis.line=</span><span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>),
-        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>))</code></pre>
+        <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>),
+        <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">30</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>將release_year改為one-hot encoding的形式</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies_year &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_year &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(id, release_year) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value=</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key=</span>release_year, <span class="dt">value=</span>value, <span class="dt">fill=</span><span class="dv">0</span>)</code></pre>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key=</span>release_year, <span class="dt">value=</span>value, <span class="dt">fill=</span><span class="dv">0</span>)</code></pre></div>
 <p>合併兩個data frame，捨棄<code>release_date</code>和<code>release_year</code>兩個variables</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">left_join</span>(movies_year) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>release_date, <span class="op">-</span>release_year)</code></pre>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>release_date, <span class="op">-</span>release_year)</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
+<p>移除<code>movies_year</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(movies_year)</code></pre></div>
 <hr />
 <p><strong>處理簡單字串類型的variables</strong></p>
 <p>簡單字串資料類型與複雜資料的差別是前者的資料格式較單純，簡單字串資料類型只有一個variable：<code>original_language</code>。</p>
 <p>分析<code>original_language</code></p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(original_language) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">proportion=</span>count<span class="op">/</span><span class="kw">sum</span>(count)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(proportion))</code></pre>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(proportion))</code></pre></div>
 <pre><code>## # A tibble: 24 x 3
 ##    original_language count proportion
 ##    &lt;chr&gt;             &lt;int&gt;      &lt;dbl&gt;
@@ -675,38 +662,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 da                    3    0.00111
 ## # ... with 14 more rows</code></pre>
 <p>可以發現雖然<code>original_language</code>中有許多可能的值，也就是收錄許多語言的電影，但絕大部分是英語片(96.64%)，因此捨棄這個variable</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>original_language)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>original_language)</code></pre></div>
 <p>分析<code>production_companies</code></p>
-<pre class="sourceCode r"><code class="sourceCode r">movies<span class="op">$</span>pc_data &lt;-<span class="st"> </span><span class="kw">sapply</span>(movies<span class="op">$</span>production_companies, valueExtract)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies<span class="op">$</span>pc_data &lt;-<span class="st"> </span><span class="kw">sapply</span>(movies<span class="op">$</span>production_companies, valueExtract)</code></pre></div>
 <p>將電影的每一個<code>production_companies</code>展開</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies_pc &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_pc &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(id, pc_data) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pc_data=</span><span class="kw">strsplit</span>(pc_data, <span class="dt">split=</span><span class="st">&quot;%&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">unnest</span>(pc_data) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value=</span><span class="dv">1</span>)</code></pre>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value=</span><span class="dv">1</span>)</code></pre></div>
 <p>統計電影製作公司與他們製作的電影數 (按電影數排名)</p>
-<pre class="sourceCode r"><code class="sourceCode r">production_companies &lt;-<span class="st"> </span>movies_pc <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">production_companies &lt;-<span class="st"> </span>movies_pc <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(pc_data) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(count))</code></pre>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(count))</code></pre></div>
 <p>製作電影數前100的電影製作公司</p>
-<pre class="sourceCode r"><code class="sourceCode r">top100pc &lt;-<span class="st"> </span>production_companies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">top100pc &lt;-<span class="st"> </span>production_companies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">pull</span>(pc_data)</code></pre>
+<span class="st">  </span><span class="kw">pull</span>(pc_data)</code></pre></div>
 <p>電影的製作公司包含幾家前100製作公司</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies_pc &lt;-<span class="st"> </span>movies_pc <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies_pc &lt;-<span class="st"> </span>movies_pc <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value=</span><span class="kw">ifelse</span>(pc_data <span class="op">%in%</span><span class="st"> </span>top100pc, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(id) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">top_pc_number=</span><span class="kw">sum</span>(value))</code></pre>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">top_pc_number=</span><span class="kw">sum</span>(value))</code></pre></div>
 <p>將電影的製作公司包含前100製作公司的數量與movies合併，捨棄production_companies和pc_data兩個variables，並且將top_pc_number的<code>NA</code>值改為0。</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">left_join</span>(movies_pc) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>production_companies, <span class="op">-</span>pc_data) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">top_pc_number=</span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(top_pc_number), <span class="dv">0</span>, top_pc_number))</code></pre>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">top_pc_number=</span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(top_pc_number), <span class="dv">0</span>, top_pc_number))</code></pre></div>
 <pre><code>## Joining, by = &quot;id&quot;</code></pre>
 <p>繪製電影的知名製作公司數量分布情形</p>
-<pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">top_pc_number=</span><span class="kw">factor</span>(top_pc_number)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(top_pc_number) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
@@ -716,11 +703,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;包含知名製作公司數&quot;</span>, <span class="dt">y=</span><span class="st">&quot;電影數量比率&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.grid.major.y =</span> <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey90&quot;</span>),
-        <span class="dt">axis.line =</span>  <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+        <span class="dt">axis.line =</span>  <span class="kw">element_line</span>(<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>))</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>移除<code>movies_pc</code>、<code>production_companies</code>和<code>top100pc</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(movies_pc)
+<span class="kw">remove</span>(production_companies)
+<span class="kw">remove</span>(top100pc)</code></pre></div>
 <hr />
 <p>在進行資料探勘前，最後再檢視一次movies</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(movies)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(movies)</code></pre></div>
 <pre><code>##      budget                id           popularity     
 ##  Min.   :    10000   Min.   :     5   Min.   :  1.552  
 ##  1st Qu.: 14000000   1st Qu.:  2988   1st Qu.: 14.982  
@@ -778,17 +769,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3rd Qu.:0.00000   3rd Qu.:2.000  
 ##  Max.   :1.00000   Max.   :8.000</code></pre>
 <p>捨棄variable <code>id</code></p>
-<pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>id)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span>movies <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>id)</code></pre></div>
 <p>除了<code>vote_average_p</code>為目標變數外，其餘的變數都為預測變數。</p>
 </div>
-<div id="section-92" class="section level3">
-<h3><span class="header-section-number">7.2.4</span> 轉換資料為有效描述和預測的特徵</h3>
+<div id="section-8.3.2" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> 轉換資料為有效描述和預測的特徵</h3>
 <p>載入套件</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret)</code></pre></div>
 <p><strong>建立訓練資料與測試資料</strong></p>
 <p>將TMDB電影資料分為訓練集與測試集，訓練資料用來訓練各種分類器，測試資料比較各種分類器的成效。</p>
-<pre class="sourceCode r"><code class="sourceCode r">sd &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">second</span>(<span class="kw">Sys.time</span>())<span class="op">*</span><span class="dv">100</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Generate random seed</span>
+sd &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">second</span>(<span class="kw">Sys.time</span>())<span class="op">*</span><span class="dv">100</span>)
 
 <span class="kw">set.seed</span>(sd)
 
@@ -799,164 +791,232 @@ trainRowNumbers &lt;-<span class="st"> </span><span class="kw">createDataPartiti
 train_set &lt;-<span class="st"> </span>movies[trainRowNumbers,]
 
 <span class="co"># Step 3: Create the test dataset</span>
-test_set &lt;-<span class="st"> </span>movies[<span class="op">-</span>trainRowNumbers,]</code></pre>
+test_set &lt;-<span class="st"> </span>movies[<span class="op">-</span>trainRowNumbers,]</code></pre></div>
 <p>調整每個variable的值，前四個variables(budget, popularity, revenue, run_time)根據平均數和標準差進行調整，最後一個variable(top_pc_number)調整為0與1之間</p>
-<pre class="sourceCode r"><code class="sourceCode r">preprocessParams_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">preProcess</span>(train_set[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">method=</span><span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 以訓練資料集，產生調整參數 (平均數和標準差)</span>
+preprocessParams_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">preProcess</span>(train_set[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">method=</span><span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>))
+<span class="co"># 調整訓練資料集</span>
 train_set[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">predict</span>(preprocessParams_<span class="dv">1</span>, train_set[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
+<span class="co"># 調整測試資料集</span>
 test_set[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">predict</span>(preprocessParams_<span class="dv">1</span>, test_set[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
 
+<span class="co"># 以訓練資料集，產生調整參數 (range:全距，調整為0~1之間的數值)</span>
 preprocessParams_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">preProcess</span>(train_set[,<span class="kw">ncol</span>(train_set)], <span class="dt">method=</span><span class="kw">c</span>(<span class="st">&quot;range&quot;</span>))
+<span class="co"># 調整訓練資料集</span>
 train_set[,<span class="kw">ncol</span>(train_set)] &lt;-<span class="st"> </span><span class="kw">predict</span>(preprocessParams_<span class="dv">2</span>, train_set[,<span class="kw">ncol</span>(train_set)])
-test_set[,<span class="kw">ncol</span>(train_set)] &lt;-<span class="st"> </span><span class="kw">predict</span>(preprocessParams_<span class="dv">2</span>, test_set[,<span class="kw">ncol</span>(train_set)])</code></pre>
+<span class="co"># 調整測試資料集</span>
+test_set[,<span class="kw">ncol</span>(train_set)] &lt;-<span class="st"> </span><span class="kw">predict</span>(preprocessParams_<span class="dv">2</span>, test_set[,<span class="kw">ncol</span>(train_set)])</code></pre></div>
+<p>移除調整參數</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(preprocessParams_<span class="dv">1</span>)
+<span class="kw">remove</span>(preprocessParams_<span class="dv">2</span>)</code></pre></div>
+<p>移除random seed和訓練集編號</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(sd)
+<span class="kw">remove</span>(trainRowNumbers)</code></pre></div>
+</div>
+<div id="data-frame" class="section level3">
+<h3><span class="header-section-number">8.3.3</span> 建立一個data frame用來比較各種分類演算法</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classifier_comp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">method=</span><span class="kw">character</span>(<span class="dv">0</span>),
+                              <span class="dt">result=</span><span class="kw">double</span>(<span class="dv">0</span>))</code></pre></div>
 </div>
 </div>
 <div id="k-nearest-neightbors" class="section level2">
-<h2><span class="header-section-number">7.3</span> 進行K-Nearest Neightbors分類</h2>
-<p>K-Nearest Neightbors分類演算法(以下簡稱KNN)，是最直覺的分類演算法。有別於其他監督式機器學習的分類演算法，KNN不需要先利用已經知道類別的資料訓練預測模型，其主要的概念是將要預測的資料與已經知道類別的資料進行比對，找出最相似的K個資料(因此稱為K-Nearest Neighbors)，然後對這K個資料統計每個類別的數量，以多數決的方式決定要預測的資料類別。</p>
+<h2><span class="header-section-number">8.4</span> 進行K-Nearest Neightbors分類</h2>
+<p>K-Nearest Neightbors分類演算法(以下簡稱KNN)，是最直覺的分類演算法。有別於其他監督式機器學習的分類演算法，KNN不需要先利用已經知道類別的資料訓練預測模型，其主要的概念是將要預測的資料與已經知道類別的資料進行比對，找出最相似的K個候選資料(因此稱為K-Nearest Neighbors)，然後對這K個資料統計每個類別的數量，以多數決的方式決定要預測的資料類別。</p>
 <p>KNN雖然概念簡單，但還有不錯的結果。因此，常常用來作為其他分類演算法的比較基準。</p>
 <p>FNN套件提供KNN分類演算法。安裝後，載入套件</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FNN)</code></pre>
-<p>以<strong>交互驗證(cross validation, cv)</strong>的方式，找出K為x時，KNN的準確度。cv是將資料分成多個部分，每一次取出一個部分當做測試資料，以其他部分作為訓練資料，建立預測模型，預測測試資料的結果，估算這個模型的準確度。然後，再取出未曾測試的另一部份資料做為測試資料，以其他部分做為訓練資料，估算準確度。反覆多次，最後將所有獲得的準確度進行平均，做為準確度的估計值。</p>
-<pre class="sourceCode r"><code class="sourceCode r">test_k &lt;-<span class="st"> </span><span class="cf">function</span> (x) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FNN)</code></pre></div>
+<p>首先找出在訓練資料集中最佳的K值，也就是以多少個候選資料來預測會有較大的準確度。此處以<strong>交互驗證(cross validation, cv)</strong>的方式，找出K為x時，KNN的準確度，然後選取準確度最大的x，做為K。cv是將資料分成多個部分，每一次取出一個部分當做測試資料，以其他部分作為訓練資料，建立預測模型，預測測試資料的結果，估算這個模型的準確度。然後，再取出未曾測試的另一部份資料做為測試資料，以其他部分做為訓練資料，估算準確度。反覆多次，最後將所有獲得的準確度進行平均，做為準確度的估計值。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_k &lt;-<span class="st"> </span><span class="cf">function</span> (x) {
   train_res &lt;-<span class="st"> </span><span class="kw">knn.cv</span>(<span class="kw">subset</span>(train_set, <span class="dt">select=</span><span class="op">-</span>vote_average_p),
                       <span class="dt">cl=</span>train_set<span class="op">$</span>vote_average_p, <span class="dt">k =</span> x)
   acc &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(train_res, train_set<span class="op">$</span>vote_average_p)
   <span class="kw">return</span>(acc<span class="op">$</span>overall[<span class="dv">1</span>])
-}</code></pre>
+}</code></pre></div>
 <p>從K=1到20分別測試，找出最大準確度的K值。</p>
-<pre class="sourceCode r"><code class="sourceCode r">accu &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, test_k)</code></pre>
-<p>計算測試資料的準確度</p>
-<pre class="sourceCode r"><code class="sourceCode r">knn_res &lt;-<span class="st"> </span><span class="kw">knn</span>(<span class="kw">subset</span>(train_set, <span class="dt">select=</span><span class="op">-</span>vote_average_p),
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accu &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, test_k)</code></pre></div>
+<p>計算測試資料集的準確度</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knn_res &lt;-<span class="st"> </span><span class="kw">knn</span>(<span class="kw">subset</span>(train_set, <span class="dt">select=</span><span class="op">-</span>vote_average_p),
                <span class="kw">subset</span>(test_set, <span class="dt">select=</span><span class="op">-</span>vote_average_p),
                <span class="dt">cl=</span>train_set<span class="op">$</span>vote_average_p, <span class="dt">k=</span><span class="kw">which.max</span>(accu))
-<span class="kw">confusionMatrix</span>(knn_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]</code></pre>
-<pre><code>##  Accuracy 
-## 0.5611111</code></pre>
+acc &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(knn_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]
+
+classifier_comp &lt;-<span class="st"> </span>classifier_comp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_row</span>(<span class="dt">method=</span><span class="st">&quot;KNN&quot;</span>, <span class="dt">result=</span><span class="kw">round</span>(acc<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>))</code></pre></div>
+<p>移除KNN計算時的暫存變數</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(accu)
+<span class="kw">remove</span>(knn_res)</code></pre></div>
 </div>
 <div id="naive-bayes" class="section level2">
-<h2><span class="header-section-number">7.4</span> 進行Naive Bayes演算法分類</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(naivebayes)</code></pre>
-<pre><code>## Warning: package &#39;naivebayes&#39; was built under R version 3.6.1</code></pre>
-<pre><code>## naivebayes 0.9.6 loaded</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">NB_model &lt;-<span class="st"> </span><span class="kw">naive_bayes</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., 
-                               <span class="dt">usekernel=</span><span class="ot">TRUE</span>, <span class="dt">data=</span>train_set)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">test_set1 &lt;-<span class="st"> </span>test_set <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>vote_average_p)
+<h2><span class="header-section-number">8.5</span> 進行Naive Bayes演算法分類</h2>
+<p>Naive Bayes分類演算法(簡稱NB)是利用Bayes Theorem(貝氏定理)，根據資料特徵計算該資料屬於各類別的機率，以機率最大者做為預測之結果。在這個方法中，首先以訓練資料集建立預測模型(也就是各特徵對於分類的重要性)，然後針對測試資料集的每一筆資料，根據其特徵進行預測。這個方法相當依賴資料特徵的好壞。</p>
+<p>安裝NB分類法的套件<code>naivebayes</code>之後，載入該套件</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(naivebayes)</code></pre></div>
+<p>因為資料特徵中有許多重覆的或是不重要的資訊，因此利用利用caret套件的pca (principal component analysis)，先將原先的資料特徵轉換成為比較小維度的特徵</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">preprocessParams &lt;-<span class="st"> </span>train_set <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>vote_average_p) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.matrix</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">preProcess</span>(<span class="dt">method =</span> <span class="st">&quot;pca&quot;</span>, <span class="dt">thresh =</span> <span class="fl">0.8</span>)</code></pre></div>
+<p>調整訓練資料集的資料特徵</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 調整訓練資料集</span>
+train_fea &lt;-<span class="st"> </span>train_set <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>vote_average_p) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.matrix</span>()
+
+train_set1 &lt;-<span class="st"> </span><span class="kw">predict</span>(preprocessParams, train_fea) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vote_average_p=</span>train_set<span class="op">$</span>vote_average_p)</code></pre></div>
+<p>以訓練資料集訓練預測模型</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NB_model &lt;-<span class="st"> </span><span class="kw">naive_bayes</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., 
+                               <span class="dt">usekernel=</span><span class="ot">TRUE</span>, <span class="dt">data=</span>train_set1)</code></pre></div>
+<p>進行測試</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 調整測試資料集</span>
+test_fea &lt;-<span class="st"> </span>test_set <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>vote_average_p) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.matrix</span>()
+
+test_set1 &lt;-<span class="st"> </span><span class="kw">predict</span>(preprocessParams, test_fea) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.data.frame</span>()
 
 NB_res &lt;-<span class="st"> </span><span class="kw">predict</span>(NB_model, <span class="dt">newdata=</span>test_set1, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)
 
+acc &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(NB_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]
 
-<span class="kw">confusionMatrix</span>(NB_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]</code></pre>
-<pre><code>##  Accuracy 
-## 0.4425926</code></pre>
+classifier_comp &lt;-<span class="st"> </span>classifier_comp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_row</span>(<span class="dt">method=</span><span class="st">&quot;NB&quot;</span>, <span class="dt">result=</span><span class="kw">round</span>(acc<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>))</code></pre></div>
+<p>移除NB計算時的暫存變數</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(preprocessParams)
+<span class="kw">remove</span>(train_fea)
+<span class="kw">remove</span>(train_set1)
+<span class="kw">remove</span>(NB_model)
+<span class="kw">remove</span>(test_fea)
+<span class="kw">remove</span>(test_set1)
+<span class="kw">remove</span>(NB_res)</code></pre></div>
 </div>
-<div id="section-93" class="section level2">
-<h2><span class="header-section-number">7.5</span> 進行支持向量機分類</h2>
+<div id="section-8.6" class="section level2">
+<h2><span class="header-section-number">8.6</span> 進行支持向量機分類</h2>
 <p>支持向量機(Support Vector Machine, SVM)試圖從訓練資料中找到一個超平面(hyperplane)，將訓練資料區分成兩個具有最大差異的類別。以下圖為例，可以發現右圖上的超平面具有最好的分類結果，因為該超平面距離兩個類別上所有的資料是最大的情形。用來找到這個超平面的資料點上垂直於超平面的向量便稱為支持向量(Support Vectors)，例如在右圖上以實心表現的資料點。當新資料需要進行分類時，便根據超平面判斷新資料的類別。</p>
-<p><img src="image/svm.png" /></p>
+<div class="figure">
+<img src="image/svm.png" />
+
+</div>
 <p>由於SVM原本的應用是針對兩個類別的問題，在將SVM應用到多個類別時，需要採用One-against-One的策略，也就是對每兩個類別分別建立一個SVM模型，所以若是有M個類別的話，便須建立<span class="math inline">\(\frac{M(M-1)}{2}\)</span>個SVM模型。當新資料輸入後，便以這立<span class="math inline">\(\frac{M(M-1)}{2}\)</span>個SVM模型進行預測，以多數決決定預測的類別。</p>
 <p>e1071套件中提供SVM分類演算法。先安裝後，再載入該套件。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)</code></pre>
-<pre><code>## Warning: package &#39;e1071&#39; was built under R version 3.6.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(e1071)</code></pre></div>
 <p>利用訓練資料進行分類模型訓練</p>
-<pre class="sourceCode r"><code class="sourceCode r">SVM_model &lt;-<span class="st"> </span><span class="kw">svm</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., 
-                 <span class="dt">data=</span>train_set)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SVM_model &lt;-<span class="st"> </span><span class="kw">svm</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., 
+                 <span class="dt">data=</span>train_set)</code></pre></div>
 <p>預測測試資料的類別，計算其準確度</p>
-<pre class="sourceCode r"><code class="sourceCode r">SVM_res &lt;-<span class="st"> </span><span class="kw">predict</span>(SVM_model, <span class="dt">newdata=</span>test_set, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SVM_res &lt;-<span class="st"> </span><span class="kw">predict</span>(SVM_model, <span class="dt">newdata=</span>test_set, <span class="dt">type=</span><span class="st">&quot;class&quot;</span>)
 
-<span class="kw">confusionMatrix</span>(SVM_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]</code></pre>
-<pre><code>##  Accuracy 
-## 0.5648148</code></pre>
+acc &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(SVM_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]
+
+classifier_comp &lt;-<span class="st"> </span>classifier_comp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_row</span>(<span class="dt">method=</span><span class="st">&quot;SVM&quot;</span>, <span class="dt">result=</span><span class="kw">round</span>(acc<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>))</code></pre></div>
+<p>移SVM計算時的暫存變數</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(SVM_model)
+<span class="kw">remove</span>(SVM_res)</code></pre></div>
 </div>
-<div id="section-94" class="section level2">
-<h2><span class="header-section-number">7.6</span> 進行決策樹分類</h2>
+<div id="section-8.7" class="section level2">
+<h2><span class="header-section-number">8.7</span> 進行決策樹分類</h2>
 <p>機器學習中，決策樹是一種樹型結構的分類方法，在樹型結構的第一層分支上對全體的資料依照某一個條件進行分類，分類後盡量使同一群內的資料具有相同的輸出資訊，也就是提高輸出資訊的純度。然後在接下來的第二層分支，再分別對這兩群資料進行分類，使得分類後的結果純度再提高。反覆進行上述的分類過程，當不能再進行分類或一個單獨的類可以被應用於某一分支時，決策樹的建置就完成了。</p>
-<p><img src="image/classification_tree.png" /></p>
+<p>預測時便從決策樹的最上層，根據節點上的條件判斷其所屬分支，然後由上而下針對每一個條件進行判斷，選擇分支，一直到最下層的節點為止，此時便以該節點上數量最多的類別做為該資料的預設結果。</p>
+<div class="figure">
+<img src="image/classification_tree.png" />
+
+</div>
 <p>套件<code>rpaprt</code>提供決策樹應用。安裝<code>rpaprt</code>套件後，載入這個套件。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)</code></pre></div>
 <p>輸入train_set的資料訓練分類樹</p>
-<pre class="sourceCode r"><code class="sourceCode r">rpart_model &lt;-<span class="st"> </span><span class="kw">rpart</span>(vote_average_p <span class="op">~</span><span class="st"> </span>.,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rpart_model &lt;-<span class="st"> </span><span class="kw">rpart</span>(vote_average_p <span class="op">~</span><span class="st"> </span>.,
                      <span class="dt">data =</span> train_set, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>,
-                     <span class="dt">minsplit=</span><span class="dv">30</span>, <span class="dt">cp=</span><span class="fl">0.00001</span>, <span class="dt">xval=</span><span class="dv">5</span>)</code></pre>
+                     <span class="dt">minsplit=</span><span class="dv">30</span>, <span class="dt">cp=</span><span class="fl">0.00001</span>, <span class="dt">xval=</span><span class="dv">5</span>)</code></pre></div>
 <p>顯示訓練的結果</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">printcp</span>(rpart_model)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">printcp</span>(rpart_model)</code></pre></div>
 <pre><code>## 
 ## Classification tree:
 ## rpart(formula = vote_average_p ~ ., data = train_set, method = &quot;class&quot;, 
 ##     minsplit = 30, cp = 1e-05, xval = 5)
 ## 
 ## Variables actually used in tree construction:
-##  [1] after2011        before1990       between1991_2000 between2001_2010
-##  [5] budget           g_Action         g_Animation      g_Comedy        
-##  [9] g_Drama          g_Horror         g_Thriller       popularity      
-## [13] revenue          runtime          top_pc_number   
+##  [1] after2011         before1990        between1991_2000 
+##  [4] budget            g_Action          g_Animation      
+##  [7] g_Comedy          g_Crime           g_Drama          
+## [10] g_Family          g_Horror          g_Science_Fiction
+## [13] g_Thriller        popularity        revenue          
+## [16] runtime           top_pc_number    
 ## 
 ## Root node error: 1261/2166 = 0.58218
 ## 
 ## n= 2166 
 ## 
 ##            CP nsplit rel error  xerror     xstd
-## 1  0.11102300      0   1.00000 1.00000 0.018203
-## 2  0.02339413      1   0.88898 0.88660 0.018444
-## 3  0.02299762      3   0.84219 0.86677 0.018453
-## 4  0.01467090      4   0.81919 0.86677 0.018453
-## 5  0.01348136      6   0.78985 0.85250 0.018453
-## 6  0.01268834      7   0.77637 0.83188 0.018445
-## 7  0.01189532      8   0.76368 0.81681 0.018432
-## 8  0.01110230      9   0.75178 0.81126 0.018425
-## 9  0.00713719     12   0.71848 0.80174 0.018413
-## 10 0.00634417     15   0.69707 0.77082 0.018357
-## 11 0.00555115     17   0.68438 0.75734 0.018324
-## 12 0.00475813     20   0.66772 0.73989 0.018276
-## 13 0.00396511     26   0.63918 0.74782 0.018299
-## 14 0.00277557     29   0.62728 0.73830 0.018271
-## 15 0.00264340     31   0.62173 0.74068 0.018278
-## 16 0.00257732     34   0.61380 0.73910 0.018273
-## 17 0.00237906     38   0.60349 0.74227 0.018283
-## 18 0.00198255     54   0.56305 0.74623 0.018294
-## 19 0.00178430     56   0.55908 0.74227 0.018283
-## 20 0.00158604     60   0.55194 0.74703 0.018297
-## 21 0.00132170     64   0.54560 0.75020 0.018305
-## 22 0.00118953     67   0.54163 0.75020 0.018305
-## 23 0.00079302     69   0.53925 0.76051 0.018332
-## 24 0.00039651     73   0.53608 0.76209 0.018336
-## 25 0.00001000     75   0.53529 0.76606 0.018346</code></pre>
-<p>訓練完成之後，決策樹如果太大，會有過度擬合(overfitting)的問題，也就是太像訓練資料。對於沒有參與訓練的資料，表現可能不理想。所以分類樹通常會經過裁減(pruning)，選擇預測能力較好的部分，也就是上面xerror最小的cp值。</p>
+## 1  0.11895321      0   1.00000 1.00000 0.018203
+## 2  0.02141158      1   0.88105 0.88105 0.018448
+## 3  0.01863600      2   0.85964 0.88184 0.018447
+## 4  0.01348136      4   0.82236 0.87312 0.018451
+## 5  0.01189532      5   0.80888 0.86201 0.018454
+## 6  0.00872324      7   0.78509 0.84060 0.018450
+## 7  0.00832672     10   0.75892 0.81919 0.018434
+## 8  0.00793021     12   0.74227 0.81919 0.018434
+## 9  0.00713719     13   0.73434 0.81681 0.018432
+## 10 0.00674068     14   0.72720 0.80254 0.018414
+## 11 0.00634417     19   0.68993 0.80254 0.018414
+## 12 0.00515464     21   0.67724 0.79857 0.018408
+## 13 0.00475813     23   0.66693 0.77954 0.018375
+## 14 0.00396511     26   0.65266 0.77637 0.018368
+## 15 0.00317209     33   0.61856 0.77478 0.018365
+## 16 0.00277557     38   0.60270 0.76606 0.018346
+## 17 0.00237906     44   0.58604 0.76447 0.018342
+## 18 0.00198255     47   0.57891 0.76447 0.018342
+## 19 0.00158604     53   0.56701 0.76368 0.018340
+## 20 0.00132170     59   0.55591 0.75971 0.018330
+## 21 0.00105736     62   0.55194 0.76051 0.018332
+## 22 0.00079302     65   0.54877 0.77557 0.018367
+## 23 0.00052868     74   0.54163 0.77557 0.018367
+## 24 0.00001000     83   0.53688 0.78033 0.018376</code></pre>
+<p>訓練完成之後，決策樹如果太大，會有過度擬合(overfitting)的問題，也就是太像訓練資料。對於沒有參與訓練的資料，表現可能不理想。所以分類樹通常會經過裁減(pruning)，選擇預測能力較好的部分，也就是上面xerror最小的CP值。</p>
 <p>xerror最小值</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>])</code></pre>
-<pre><code>## [1] 0.7383029</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>])</code></pre></div>
+<pre><code>## [1] 0.7597145</code></pre>
 <p>xerror最小的層級</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>])</code></pre>
-<pre><code>## 14 
-## 14</code></pre>
-<p>xerror最小的cp值</p>
-<pre class="sourceCode r"><code class="sourceCode r">rpart_model<span class="op">$</span>cptable[<span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>]</code></pre>
-<pre><code>## [1] 0.002775575</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>])</code></pre></div>
+<pre><code>## 20 
+## 20</code></pre>
+<p>xerror最小的CP值</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rpart_model<span class="op">$</span>cptable[<span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>]</code></pre></div>
+<pre><code>## [1] 0.001321702</code></pre>
 <p>以xerror最小的cp值進行裁減</p>
-<pre class="sourceCode r"><code class="sourceCode r">pruned.tree &lt;-<span class="st"> </span><span class="kw">prune</span>(rpart_model,
-                     <span class="dt">cp =</span> rpart_model<span class="op">$</span>cptable[<span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>])</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pruned.tree &lt;-<span class="st"> </span><span class="kw">prune</span>(rpart_model,
+                     <span class="dt">cp =</span> rpart_model<span class="op">$</span>cptable[<span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>])</code></pre></div>
 <p>以訓練好的分類模型進行測試資料(test_set)分類的成效</p>
-<pre class="sourceCode r"><code class="sourceCode r">test_res &lt;-<span class="st"> </span><span class="kw">predict</span>(pruned.tree, test_set, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_res &lt;-<span class="st"> </span><span class="kw">predict</span>(pruned.tree, test_set, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
 
-<span class="kw">confusionMatrix</span>(test_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]</code></pre>
-<pre><code>##  Accuracy 
-## 0.5611111</code></pre>
+acc &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(test_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]
+
+classifier_comp &lt;-<span class="st"> </span>classifier_comp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_row</span>(<span class="dt">method=</span><span class="st">&quot;Decision Tree&quot;</span>, <span class="dt">result=</span><span class="kw">round</span>(acc<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>))</code></pre></div>
 <p>為了觀察決策樹上所使用的分類條件，以下將畫出決策樹各層的條件。請安裝rpart.plot套件，並載入該套件</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart.plot)</code></pre>
-<pre><code>## Warning: package &#39;rpart.plot&#39; was built under R version 3.6.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart.plot)</code></pre></div>
 <p>因為產生的決策樹相當龐大，所以將畫出的決策樹輸出為尺寸相當大的png檔，便於觀察。</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">png</span>(<span class="st">&quot;rpart_tree.png&quot;</span>, <span class="dt">width=</span><span class="dv">2048</span>, <span class="dt">height=</span><span class="dv">1536</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">png</span>(<span class="st">&quot;rpart_tree.png&quot;</span>, <span class="dt">width=</span><span class="dv">2048</span>, <span class="dt">height=</span><span class="dv">1536</span>)
 <span class="kw">rpart.plot</span>(pruned.tree, <span class="dt">box.palette=</span><span class="st">&quot;RdBu&quot;</span>, <span class="dt">shadow.col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">nn=</span><span class="ot">TRUE</span>)
-<span class="kw">dev.off</span>()</code></pre>
+<span class="kw">dev.off</span>()</code></pre></div>
 <pre><code>## png 
 ##   2</code></pre>
+<p>移決策樹計算時的暫存變數</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(rpart_model)
+<span class="kw">remove</span>(test_res)
+<span class="kw">remove</span>(pruned.tree)</code></pre></div>
 </div>
-<div id="section-95" class="section level2">
-<h2><span class="header-section-number">7.7</span> 進行隨機森林監督式學習</h2>
+<div id="section-8.8" class="section level2">
+<h2><span class="header-section-number">8.8</span> 進行隨機森林分類</h2>
+<p>隨機森林(random forest)是一個集成式學習(ensemble learning)的分類方法，也就是是將多個分類結果整合起來的方法。隨機森林的得名來自於它是由多個決策樹的分類結果整合起來的方法，並且每一個決策樹的訓練資料集是從原本的訓練資料集<strong>隨機</strong>選取若干observations和variables進行訓練。進行預測時，將輸入的資料分別輸入所有的決策樹，產生每一個決策樹的預測結果，然後以多數決的方式，選取最有可能的類別。</p>
 <p>載入隨機森林套件</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randomForest)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">rf_model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_set)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">importance &lt;-<span class="st"> </span><span class="kw">importance</span>(rf_model)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randomForest)</code></pre></div>
+<p>利用訓練資料進行分類模型訓練</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rf_model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_set)</code></pre></div>
+<p>查看每個variable在運用隨機森林進行分類的重要性</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">importance &lt;-<span class="st"> </span><span class="kw">importance</span>(rf_model)
 <span class="kw">data.frame</span>(<span class="dt">variable=</span><span class="kw">dimnames</span>(importance)[[<span class="dv">1</span>]],
            <span class="dt">MeanDecreaseGini=</span>importance,
            <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
@@ -964,39 +1024,78 @@ NB_res &lt;-<span class="st"> </span><span class="kw">predict</span>(NB_model, <
 <span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(variable, MeanDecreaseGini), <span class="dt">y=</span>MeanDecreaseGini)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">rf_res &lt;-<span class="st"> </span><span class="kw">predict</span>(rf_model, test_set)
+<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<p>預測測試資料的類別，計算其準確度</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rf_res &lt;-<span class="st"> </span><span class="kw">predict</span>(rf_model, test_set)
 
-<span class="kw">confusionMatrix</span>(rf_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]</code></pre>
-<pre><code>##  Accuracy 
-## 0.6111111</code></pre>
+acc &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(rf_res, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]
+
+classifier_comp &lt;-<span class="st"> </span>classifier_comp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_row</span>(<span class="dt">method=</span><span class="st">&quot;RF&quot;</span>, <span class="dt">result=</span><span class="kw">round</span>(acc<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>))</code></pre></div>
+<p>移隨機森林計算時的暫存變數</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(rf_model)
+<span class="kw">remove</span>(rf_res)
+<span class="kw">remove</span>(importance)</code></pre></div>
 </div>
-<div id="section-96" class="section level2">
-<h2><span class="header-section-number">7.8</span> 隨機梯度增強</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gbm)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">gbm_model &lt;-<span class="st"> </span><span class="kw">gbm</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_set,
+<div id="section-8.9" class="section level2">
+<h2><span class="header-section-number">8.9</span> 進行梯度提升機分類</h2>
+<p>梯度提升機(Gradient Boosting Machine)是另一種集成式的機器學習技術，透過多個弱預測模型(例如決策樹)的集成來產生。其概念為在訓練新的預測模型時，可從先前模型錯誤分類的資料來增強，也就是給予錯誤分類的資料更大的權重，以訓練新的預測模型。然後將所有的分類模型以它們的預測精準度加權，構建集成模型。理論上，可以應用各種分類演算法做為梯度提升機的基礎分類法，一般使用決策樹做為基礎模型，此時稱為梯度提升樹（GBT或GBDT）。</p>
+<p>載入梯度提升樹套件</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gbm)</code></pre></div>
+<p>利用訓練資料進行分類模型訓練</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gbm_model &lt;-<span class="st"> </span><span class="kw">gbm</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_set,
                  <span class="dt">distribution=</span><span class="st">&quot;multinomial&quot;</span>, <span class="dt">n.trees =</span> <span class="dv">1000</span>,
-                 <span class="dt">cv.folds =</span> <span class="dv">10</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">best_iter &lt;-<span class="st"> </span><span class="kw">gbm.perf</span>(gbm_model, <span class="dt">method=</span><span class="st">&quot;cv&quot;</span>)</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">gbm_res &lt;-<span class="st"> </span><span class="kw">predict</span>(gbm_model, test_set, <span class="dt">n.trees=</span>best_iter)
+                 <span class="dt">cv.folds =</span> <span class="dv">10</span>)</code></pre></div>
+<p>最佳的決策樹數量</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">best_iter &lt;-<span class="st"> </span><span class="kw">gbm.perf</span>(gbm_model, <span class="dt">method=</span><span class="st">&quot;cv&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p>預測測試資料的類別，計算其準確度</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gbm_res &lt;-<span class="st"> </span><span class="kw">predict</span>(gbm_model, test_set, <span class="dt">n.trees=</span>best_iter)
 
 gbm_res_labels &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">colnames</span>(gbm_res)[<span class="kw">apply</span>(gbm_res, <span class="dv">1</span>, which.max)])
 
-<span class="kw">confusionMatrix</span>(gbm_res_labels, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]</code></pre>
-<pre><code>##  Accuracy 
-## 0.5962963</code></pre>
-</div>
-<div id="section-97" class="section level2">
-<h2><span class="header-section-number">7.9</span> 類神經網路</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nnet)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">nnet_model &lt;-<span class="st"> </span><span class="kw">nnet</span>(vote_average_p <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_set, <span class="dt">linout =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">30</span>, <span class="dt">decay =</span> <span class="fl">0.001</span>, <span class="dt">maxit =</span> <span class="dv">5000</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">nnet_res &lt;-<span class="st"> </span><span class="kw">predict</span>(nnet_model, test_set, <span class="dt">type =</span> <span class="st">&#39;class&#39;</span>)
+acc &lt;-<span class="st"> </span><span class="kw">confusionMatrix</span>(gbm_res_labels, test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]
 
-<span class="kw">confusionMatrix</span>(<span class="kw">as.factor</span>(nnet_res), test_set<span class="op">$</span>vote_average_p)<span class="op">$</span>overall[<span class="dv">1</span>]</code></pre>
-<pre><code>##  Accuracy 
-## 0.5166667</code></pre>
+classifier_comp &lt;-<span class="st"> </span>classifier_comp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_row</span>(<span class="dt">method=</span><span class="st">&quot;GBM&quot;</span>, <span class="dt">result=</span><span class="kw">round</span>(acc<span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span>))</code></pre></div>
+<p>移隨機森林計算時的暫存變數</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">remove</span>(gbm_model)
+<span class="kw">remove</span>(gbm_res)
+<span class="kw">remove</span>(gbm_res_labels)
+<span class="kw">remove</span>(best_iter)
+<span class="kw">remove</span>(acc)</code></pre></div>
+</div>
+<div id="section-8.10" class="section level2">
+<h2><span class="header-section-number">8.10</span> 比較各分類器的結果</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classifier_comp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(method, result), <span class="dt">y=</span>result, <span class="dt">fill=</span>method)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">70</span>, <span class="dv">10</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;分類演算法&quot;</span>, <span class="dt">y=</span><span class="st">&quot;測試準確率 (%)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,
+        <span class="dt">axis.line =</span> <span class="kw">element_line</span>(<span class="dt">colour=</span><span class="st">&quot;grey50&quot;</span>),
+        <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">60</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+</div>
+<div id="-6" class="section level2 unnumbered">
+<h2>小結</h2>
+<ul>
+<li><p>本節探討各種分類演算法。分類演算法是根據已知分類結果的資料特徵訓練一個預測模型，用來預測其它資料的分類結果。</p></li>
+<li><p>為了達到上述目的，研究人員發展出許多集群分析演算法，例如：本次課程中使用的K Nearest Neighbors、Naive Bayes、Support Vector Machine、Decision Tree、Random Forest和Gradient Boosting Machine等分類演算法以及其它分類演算法，如著名的Neural Network(神經網絡)。不同的分類演算法適合應用在不同的問題，同學可以熟悉各種分類演算法，以便應用在不同的問題上。</p></li>
+<li><p>和上次課程的分類演算法類似，影響分類結果的因素，除了採用的演算法之外，還包括資料的特徵。本次課程中以one-hot encoding, z-score normalization, 以及 min-max scaling三種方法將資料的各種特徵對應到[0, 1]之間的數值，以便彼此的誤差不會相差過大。</p></li>
+<li><p>因為訓練資料集與測試資料集為隨機指派，所以每次產生的結果可能會有少部分差異，但大體的趨勢是可以觀察到的。同學可以多試著執行幾次看看會有什麼不同，也可以試著想想，利用k次交叉驗證(k-fold cross validation)獲得較精確的結果。</p></li>
+</ul>
+</div>
+<div id="-6" class="section level2 unnumbered">
+<h2>延伸思考</h2>
+<ul>
+<li><p>什麼樣性質的問題適合應用分類？</p></li>
+<li><p>對資料分析來說，選取適當的特徵是很關鍵的步驟，什麼樣的資料類型應選用什麼樣的特徵呢？例如，本次課程中以one-hot encoding, z-score normalization, 以及 min-max scaling三種方法將資料的各種特徵對應到[0, 1]之間的數值，為什麼採用這種特徵？是否有其它更適合的特徵？</p></li>
+<li><p>除了課程中練習的分類演算法和有關套件之外，還有許多的分類演算法和套件，如何在R語言中找到適合的套件，並且應用這些套件撰寫程式？</p></li>
+</ul>
 
 </div>
 </div>
@@ -1005,8 +1104,8 @@ gbm_res_labels &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<
           </div>
         </div>
       </div>
-<a href="unsupervised-machine-learning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-mining-case-study.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="unsupervised-machine-learning.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1056,7 +1155,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
