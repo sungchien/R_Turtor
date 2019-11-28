@@ -716,11 +716,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>tsne對每個資料產生它在圖形上的映射位置，其結果放在一個行數為2的矩陣Y上，每一列分別代表分別表示一個資料在圖形上的坐標。例如：前五個站點在圖形上的坐標為</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsne_out<span class="op">$</span>Y[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,]</code></pre></div>
 <pre><code>##           [,1]       [,2]
-## [1,]  81.93088   1.915601
-## [2,] -19.05071 -24.292169
-## [3,]  45.98614  20.639244
-## [4,] -59.14341 -11.221718
-## [5,]  85.98876  15.748300</code></pre>
+## [1,] -80.58397  17.568775
+## [2,]  38.88913 -29.811184
+## [3,] -41.89528  30.880372
+## [4,]  19.44379 -57.688956
+## [5,] -77.19597   1.494353</code></pre>
 <p>將每個站點加上它映射的坐標後，依據其坐標畫成圖形</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sta_inf <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(staName) <span class="op">%&gt;%</span>

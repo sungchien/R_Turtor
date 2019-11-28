@@ -24,7 +24,7 @@
 <meta name="author" content="林頌堅" />
 
 
-<meta name="date" content="2019-11-20" />
+<meta name="date" content="2019-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -938,53 +938,54 @@ classifier_comp &lt;-<span class="st"> </span>classifier_comp <span class="op">%
 ##     minsplit = 30, cp = 1e-05, xval = 5)
 ## 
 ## Variables actually used in tree construction:
-##  [1] after2011         before1990        between1991_2000 
-##  [4] budget            g_Action          g_Animation      
-##  [7] g_Comedy          g_Crime           g_Drama          
-## [10] g_Family          g_Horror          g_Science_Fiction
-## [13] g_Thriller        popularity        revenue          
-## [16] runtime           top_pc_number    
+##  [1] after2011         before1990        budget           
+##  [4] g_Animation       g_Comedy          g_Drama          
+##  [7] g_Family          g_History         g_Horror         
+## [10] g_Romance         g_Science_Fiction g_Thriller       
+## [13] popularity        revenue           runtime          
 ## 
 ## Root node error: 1261/2166 = 0.58218
 ## 
 ## n= 2166 
 ## 
 ##            CP nsplit rel error  xerror     xstd
-## 1  0.11895321      0   1.00000 1.00000 0.018203
-## 2  0.02141158      1   0.88105 0.88105 0.018448
-## 3  0.01863600      2   0.85964 0.88184 0.018447
-## 4  0.01348136      4   0.82236 0.87312 0.018451
-## 5  0.01189532      5   0.80888 0.86201 0.018454
-## 6  0.00872324      7   0.78509 0.84060 0.018450
-## 7  0.00832672     10   0.75892 0.81919 0.018434
-## 8  0.00793021     12   0.74227 0.81919 0.018434
-## 9  0.00713719     13   0.73434 0.81681 0.018432
-## 10 0.00674068     14   0.72720 0.80254 0.018414
-## 11 0.00634417     19   0.68993 0.80254 0.018414
-## 12 0.00515464     21   0.67724 0.79857 0.018408
-## 13 0.00475813     23   0.66693 0.77954 0.018375
-## 14 0.00396511     26   0.65266 0.77637 0.018368
-## 15 0.00317209     33   0.61856 0.77478 0.018365
-## 16 0.00277557     38   0.60270 0.76606 0.018346
-## 17 0.00237906     44   0.58604 0.76447 0.018342
-## 18 0.00198255     47   0.57891 0.76447 0.018342
-## 19 0.00158604     53   0.56701 0.76368 0.018340
-## 20 0.00132170     59   0.55591 0.75971 0.018330
-## 21 0.00105736     62   0.55194 0.76051 0.018332
-## 22 0.00079302     65   0.54877 0.77557 0.018367
-## 23 0.00052868     74   0.54163 0.77557 0.018367
-## 24 0.00001000     83   0.53688 0.78033 0.018376</code></pre>
+## 1  0.11260904      0   1.00000 1.00000 0.018203
+## 2  0.02141158      1   0.88739 0.88739 0.018444
+## 3  0.01982554      2   0.86598 0.87312 0.018451
+## 4  0.01348136      5   0.80650 0.84377 0.018451
+## 5  0.01308485      6   0.79302 0.83347 0.018446
+## 6  0.01268834      8   0.76685 0.83188 0.018445
+## 7  0.01110230      9   0.75416 0.82395 0.018438
+## 8  0.00793021     11   0.73196 0.81998 0.018435
+## 9  0.00753370     12   0.72403 0.81761 0.018432
+## 10 0.00634417     14   0.70896 0.80967 0.018423
+## 11 0.00555115     15   0.70262 0.80650 0.018419
+## 12 0.00475813     16   0.69707 0.80650 0.018419
+## 13 0.00449379     17   0.69231 0.79461 0.018402
+## 14 0.00396511     20   0.67883 0.78985 0.018394
+## 15 0.00356860     23   0.66614 0.78430 0.018384
+## 16 0.00343643     25   0.65900 0.78826 0.018391
+## 17 0.00317209     28   0.64869 0.78826 0.018391
+## 18 0.00277557     33   0.63283 0.79461 0.018402
+## 19 0.00237906     41   0.61063 0.79778 0.018407
+## 20 0.00198255     46   0.59715 0.81443 0.018429
+## 21 0.00185038     51   0.58604 0.82712 0.018441
+## 22 0.00158604     54   0.58049 0.82633 0.018441
+## 23 0.00132170     62   0.56780 0.82712 0.018441
+## 24 0.00079302     68   0.55987 0.82554 0.018440
+## 25 0.00039651     76   0.55353 0.83029 0.018444
+## 26 0.00001000     78   0.55274 0.83584 0.018447</code></pre>
 <p>訓練完成之後，決策樹如果太大，會有過度擬合(overfitting)的問題，也就是太像訓練資料。對於沒有參與訓練的資料，表現可能不理想。所以分類樹通常會經過裁減(pruning)，選擇預測能力較好的部分，也就是上面xerror最小的CP值。</p>
 <p>xerror最小值</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>])</code></pre></div>
-<pre><code>## [1] 0.7597145</code></pre>
+<pre><code>## [1] 0.7842982</code></pre>
 <p>xerror最小的層級</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>])</code></pre></div>
-<pre><code>## 20 
-## 20</code></pre>
+<pre><code>## 15 
+## 15</code></pre>
 <p>xerror最小的CP值</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rpart_model<span class="op">$</span>cptable[<span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[, <span class="st">&quot;xerror&quot;</span>]), <span class="st">&quot;CP&quot;</span>]</code></pre></div>
-<pre><code>## [1] 0.001321702</code></pre>
+<pre><code>## [1] 0.003568596</code></pre>
 <p>以xerror最小的cp值進行裁減</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pruned.tree &lt;-<span class="st"> </span><span class="kw">prune</span>(rpart_model,
                      <span class="dt">cp =</span> rpart_model<span class="op">$</span>cptable[<span class="kw">which.min</span>(rpart_model<span class="op">$</span>cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>])</code></pre></div>
